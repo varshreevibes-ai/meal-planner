@@ -1,0 +1,855 @@
+days:
+  - Today
+  - Monday
+  - Tuesday
+  - Wednesday
+  - Thursday
+  - Friday
+  - Saturday
+  - Sunday
+
+people:
+  you:
+    label: You
+    constitution: Vata-Pitta
+    goal: gentle calorie deficit
+    weight_kg: 54
+    protein_target_g: 55
+    target_kcal: 1450
+    calisthenics_burn_kcal: 500
+    desk_work_burn_kcal: 500
+    daily_steps: 2000
+    kcal_per_step: 0.04
+    notes:
+      - Prefer warm, moist, easy-to-digest meals.
+      - Keep chilli low and avoid very dry meals.
+      - Amrapali or Kesar ripe mango works better as a small separate portion, not after heavy meals.
+  varshit:
+    label: Varshit
+    constitution: Kapha-Pitta
+    goal: gentle calorie deficit with better satiety
+    weight_kg: 79
+    protein_target_g: 70
+    target_kcal: 1750
+    calisthenics_burn_kcal: 600
+    desk_work_burn_kcal: 500
+    daily_steps: 2000
+    kcal_per_step: 0.05
+    notes:
+      - Keep dinner lighter than brunch.
+      - Add protein before adding extra roti or rice.
+      - Keep oil low and avoid very heavy repeat carbs.
+
+plan_notes:
+  base_strategy: Cook once in the morning for brunch and either keep a lighter dinner or reuse a controlled portion of the morning meal. Keep digestion easy and calories in deficit.
+  morning_workflow:
+    - Start the main brunch item first since it may also cover dinner.
+    - Check the top table first and complete all soaking and ingredient readiness from the night before.
+    - Prep digestion aids together: roasted cumin, coriander, and fennel.
+    - Soak dates, almonds, pumpkin seeds, and kali kishmish ahead.
+    - Cut anar fresh and keep chilled for both.
+    - Keep 3 cucumbers ready daily for Varshit's salad.
+    - Portion any dinner reuse early and refrigerate in summer.
+
+daily_routine:
+  night_prep_title: Soak and kitchen-ready prep
+  night_prep:
+    - Soak dates, almonds, pumpkin seeds, and kali kishmish for next morning.
+    - Check that all ingredients for tomorrow's brunch, add-ons, and dinner are in the kitchen.
+    - Soak rajma or chhole overnight when planning rajma chawal or chane-based meals.
+    - Keep cucumbers washed and ready for Varshit's daily salad.
+    - Refill sattu, ON Alphonso Mango whey, Avvatar Matka Kulfi whey, sonth powder, and soya milk if finishing.
+  morning_title: Before work starts
+  morning_start:
+    - You start with warm water and ghee.
+    - Serve the soaked nuts, seeds, dates, and kali kishmish in the morning.
+    - Varshit has ON Alphonso Mango protein shake with soya milk and banana bites around 8 AM during gym.
+    - Prepare anar bowls and daily digestion aids.
+  timed_items:
+    - Morning: you start with warm water plus ghee.
+    - Morning: soaked dates, almonds, pumpkin seeds, and kali kishmish.
+    - Around 8 AM during gym: Varshit has ON Alphonso Mango protein shake with soya milk and banana bites.
+    - Daily: one bowl anar each.
+    - Daily: Varshit gets 3 cucumbers as salad.
+    - Around 4 PM: Shreya has Avvatar Matka Kulfi protein shake with warm water and sonth powder.
+    - Daily: sattu drink and digestion aids of cumin, coriander, and fennel.
+  ingredients:
+    - name: ghee
+      qty: 2 tsp
+    - name: soya milk
+      qty: 1 to 2 glasses
+    - name: banana
+      qty: 1
+    - name: cucumber
+      qty: 3
+    - name: warm water
+      qty: as needed
+    - name: ON Alphonso Mango whey
+      qty: 2 spoons
+    - name: Avvatar Matka Kulfi whey
+      qty: 1 scoop
+    - name: sonth powder
+      qty: a pinch
+
+daily_items:
+  notes:
+    - Daily sattu drink.
+    - One bowl anar each.
+    - Soaked dates, almonds, pumpkin seeds, and kali kishmish.
+    - Use cumin, coriander, and fennel as digestion aids through the day.
+  ingredients:
+    - name: sattu
+      qty: 4 tbsp
+    - name: anar
+      qty: 2 medium
+    - name: dates
+      qty: 2 to 4
+    - name: almonds
+      qty: 10 to 12
+    - name: pumpkin seeds
+      qty: 2 tbsp
+    - name: kali kishmish
+      qty: 2 tbsp
+    - name: cumin
+      qty: 2 tsp
+    - name: coriander
+      qty: 2 tsp or 1 small bunch
+    - name: fennel
+      qty: 2 tsp
+
+sections:
+  brunch:
+    - name: Avocado Toast
+      summary: Indian-style avocado toast with tofu, onion, capsicum, and optional sweet corn-spinach.
+      cook_time: 15 min
+      cook_summary: Toast sourdough bread and cook the avocado-tofu vegetable topping.
+      complexity: low
+      protein_note: moderate protein from tofu, better satiety than plain avocado toast
+      for_you: Keep the topping moist and warm, with lighter seasoning.
+      for_varshit: Works better as a fuller brunch with more bread slices and extra tofu topping.
+      ingredients:
+        - name: avocado
+          qty: 1
+        - name: tofu
+          qty: 200 g
+        - name: garlic paste
+          qty: 1 tsp
+        - name: onion
+          qty: 1 finely chopped
+        - name: capsicum
+          qty: 1 finely chopped
+        - name: sweet corn
+          qty: optional
+        - name: spinach
+          qty: optional
+        - name: 1 snappin oregano pouch
+          qty: to taste
+        - name: salt
+          qty: to taste
+        - name: black pepper
+          qty: to taste
+        - name: sourdough sandwich bread
+          qty: 12 slices total
+      method:
+        - Churn tofu and avocado in mixy to make it a paste
+        - Finely chop onion, capsicum, spinach for the guacamole-style mix.
+        - Boil sweet corn and add it to the guacamole mix.
+        - Add garlic paste, oregano, salt, and black pepper, keeping the mixture soft.
+        - Spread the mix on sourdough slices and toast it like a sandwich.
+        - Cheese spread can be added if desired.
+    - name: Avocado Salad
+      summary: Fresh avocado salad with tofu and crunchy vegetables for a lighter meal option.
+      cook_time: 15 min
+      cook_summary: Chop, toss, season, and serve fresh.
+      complexity: low
+      protein_note: light to moderate protein from tofu, good when keeping the meal lighter
+      for_you: Keep it soft, mildly seasoned, and easy to digest.
+      for_varshit: Add a fuller tofu portion and more cucumber for better satiety.
+      ingredients:
+        - name: avocado
+          qty: 1 to 2
+        - name: tofu
+          qty: 200 g
+        - name: cucumber
+          qty: 1 to 2
+        - name: onion
+          qty: 1 small
+        - name: capsicum
+          qty: 1 small
+        - name: sweet corn
+          qty: optional
+        - name: spinach
+          qty: optional
+        - name: lemon
+          qty: 1
+        - name: black pepper
+          qty: to taste
+        - name: salt
+          qty: to taste
+      method:
+        - Finely chop avocado, tofu, cucumber, onion, capsicum, and spinach if using.
+        - Boil sweet corn separately if adding it.
+        - Toss everything with lemon, salt, and black pepper.
+        - Serve fresh as a salad bowl.
+    - name: Chickpea Tacos
+      summary: Chickpea tacos with tofu, chopped vegetables, green chutney, and fresh sliced toppings.
+      youtube: https://youtube.com/shorts/yuqCLe_v9GE?si=MMK8wMNoJJxwi30Q
+      cook_time: 45 min
+      cook_summary: Mix the chole filling, prep toppings, and assemble tacos.
+      complexity: medium
+      protein_note: medium protein, heavier so portion control matters
+      for_you: Keep the filling lighter on chilli if digestion feels sensitive.
+      for_varshit: Good as a filling brunch with extra chole-tofu mix before adding more taco base.
+      ingredients:
+        - name: boiled chhole
+          qty: as needed
+        - name: hari mirch
+          qty: as needed
+        - name: gajar
+          qty: as needed
+        - name: shimla mirch
+          qty: as needed
+        - name: pyaj chopped
+          qty: as needed
+        - name: dhaniya
+          qty: as needed
+        - name: tofu
+          qty: 200 g
+        - name: chilli flakes
+          qty: to taste
+        - name: black pepper
+          qty: to taste
+        - name: salt
+          qty: to taste
+        - name: black salt
+          qty: to taste
+        - name: sliced onion
+          qty: as needed
+        - name: sliced cucumber
+          qty: as needed
+        - name: green chutney
+          qty: as needed
+      method:
+        - Mix boiled chhole with chopped hari mirch, gajar, shimla mirch, pyaj, dhaniya, and tofu.
+        - Add chilli flakes, black pepper, salt, and black salt.
+        - Prepare sliced onion, sliced cucumber, and green chutney for topping.
+        - Fill and assemble the tacos with the chole-tofu mixture and toppings.
+    - name: Matra
+      summary: Matra as a street-style brunch option with recipe reference from the linked Short.
+      youtube: https://youtube.com/shorts/NDObjug7vXU?si=F9VYAnajdjsvBw1h
+      cook_time: 35 min
+      cook_summary: Prepare the matra base and serve it fresh with toppings as shown in the video.
+      complexity: medium
+      protein_note: moderate protein depending on pea quantity and toppings
+      for_you: Keep the masala lighter and the portion moderate if digestion feels sensitive.
+      for_varshit: Good as a filling brunch, especially with a stronger pea portion before adding more toppings.
+      ingredients:
+        - name: matra ingredients
+          qty: follow video recipe for now
+      method:
+        - Follow the linked recipe video for the current version.
+        - Update the ingredient list locally later once the exact house version is finalized.
+    - name: Poha
+      summary: Light vegetable poha for an easy home brunch.
+      cook_time: 20 min
+      cook_summary: Rinse poha, temper, cook briefly, and serve hot.
+      complexity: low
+      protein_note: low protein by itself, so it works better with daily whey and seeds
+      for_you: Keep it soft with less chilli and enough vegetables.
+      for_varshit: Use a bigger bowl and add more peanuts only if needed for satiety.
+      ingredients:
+        - name: poha
+          qty: 2 cups
+        - name: onion
+          qty: 1 chopped
+        - name: potato
+          qty: 1 small optional
+        - name: peas
+          qty: 1/2 cup optional
+        - name: hari mirch
+          qty: to taste
+        - name: curry leaves
+          qty: as needed
+        - name: rai
+          qty: 1 tsp
+        - name: haldi
+          qty: 1/2 tsp
+        - name: peanuts
+          qty: small handful optional
+        - name: lemon
+          qty: 1
+        - name: dhaniya
+          qty: for garnish
+        - name: salt
+          qty: to taste
+      method:
+        - Rinse poha lightly and rest it till soft.
+        - Temper rai, curry leaves, hari mirch, and onion.
+        - Add potato and peas if using, then haldi and salt.
+        - Fold in poha gently and cook for a few minutes.
+        - Finish with lemon and dhaniya.
+    - name: Upma
+      summary: Simple vegetable upma that Varshit likes as a warm brunch option.
+      cook_time: 25 min
+      cook_summary: Roast rava, make tempering, cook with water and vegetables.
+      complexity: low
+      protein_note: low protein on its own, so pair with the fixed whey routine
+      for_you: Keep it soft and lighter on oil.
+      for_varshit: A larger bowl works better than repeating toast or extra carbs later.
+      ingredients:
+        - name: rava
+          qty: 1 cup
+        - name: onion
+          qty: 1 chopped
+        - name: carrot
+          qty: 1 small chopped
+        - name: peas
+          qty: 1/2 cup optional
+        - name: hari mirch
+          qty: to taste
+        - name: curry leaves
+          qty: as needed
+        - name: rai
+          qty: 1 tsp
+        - name: chana dal
+          qty: 1 tsp optional
+        - name: urad dal
+          qty: 1 tsp optional
+        - name: ginger
+          qty: 1 tsp chopped
+        - name: salt
+          qty: to taste
+        - name: lemon
+          qty: 1 optional
+      method:
+        - Dry roast rava and keep aside.
+        - Temper rai, curry leaves, hari mirch, ginger, and onion.
+        - Add vegetables and cook briefly.
+        - Add water and salt, then stir in roasted rava slowly.
+        - Cook till soft and finish with lemon if desired.
+    - name: Shakarkandi Wedges (Sweet Potato)
+      summary: Roasted sweet potato wedges as a simple side or snack-style recipe.
+      cook_time: 25 min
+      cook_summary: Boil, wedge, dry, season, and air fry until crisp.
+      complexity: low
+      protein_note: low protein, better as a side than a main protein meal
+      for_you: Works well in a moderate portion with simple seasoning.
+      for_varshit: Better paired with a stronger protein source if used in a meal.
+      ingredients:
+        - name: whole sweet potato
+          qty: as needed
+        - name: ghee
+          qty: 1 tsp
+        - name: cornstarch
+          qty: 1 tsp
+        - name: salt
+          qty: to taste
+        - name: roasted cumin
+          qty: to taste
+      method:
+        - Boil the whole sweet potato for 5 minutes.
+        - Cut into wedges.
+        - Pat dry and let sit for 10 minutes.
+        - Toss with 1 tsp ghee and 1 tsp cornstarch.
+        - Add only salt and roasted cumin.
+        - Air fry at 200 C for 14 to 16 minutes.
+    - name: Idli Sambar
+      summary: Idli with vegetable sambar, a familiar balanced brunch.
+      youtube: https://www.youtube.com/watch?v=0W6rY2mcvqY
+      cook_time: 40 min
+      cook_summary: Steam idlis and make sambar.
+      complexity: medium
+      protein_note: moderate protein, easier digestion than rolls
+      for_you: Very suitable on digestion-sensitive days.
+      for_varshit: Increase sambar and add whey protein support rather than many idlis.
+      ingredients:
+        - name: idli batter
+          qty: 4 cups
+        - name: toor dal
+          qty: 3/4 cup
+        - name: carrot
+          qty: 1
+        - name: lauki
+          qty: 1 cup
+        - name: tamarind
+          qty: 1 small piece
+        - name: sambar powder
+          qty: 2 tsp
+        - name: curry leaves
+          qty: 1 sprig
+      method:
+        - Steam idlis.
+        - Pressure cook dal and vegetables.
+        - Finish sambar with tamarind and sambar powder.
+    - name: Bhaji Roti
+      summary: Simple sabzi with roti for a regular home brunch.
+      youtube: https://www.youtube.com/watch?v=0QvDk6K2dP4
+      cook_time: 30 min
+      cook_summary: Cook bhaji and make only the needed rotis.
+      complexity: low
+      protein_note: lower protein unless paired with tofu or shake
+      for_you: Keep bhaji softer and well-cooked.
+      for_varshit: Add tofu or a side of chana rather than more roti.
+      ingredients:
+        - name: mixed vegetables
+          qty: 3 cups
+        - name: wheat flour
+          qty: 1.5 cups
+        - name: ginger
+          qty: 1 inch
+        - name: cumin
+          qty: 1 tsp
+        - name: coriander
+          qty: 1 small bunch
+      method:
+        - Cook bhaji with minimal oil and mild spices.
+        - Make only the required number of rotis.
+    - name: Baingan Bharta Roti
+      summary: Baingan bharta with roti as a soft home-style brunch.
+      youtube: https://www.youtube.com/watch?v=15i2Xb1dKj0
+      cook_time: 35 min
+      cook_summary: Roast brinjal, make bharta, and cook measured rotis.
+      complexity: medium
+      protein_note: lower protein unless paired with tofu or shake
+      for_you: Very suitable when kept soft, warm, and not too spicy.
+      for_varshit: Pair with tofu or chana instead of extra rotis.
+      ingredients:
+        - name: baingan
+          qty: 2 medium
+        - name: onion
+          qty: 1 medium
+        - name: tomato
+          qty: 2 medium
+        - name: wheat flour
+          qty: 1.5 cups
+        - name: ginger
+          qty: 1 inch
+        - name: cumin
+          qty: 1 tsp
+        - name: coriander
+          qty: 1 small bunch
+      method:
+        - Roast baingan till soft and peel.
+        - Cook with onion, tomato, ginger, and cumin.
+        - Make only the needed number of rotis.
+    - name: Chane Sabji Roti
+      summary: Chane sabji with roti, filling and easy to batch for later.
+      youtube: https://www.youtube.com/watch?v=7V5wBIx2J4k
+      cook_time: 35 min
+      cook_summary: Make chane sabji, cook rotis, keep optional dinner portion aside.
+      complexity: low
+      protein_note: medium protein, good satiety
+      for_you: Keep more sabji and fewer rotis for lighter digestion.
+      for_varshit: Increase chana portion before adding extra roti.
+      ingredients:
+        - name: boiled chana
+          qty: 2 cups
+        - name: onion
+          qty: 1 medium
+        - name: tomato
+          qty: 2 medium
+        - name: wheat flour
+          qty: 1.5 cups
+        - name: ginger
+          qty: 1 inch
+        - name: cumin
+          qty: 1 tsp
+        - name: coriander
+          qty: 1 small bunch
+      method:
+        - Make simple chana sabji with onion, tomato, and cumin.
+        - Cook enough sabji to optionally reuse a small portion at dinner.
+        - Serve with measured roti portions.
+    - name: Tofu Tikka Roll
+      summary: Tofu tikka roll with vegetables, filling enough for brunch and possible dinner reuse.
+      youtube: https://www.youtube.com/watch?v=W1Y4wB8YB2Q
+      cook_time: 35 min
+      cook_summary: Marinate and cook tofu, fill wraps, keep one lighter portion if needed.
+      complexity: medium
+      protein_note: higher protein
+      ingredients:
+        - name: tofu
+          qty: 300 g
+        - name: soy curd
+          qty: 1 cup
+        - name: whole wheat wraps
+          qty: 4
+        - name: onion
+          qty: 1
+        - name: capsicum
+          qty: 1
+        - name: ginger
+          qty: 1 inch
+        - name: cumin
+          qty: 1 tsp
+        - name: coriander
+          qty: 1 small bunch
+      method:
+        - Marinate tofu in soy curd and spices.
+        - Pan cook with onion and capsicum.
+        - Fill wraps and keep one lighter portion if saving for dinner.
+    - name: Daal Chawal
+      summary: Simple daal chawal, comfortable and easy to digest when kept light.
+      youtube: https://www.youtube.com/watch?v=6n7kLQjB8l8
+      cook_time: 35 min
+      cook_summary: Cook dal and rice, keep rice portion controlled.
+      complexity: low
+      protein_note: moderate protein, soft digestion
+      for_you: Good on days when you want warmth and simplicity.
+      for_varshit: Pair with more dal than rice to hold the deficit.
+      ingredients:
+        - name: moong dal
+          qty: 3/4 cup
+        - name: rice
+          qty: 1 cup
+        - name: ginger
+          qty: 1 inch
+        - name: cumin
+          qty: 1 tsp
+        - name: coriander
+          qty: 1 small bunch
+      method:
+        - Pressure cook dal till soft.
+        - Cook rice separately.
+        - Finish dal with simple cumin and ginger tadka.
+    - name: Rajma Chawal
+      summary: Rajma chawal as a heavier brunch option that needs overnight soaking and portion control.
+      youtube: https://www.youtube.com/watch?v=qS8Yp2l7l4M
+      cook_time: 50 min
+      cook_summary: Soak rajma overnight, pressure cook rajma, make masala, cook rice.
+      complexity: medium
+      protein_note: medium protein, heavier meal so keep rice controlled
+      for_you: Keep rajma soft and rice quantity modest for easier digestion.
+      for_varshit: Increase rajma portion before increasing rice.
+      ingredients:
+        - name: rajma
+          qty: 1 cup
+        - name: rice
+          qty: 1 cup
+        - name: onion
+          qty: 1 medium
+        - name: tomato
+          qty: 2 medium
+        - name: ginger
+          qty: 1 inch
+        - name: cumin
+          qty: 1 tsp
+        - name: coriander
+          qty: 1 small bunch
+      method:
+        - Soak rajma overnight.
+        - Pressure cook rajma until soft.
+        - Make simple onion-tomato masala and simmer rajma.
+        - Cook rice separately and serve with more rajma than rice.
+    - name: Uttapam and Ghee Podi Dosa
+      summary: Uttapam for Varshit and ghee podi dosa for Shreya from the same batter.
+      youtube: https://www.youtube.com/watch?v=7h7c2i8vS8U
+      cook_time: 35 min
+      cook_summary: Use one batter for uttapam and dosa, prep toppings, and keep portions controlled.
+      complexity: medium
+      protein_note: moderate protein, better with sambar or tofu support
+      for_you: Keep the ghee light and pair with sambar or tofu for easier digestion.
+      for_varshit: Uttapam is more filling, but protein should still come from sides too.
+      ingredients:
+        - name: ID dosa batter or priya bhabhi home made dosa batter
+          qty: 4 cups
+        - name: onion
+          qty: 1 medium
+        - name: tomato
+          qty: 1 medium
+        - name: Ginpowder podi by yours freshly
+          qty: 2 tbsp
+        - name: ghee
+          qty: 4 tsp in each dosa
+        - name: curry leaves
+          qty: 1 sprig
+      method:
+        - Chop onion, carrot and tomato for uttapam topping.
+        - Make uttapam for Varshit and light ghee podi dosa for Shreya.
+        - Serve with a simple side like tofu or sambar if available.
+    - name: Rice Paper Rolls
+      summary: Fresh rice paper rolls with tofu and crunchy vegetables for a lighter shared meal.
+      cook_time: 25 min
+      cook_summary: Prep filling, soften wrappers, roll, and serve with dip.
+      complexity: medium
+      protein_note: moderate protein from tofu, lighter than wraps or rice meals
+      for_you: Keep the rolls soft and not overfilled.
+      for_varshit: Use a fuller tofu filling and more rolls for satiety.
+      ingredients:
+        - name: rice paper sheets
+          qty: 6 to 8
+        - name: tofu
+          qty: 200 g
+        - name: cucumber
+          qty: 1
+        - name: carrot
+          qty: 1
+        - name: capsicum
+          qty: 1
+        - name: lettuce or cabbage
+          qty: optional
+        - name: green chutney or peanut dip
+          qty: as needed
+        - name: salt
+          qty: to taste
+        - name: black pepper
+          qty: to taste
+      method:
+        - Finely slice all vegetables and crumble or chop tofu.
+        - Season the filling lightly with salt and black pepper.
+        - Soften each rice paper sheet briefly in water.
+        - Fill, roll tightly, and serve with chutney or dip.
+
+  fruits:
+    - name: Daily Fixed Add-ons
+      summary: Anar, soaked dry fruits, seeds, sattu drink, and protein shake.
+      cook_time: 15 min
+      cook_summary: Prep anar bowls, soaked items, sattu, and timed drinks.
+      complexity: very low
+      protein_note: includes daily drink support
+      for_you: Keep soaked items moderate and take mango separately only when wanted.
+      for_varshit: Useful for steady energy without needing snacky processed food.
+      ingredients:
+        - name: anar
+          qty: 2 medium
+        - name: dates
+          qty: 2 to 4
+        - name: almonds
+          qty: 10 to 12
+        - name: pumpkin seeds
+          qty: 2 tbsp
+        - name: kali kishmish
+          qty: 2 tbsp
+        - name: sattu
+          qty: 4 tbsp
+      method:
+        - Prepare two anar bowls.
+        - Soak dates, almonds, pumpkin seeds, and kali kishmish ahead.
+        - Make sattu drink and keep timed drinks as per routine.
+    - name: Daily Add-ons plus Mango
+      summary: Fixed daily items plus a small Amrapali or Kesar ripe mango portion for you.
+      cook_time: 15 min
+      cook_summary: Prep fixed add-ons and slice a small Amrapali or Kesar ripe mango portion.
+      complexity: very low
+      protein_note: includes daily drink support
+      for_you: Best on days with lighter brunch choices.
+      for_varshit: Keep the fixed items and skip mango if staying tighter on deficit.
+      ingredients:
+        - name: anar
+          qty: 2 medium
+        - name: dates
+          qty: 2 to 4
+        - name: almonds
+          qty: 10 to 12
+        - name: pumpkin seeds
+          qty: 2 tbsp
+        - name: kali kishmish
+          qty: 2 tbsp
+        - name: sattu
+          qty: 4 tbsp
+        - name: Amrapali or Kesar ripe mango
+          qty: 1 small
+      method:
+        - Prepare the fixed daily items first.
+        - Slice the ripe Amrapali or Kesar mango separately as a small extra portion.
+    - name: Daily Add-ons plus Papaya
+      summary: Fixed daily items plus papaya for a gentler fruit add-on.
+      cook_time: 15 min
+      cook_summary: Prep fixed add-ons and add papaya.
+      complexity: very low
+      protein_note: includes daily drink support
+      for_you: Useful on hotter days or when digestion needs a gentler fruit.
+      for_varshit: Light fruit add-on without much calorie push.
+      ingredients:
+        - name: anar
+          qty: 2 medium
+        - name: dates
+          qty: 2 to 4
+        - name: almonds
+          qty: 10 to 12
+        - name: pumpkin seeds
+          qty: 2 tbsp
+        - name: kali kishmish
+          qty: 2 tbsp
+        - name: sattu
+          qty: 4 tbsp
+        - name: papaya
+          qty: 2 cups
+      method:
+        - Prepare the fixed daily items first.
+        - Peel and cube papaya separately.
+    - name: Daily Add-ons plus Air-Fried Chana
+      summary: Fixed daily items plus a crunchy roasted chana add-on.
+      cook_time: 20 min
+      cook_summary: Prep fixed add-ons and roast or air-fry chana.
+      complexity: low
+      protein_note: includes daily drink support plus extra chana protein
+      for_you: Keep the chana portion smaller if digestion feels dry.
+      for_varshit: Useful on higher hunger days without moving to packaged snacks.
+      ingredients:
+        - name: anar
+          qty: 2 medium
+        - name: dates
+          qty: 2 to 4
+        - name: almonds
+          qty: 10 to 12
+        - name: pumpkin seeds
+          qty: 2 tbsp
+        - name: kali kishmish
+          qty: 2 tbsp
+        - name: sattu
+          qty: 4 tbsp
+        - name: roasted chana
+          qty: 1.5 cups
+      method:
+        - Prepare the fixed daily items first.
+        - Roast or air-fry chana and keep it for a measured snack portion.
+
+  dinner:
+    - name: Morning Portion Only
+      summary: Eat a measured lighter portion of the brunch meal for dinner.
+      cook_time: 5 min
+      cook_summary: Keep a smaller portion from brunch aside and reheat gently.
+      complexity: very low
+      protein_note: depends on brunch choice
+      for_you: Best when brunch was simple and moist like idli sambar or daal chawal.
+      for_varshit: Keep the portion controlled and add protein shake support if needed.
+      ingredients: []
+      method:
+        - Portion the dinner share in the morning itself.
+        - Refrigerate early in summer.
+        - Reheat gently and keep the portion smaller than brunch.
+    - name: Light Soup or Salad Plate
+      summary: A very light dinner with soup or salad and no major recooking.
+      youtube: https://www.youtube.com/watch?v=6o4Q1XQ9w6w
+      cook_time: 15 min
+      cook_summary: Make quick soup or salad only.
+      complexity: low
+      protein_note: low unless paired with protein shake
+      for_you: Prefer warm soup over raw salad if digestion feels delicate.
+      for_varshit: Add a protein side before adding breads.
+      ingredients:
+        - name: cucumber
+          qty: 1
+        - name: tomato
+          qty: 1
+        - name: carrot
+          qty: 1
+        - name: lemon
+          qty: 1
+        - name: ginger
+          qty: 1 inch
+        - name: cumin
+          qty: 1 tsp
+        - name: coriander
+          qty: 1 small bunch
+      method:
+        - Make a quick vegetable soup or a light salad plate.
+        - Use cumin, coriander, and lemon for digestion support.
+        - Keep dinner smaller than brunch.
+    - name: Moong Chilla Light Dinner
+      summary: Moong chilla as a lighter cooked dinner when not reusing brunch.
+      youtube: https://www.youtube.com/watch?v=0n2bH0Qq0oQ
+      cook_time: 30 min
+      cook_summary: Soak moong if needed, make chillas, serve with light side.
+      complexity: medium
+      protein_note: better protein without a heavy dinner
+      for_you: Keep chilla soft and not overly crisp.
+      for_varshit: Add one extra chilla instead of bread if protein is still low.
+      ingredients:
+        - name: yellow moong dal
+          qty: 1 cup
+        - name: curd
+          qty: 1.5 cups
+        - name: mint
+          qty: 1 small bunch
+        - name: carrot
+          qty: 2
+        - name: capsicum
+          qty: 1
+        - name: ginger
+          qty: 1 inch
+        - name: cumin
+          qty: 1 tsp
+        - name: coriander
+          qty: 1 small bunch
+      method:
+        - Soak moong dal and blend with ginger and cumin.
+        - Cook soft chillas on a pan with minimal oil.
+        - Serve with mint curd and quick sauteed vegetables.
+    - name: Soup Light Dinner
+      summary: Light soup dinner to keep the evening easy and low effort.
+      youtube: https://www.youtube.com/watch?v=tJxV6v4k9wY
+      cook_time: 30 min
+      cook_summary: Cook a simple light soup.
+      complexity: low
+      protein_note: light dinner
+      for_you: Keep soup warm and smooth for easy digestion.
+      for_varshit: Keep it light and add salad first if needed.
+      ingredients:
+        - name: lauki
+          qty: 1 medium
+        - name: ginger
+          qty: 1 inch
+        - name: cumin
+          qty: 1 tsp
+        - name: black pepper
+          qty: 1/2 tsp
+        - name: carrot
+          qty: 1
+        - name: coriander
+          qty: 1 small bunch
+      method:
+        - Pressure cook lauki with ginger and blend lightly.
+        - Season with cumin and black pepper.
+        - Serve warm and keep the portion light.
+
+grocery_modes:
+  Home:
+    buy:
+      - daily anar stock
+      - dates, almonds, pumpkin seeds, kali kishmish
+      - sattu and whey protein
+      - soya milk and bananas
+      - 2 to 3 days of tofu only
+      - easy vegetables for brunch mains and light dinners
+      - soy curd if using
+      - chhole, rajma, moong dal, rice, wheat flour
+    finish:
+      - old curd first
+      - ripe Amrapali or Kesar mangoes first
+      - cooked food within 24 hours in summer
+  Vacation:
+    buy:
+      - only 1 day fruit
+      - no large dry fruit refill
+      - no extra tofu
+      - no bulk vegetables
+      - one small curd pack
+      - enough sattu, whey protein, and soya milk only for the trip window
+    finish:
+      - all cooked food
+      - open dairy
+      - cut fruit same day
+  Return:
+    buy:
+      - anar
+      - soaked item basics
+      - sattu
+      - soya milk and bananas
+      - whey protein
+      - moong dal
+      - rice
+      - one easy vegetable
+      - curd
+      - ginger and cumin
+    finish:
+      - restart with easy meals
+      - avoid bulk buying for 2 days
+
+storage_notes:
+  - Refrigerate dinner portions early in summer.
+  - Keep fruit cut fresh, especially anar and ripe Amrapali or Kesar mango.
+  - Keep curd and chopped salad separate till serving.
+  - Soak dry fruits and seeds in only the amount needed for the next day.
+  - Prefer shorter grocery cycles in hot weeks.
