@@ -146,7 +146,7 @@ def sedentary_tdee_from_weight(weight_kg):
 
 
 st.set_page_config(page_title="Meal Planner", page_icon="🥗", layout="wide")
-st.title("Meal Planner")
+st.title("Meal Planners")
 st.caption("Plan meals, portions, fixed add-ons, calories, and deficit clearly for each person.")
 
 if "grocery_list" not in st.session_state:
