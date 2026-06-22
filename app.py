@@ -8,6 +8,7 @@ from uuid import uuid4
 
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 import yaml
 
 DATA = yaml.safe_load(Path("meal_data.yaml").read_text())
@@ -173,6 +174,10 @@ def inject_ui_styles():
             color: var(--text-color);
             margin: 1rem 0 0.55rem;
         }
+        .recipe-anchor {
+            display: block;
+            scroll-margin-top: 5rem;
+        }
         [data-testid="stVerticalBlockBorderWrapper"] {
             background: color-mix(in srgb, var(--secondary-background-color) 72%, var(--background-color) 28%);
             border: 1px solid color-mix(in srgb, var(--text-color) 12%, transparent 88%);
@@ -264,6 +269,14 @@ def section_intro(anchor, title):
 
 def has_dinner_recipe_link(dish):
     return bool(dish.get("ingredients") or dish.get("youtube"))
+
+
+def recipe_anchor_id(name):
+    return f"recipe-{recipe_slug(name)}"
+
+
+def open_recipe(name):
+    st.session_state.selected_recipe_slug = recipe_slug(name)
 
 
 def load_meal_log():
@@ -414,6 +427,8 @@ if "grocery_list" not in st.session_state:
     st.session_state.grocery_list = OrderedDict()
 if "mealLog" not in st.session_state:
     st.session_state.mealLog = load_meal_log()
+if "selected_recipe_slug" not in st.session_state:
+    st.session_state.selected_recipe_slug = ""
 
 with st.container(border=True):
     st.markdown("<div id='planner-section'></div>", unsafe_allow_html=True)
@@ -448,32 +463,38 @@ with st.container(border=True):
     row4, row5 = st.columns(2)
     portion_you = row4.text_input("Shreya Brunch Portion", key="portion_you")
     dinner_portion_you = row5.text_input("Shreya Dinner Portion", key="dinner_portion_you")
-    st.markdown("**Shreya fixed add-ons**")
-    your_checks = st.columns(4)
     selected_you = []
-    for i, item in enumerate(FIXED_ITEM_META["you"]):
-        if your_checks[i % 4].checkbox(item, value=True, key=f"you_{item}"):
-            selected_you.append(item)
-        else:
-            for name, qty in FIXED_ITEM_META["you"][item]["ingredients"]:
-                st.session_state.grocery_list[name] = qty
+    with st.expander("Shreya fixed add-ons", expanded=False):
+        your_checks = st.columns(4)
+        for i, item in enumerate(FIXED_ITEM_META["you"]):
+            if your_checks[i % 4].checkbox(item, value=True, key=f"you_{item}"):
+                selected_you.append(item)
+            else:
+                for name, qty in FIXED_ITEM_META["you"][item]["ingredients"]:
+                    st.session_state.grocery_list[name] = qty
 
     st.markdown("**Varshit plan**")
     row6, row7 = st.columns(2)
     portion_varshit = row6.text_input("Varshit Brunch Portion", key="portion_varshit")
     dinner_portion_varshit = row7.text_input("Varshit Dinner Portion", key="dinner_portion_varshit")
-    st.markdown("**Varshit fixed add-ons**")
-    varshit_checks = st.columns(3)
     selected_varshit = []
-    for i, item in enumerate(FIXED_ITEM_META["varshit"]):
-        if varshit_checks[i % 3].checkbox(item, value=True, key=f"varshit_{item}"):
-            selected_varshit.append(item)
-        else:
-            for name, qty in FIXED_ITEM_META["varshit"][item]["ingredients"]:
-                st.session_state.grocery_list[name] = qty
+    with st.expander("Varshit fixed add-ons", expanded=False):
+        varshit_checks = st.columns(3)
+        for i, item in enumerate(FIXED_ITEM_META["varshit"]):
+            if varshit_checks[i % 3].checkbox(item, value=True, key=f"varshit_{item}"):
+                selected_varshit.append(item)
+            else:
+                for name, qty in FIXED_ITEM_META["varshit"][item]["ingredients"]:
+                    st.session_state.grocery_list[name] = qty
 
 brunch = get_dish("brunch", brunch_name)
 dinner = dinner_dish(dinner_name)
+recipe_dishes = all_recipe_dishes()
+recipe_slugs = {recipe_slug(dish["name"]) for dish in recipe_dishes}
+selected_recipe_slug = st.session_state.get("selected_recipe_slug", "")
+if selected_recipe_slug not in recipe_slugs:
+    selected_recipe_slug = ""
+    st.session_state.selected_recipe_slug = ""
 shreya_brunch_factor = portion_factor(portion_you)
 shreya_dinner_factor = portion_factor(dinner_portion_you)
 varshit_brunch_factor = portion_factor(portion_varshit)
@@ -630,9 +651,18 @@ with ingredients_tab:
             st.write("All selected ingredients are available.")
 
         st.markdown("**Selected recipe links**")
-        st.markdown(f"- Brunch: [View {brunch['name']}](#{recipe_slug(brunch['name'])})")
-        if has_dinner_recipe_link(dinner):
-            st.markdown(f"- Dinner: [View {dinner['name']}](#{recipe_slug(dinner['name'])})")
+        if recipe_slug(brunch["name"]) in recipe_slugs:
+            brunch_link_col, brunch_text_col = st.columns([1, 4])
+            if brunch_link_col.button("Open", key=f"open_recipe_{recipe_slug(brunch['name'])}", use_container_width=True):
+                open_recipe(brunch["name"])
+                st.rerun()
+            brunch_text_col.markdown(f"Brunch recipe: **{brunch['name']}**")
+        if has_dinner_recipe_link(dinner) and recipe_slug(dinner["name"]) in recipe_slugs:
+            dinner_link_col, dinner_text_col = st.columns([1, 4])
+            if dinner_link_col.button("Open", key=f"open_recipe_{recipe_slug(dinner['name'])}", use_container_width=True):
+                open_recipe(dinner["name"])
+                st.rerun()
+            dinner_text_col.markdown(f"Dinner recipe: **{dinner['name']}**")
 
         with st.expander("Before Didi Arrives", expanded=False):
             st.markdown("- " + "\n- ".join(DATA["daily_routine"]["night_prep"]))
@@ -655,9 +685,10 @@ section_intro(
     "Recipe View",
 )
 with st.container(border=True):
-    for dish in all_recipe_dishes():
-        st.markdown(f"<div id='{recipe_slug(dish['name'])}'></div>", unsafe_allow_html=True)
-        with st.expander(dish["name"]):
+    for dish in recipe_dishes:
+        dish_slug = recipe_slug(dish["name"])
+        st.markdown(f"<div id='{recipe_anchor_id(dish['name'])}' class='recipe-anchor'></div>", unsafe_allow_html=True)
+        with st.expander(dish["name"], expanded=dish_slug == selected_recipe_slug):
             st.write(dish["summary"])
             st.markdown("**Ingredients**")
             st.markdown("- " + "\n- ".join(f"{item['name']}: {item.get('qty', '')}".rstrip(": ") for item in dish["ingredients"]))
@@ -666,3 +697,25 @@ with st.container(border=True):
             if dish.get("youtube"):
                 st.markdown(f"**YouTube:** [Open recipe video]({dish['youtube']})")
                 st.video(dish["youtube"])
+
+if selected_recipe_slug:
+    components.html(
+        f"""
+        <script>
+        const anchorId = {json.dumps(recipe_anchor_id(selected_recipe_slug))};
+        const scrollToRecipe = () => {{
+          const doc = window.parent.document;
+          const target = doc.getElementById(anchorId);
+          if (!target) return;
+          target.scrollIntoView({{ behavior: "smooth", block: "start" }});
+          const expander = target.nextElementSibling;
+          if (expander) {{
+            expander.setAttribute("tabindex", "-1");
+            expander.focus({{ preventScroll: true }});
+          }}
+        }};
+        requestAnimationFrame(() => setTimeout(scrollToRecipe, 80));
+        </script>
+        """,
+        height=0,
+    )
