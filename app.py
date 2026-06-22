@@ -149,6 +149,123 @@ def sedentary_tdee_from_weight(weight_kg):
     return round(22 * weight_kg)
 
 
+def inject_ui_styles():
+    st.markdown(
+        """
+        <style>
+        :root {
+            color-scheme: light dark;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .stApp {
+            color: var(--text-color);
+            background: var(--background-color);
+        }
+        .block-container {
+            padding-top: 1.4rem;
+            padding-bottom: 2rem;
+        }
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin: 1rem 0 0.55rem;
+        }
+        [data-testid="stVerticalBlockBorderWrapper"] {
+            background: color-mix(in srgb, var(--secondary-background-color) 72%, var(--background-color) 28%);
+            border: 1px solid color-mix(in srgb, var(--text-color) 12%, transparent 88%);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+            padding: 0.2rem;
+            margin-bottom: 1rem;
+        }
+        .stApp h1, .stApp h2, .stApp h3, .stApp h4,
+        .stApp p, .stApp li, .stApp label, .stApp div, .stApp span,
+        .stApp [data-baseweb="select"] *, .stApp [data-baseweb="tab"] * {
+            color: var(--text-color);
+        }
+        .stApp a {
+            color: var(--link-color, #0f766e);
+            text-decoration-color: var(--link-color, #0f766e);
+        }
+        .stApp .stTabs button[role="tab"] {
+            color: var(--text-color);
+            background: transparent;
+            font-weight: 600;
+        }
+        .stApp .stTabs button[aria-selected="true"] {
+            color: var(--text-color);
+        }
+        .stApp .stButton button {
+            font-weight: 600;
+            color: var(--text-color);
+            border-radius: 12px;
+        }
+        .stApp .stButton button[kind="secondary"] {
+            background: var(--secondary-background-color);
+        }
+        .stApp [data-baseweb="select"] > div,
+        .stApp .stTextInput input,
+        .stApp .stNumberInput input,
+        .stApp textarea {
+            color: var(--text-color);
+            background: color-mix(in srgb, var(--background-color) 85%, var(--secondary-background-color) 15%);
+        }
+        .stApp [data-baseweb="select"] svg,
+        .stApp .stExpander svg {
+            fill: var(--text-color);
+        }
+        .stApp .stExpander {
+            border: 1px solid color-mix(in srgb, var(--text-color) 12%, transparent 88%);
+            border-radius: 12px;
+            background: color-mix(in srgb, var(--background-color) 86%, var(--secondary-background-color) 14%);
+        }
+        .stApp .stExpander summary,
+        .stApp .stExpander summary p {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+        .stApp [data-testid="stDataFrame"],
+        .stApp [data-testid="stDataFrame"] * {
+            color: var(--text-color);
+        }
+        .stApp .stAlert,
+        .stApp .stAlert * {
+            color: var(--text-color);
+        }
+        .stApp .stCheckbox label p,
+        .stApp .stRadio label p,
+        .stApp .stMarkdown p {
+            color: var(--text-color);
+        }
+        @media (max-width: 768px) {
+            .block-container {
+                padding-top: 1rem;
+                padding-bottom: 1.5rem;
+            }
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def section_intro(anchor, title):
+    st.markdown(
+        f"""
+        <div id="{anchor}"></div>
+        <div class="section-title">{title}</div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def has_dinner_recipe_link(dish):
+    return bool(dish.get("ingredients") or dish.get("youtube"))
+
+
 def load_meal_log():
     if not MEAL_LOG_PATH.exists():
         return []
@@ -255,7 +372,6 @@ def log_current_meal():
 
 
 def MealLogTab(mealLog):
-    st.subheader("Meal Log")
     if not mealLog:
         st.info("No meals logged yet.")
         return
@@ -291,68 +407,70 @@ def MealLogTab(mealLog):
 
 
 st.set_page_config(page_title="Meal Planner", page_icon="🥗", layout="wide")
+inject_ui_styles()
 st.title("Meal Planner")
-st.caption("Plan meals, portions, fixed add-ons, calories, and deficit clearly for each person.")
 
 if "grocery_list" not in st.session_state:
     st.session_state.grocery_list = OrderedDict()
 if "mealLog" not in st.session_state:
     st.session_state.mealLog = load_meal_log()
 
-top_left, top_right = st.columns([2, 1])
-day = top_left.selectbox("Plan for", DATA["days"])
-top_right.write("")
+with st.container(border=True):
+    st.markdown("<div id='planner-section'></div>", unsafe_allow_html=True)
+    top_left, top_right = st.columns([2, 1])
+    day = top_left.selectbox("Plan for", DATA["days"])
+    top_right.write("")
 
-if st.session_state.get("selected_day") != day:
-    st.session_state.selected_day = day
-    defaults = DAY_PLANS.get(day, DAY_PLANS["Today"])
-    st.session_state.brunch_name = defaults["brunch"]
-    st.session_state.dinner_name = defaults["dinner"]
-    sync_portions_from_selection()
+    if st.session_state.get("selected_day") != day:
+        st.session_state.selected_day = day
+        defaults = DAY_PLANS.get(day, DAY_PLANS["Today"])
+        st.session_state.brunch_name = defaults["brunch"]
+        st.session_state.dinner_name = defaults["dinner"]
+        sync_portions_from_selection()
 
-action_left, action_right = st.columns(2)
-action_left.button("Khane Mein Kya Khaye?", on_click=choose_random_meals, use_container_width=True)
-action_right.button(
-    "Log what I ate",
-    on_click=log_current_meal,
-    disabled=not bool(st.session_state.get("brunch_name")),
-    use_container_width=True,
-)
-if st.session_state.get("meal_log_flash"):
-    st.success(st.session_state.meal_log_flash)
-    st.session_state.meal_log_flash = ""
+    action_left, action_right = st.columns(2)
+    action_left.button("Khane Mein Kya Khaye?", on_click=choose_random_meals, use_container_width=True)
+    action_right.button(
+        "Log what I ate",
+        on_click=log_current_meal,
+        disabled=not bool(st.session_state.get("brunch_name")),
+        use_container_width=True,
+    )
+    if st.session_state.get("meal_log_flash"):
+        st.success(st.session_state.meal_log_flash)
+        st.session_state.meal_log_flash = ""
 
-row1, row2 = st.columns(2)
-brunch_name = row1.selectbox("Brunch", dish_names("brunch"), key="brunch_name", on_change=sync_portions_from_selection)
-dinner_name = row2.selectbox("Dinner", ["Morning Portion Only"] + dish_names("brunch"), key="dinner_name", on_change=sync_portions_from_selection)
+    row1, row2 = st.columns(2)
+    brunch_name = row1.selectbox("Brunch", dish_names("brunch"), key="brunch_name", on_change=sync_portions_from_selection)
+    dinner_name = row2.selectbox("Dinner", ["Morning Portion Only"] + dish_names("brunch"), key="dinner_name", on_change=sync_portions_from_selection)
 
-st.markdown("**Shreya plan**")
-row4, row5 = st.columns(2)
-portion_you = row4.text_input("Shreya Brunch Portion", key="portion_you")
-dinner_portion_you = row5.text_input("Shreya Dinner Portion", key="dinner_portion_you")
-st.markdown("**Shreya fixed add-ons**")
-your_checks = st.columns(4)
-selected_you = []
-for i, item in enumerate(FIXED_ITEM_META["you"]):
-    if your_checks[i % 4].checkbox(item, value=True, key=f"you_{item}"):
-        selected_you.append(item)
-    else:
-        for name, qty in FIXED_ITEM_META["you"][item]["ingredients"]:
-            st.session_state.grocery_list[name] = qty
+    st.markdown("**Shreya plan**")
+    row4, row5 = st.columns(2)
+    portion_you = row4.text_input("Shreya Brunch Portion", key="portion_you")
+    dinner_portion_you = row5.text_input("Shreya Dinner Portion", key="dinner_portion_you")
+    st.markdown("**Shreya fixed add-ons**")
+    your_checks = st.columns(4)
+    selected_you = []
+    for i, item in enumerate(FIXED_ITEM_META["you"]):
+        if your_checks[i % 4].checkbox(item, value=True, key=f"you_{item}"):
+            selected_you.append(item)
+        else:
+            for name, qty in FIXED_ITEM_META["you"][item]["ingredients"]:
+                st.session_state.grocery_list[name] = qty
 
-st.markdown("**Varshit plan**")
-row6, row7 = st.columns(2)
-portion_varshit = row6.text_input("Varshit Brunch Portion", key="portion_varshit")
-dinner_portion_varshit = row7.text_input("Varshit Dinner Portion", key="dinner_portion_varshit")
-st.markdown("**Varshit fixed add-ons**")
-varshit_checks = st.columns(3)
-selected_varshit = []
-for i, item in enumerate(FIXED_ITEM_META["varshit"]):
-    if varshit_checks[i % 3].checkbox(item, value=True, key=f"varshit_{item}"):
-        selected_varshit.append(item)
-    else:
-        for name, qty in FIXED_ITEM_META["varshit"][item]["ingredients"]:
-            st.session_state.grocery_list[name] = qty
+    st.markdown("**Varshit plan**")
+    row6, row7 = st.columns(2)
+    portion_varshit = row6.text_input("Varshit Brunch Portion", key="portion_varshit")
+    dinner_portion_varshit = row7.text_input("Varshit Dinner Portion", key="dinner_portion_varshit")
+    st.markdown("**Varshit fixed add-ons**")
+    varshit_checks = st.columns(3)
+    selected_varshit = []
+    for i, item in enumerate(FIXED_ITEM_META["varshit"]):
+        if varshit_checks[i % 3].checkbox(item, value=True, key=f"varshit_{item}"):
+            selected_varshit.append(item)
+        else:
+            for name, qty in FIXED_ITEM_META["varshit"][item]["ingredients"]:
+                st.session_state.grocery_list[name] = qty
 
 brunch = get_dish("brunch", brunch_name)
 dinner = dinner_dish(dinner_name)
@@ -460,93 +578,91 @@ def style_deficit_row(row):
 ingredients_tab, calories_tab, meal_log_tab = st.tabs(["Ingredients & Recipe", "Calories", "Meal Log"])
 
 with ingredients_tab:
-    st.subheader("Ingredients Needed")
-    all_ingredients = collect_ingredients([brunch, dinner])
-    main_ingredients = collect_ingredients([brunch, dinner])
-    addon_ingredients = OrderedDict()
-    for item in selected_you:
-        for name, qty in FIXED_ITEM_META["you"][item]["ingredients"]:
-            all_ingredients[name] = qty
-            addon_ingredients[name] = qty
-    for item in selected_varshit:
-        for name, qty in FIXED_ITEM_META["varshit"][item]["ingredients"]:
-            all_ingredients[name] = qty
-            addon_ingredients[name] = qty
-    st.markdown("**Main Ingredients**")
-    st.caption("Untick anything not available at home. Missing items will appear in a grocery-reference list below.")
-    ingredient_cols = st.columns(2)
-    missing = OrderedDict()
-    for i, (name, qty) in enumerate(main_ingredients.items()):
-        label = f"{name}: {qty}" if qty else name
-        available = ingredient_cols[i % 2].checkbox(label, value=True, key=f"ingredient_{name}")
-        if not available:
-            missing[name] = qty
-            st.session_state.grocery_list[name] = qty
-    st.markdown("**Add-on Ingredients**")
-    addon_cols = st.columns(2)
-    for i, (name, qty) in enumerate(addon_ingredients.items()):
-        label = f"{name}: {qty}" if qty else name
-        available = addon_cols[i % 2].checkbox(label, value=True, key=f"addon_ingredient_{name}")
-        if not available:
-            missing[name] = qty
-            st.session_state.grocery_list[name] = qty
-
-    st.markdown("**Next Grocery Buy List**")
-    if st.session_state.grocery_list:
-        buy_cols = st.columns(2)
-        bought_now = []
-        for i, (name, qty) in enumerate(st.session_state.grocery_list.items()):
+    with st.container(border=True):
+        st.markdown("<div id='ingredients-section'></div>", unsafe_allow_html=True)
+        all_ingredients = collect_ingredients([brunch, dinner])
+        main_ingredients = collect_ingredients([brunch, dinner])
+        addon_ingredients = OrderedDict()
+        for item in selected_you:
+            for name, qty in FIXED_ITEM_META["you"][item]["ingredients"]:
+                all_ingredients[name] = qty
+                addon_ingredients[name] = qty
+        for item in selected_varshit:
+            for name, qty in FIXED_ITEM_META["varshit"][item]["ingredients"]:
+                all_ingredients[name] = qty
+                addon_ingredients[name] = qty
+        st.markdown("**Ingredients**")
+        ingredient_cols = st.columns(2)
+        missing = OrderedDict()
+        for i, (name, qty) in enumerate(main_ingredients.items()):
             label = f"{name}: {qty}" if qty else name
-            if buy_cols[i % 2].checkbox(f"Bought - {label}", value=False, key=f"bought_{name}"):
-                bought_now.append(name)
-        if bought_now:
-            for name in bought_now:
-                st.session_state.grocery_list.pop(name, None)
-                if f"ingredient_{name}" in st.session_state:
-                    st.session_state[f"ingredient_{name}"] = True
-                if f"addon_ingredient_{name}" in st.session_state:
-                    st.session_state[f"addon_ingredient_{name}"] = True
-                st.session_state[f"bought_{name}"] = False
-            st.rerun()
-    else:
-        st.write("All selected ingredients are available.")
+            available = ingredient_cols[i % 2].checkbox(label, value=True, key=f"ingredient_{name}")
+            if not available:
+                missing[name] = qty
+                st.session_state.grocery_list[name] = qty
+        st.markdown("**Add-on Ingredients**")
+        addon_cols = st.columns(2)
+        for i, (name, qty) in enumerate(addon_ingredients.items()):
+            label = f"{name}: {qty}" if qty else name
+            available = addon_cols[i % 2].checkbox(label, value=True, key=f"addon_ingredient_{name}")
+            if not available:
+                missing[name] = qty
+                st.session_state.grocery_list[name] = qty
 
-    st.markdown("**Selected recipe links**")
-    st.markdown(f"- Brunch: [View {brunch['name']}](#{recipe_slug(brunch['name'])})")
-    st.markdown(f"- Dinner: [View {dinner['name']}](#{recipe_slug(dinner['name'])})")
+        st.markdown("**Next Grocery Buy List**")
+        if st.session_state.grocery_list:
+            buy_cols = st.columns(2)
+            bought_now = []
+            for i, (name, qty) in enumerate(st.session_state.grocery_list.items()):
+                label = f"{name}: {qty}" if qty else name
+                if buy_cols[i % 2].checkbox(f"Bought - {label}", value=False, key=f"bought_{name}"):
+                    bought_now.append(name)
+            if bought_now:
+                for name in bought_now:
+                    st.session_state.grocery_list.pop(name, None)
+                    if f"ingredient_{name}" in st.session_state:
+                        st.session_state[f"ingredient_{name}"] = True
+                    if f"addon_ingredient_{name}" in st.session_state:
+                        st.session_state[f"addon_ingredient_{name}"] = True
+                    st.session_state[f"bought_{name}"] = False
+                st.rerun()
+        else:
+            st.write("All selected ingredients are available.")
 
-    st.markdown("**Before Didi arrives**")
-    st.markdown("- " + "\n- ".join(DATA["daily_routine"]["night_prep"]))
-    st.markdown("**Morning routine**")
-    st.markdown("- " + "\n- ".join(DATA["daily_routine"]["morning_start"]))
+        st.markdown("**Selected recipe links**")
+        st.markdown(f"- Brunch: [View {brunch['name']}](#{recipe_slug(brunch['name'])})")
+        if has_dinner_recipe_link(dinner):
+            st.markdown(f"- Dinner: [View {dinner['name']}](#{recipe_slug(dinner['name'])})")
+
+        with st.expander("Before Didi Arrives", expanded=False):
+            st.markdown("- " + "\n- ".join(DATA["daily_routine"]["night_prep"]))
+        with st.expander("Morning Routine", expanded=False):
+            st.markdown("- " + "\n- ".join(DATA["daily_routine"]["morning_start"]))
 
 with calories_tab:
-    st.dataframe(df.style.apply(style_deficit_row, axis=1), use_container_width=True, hide_index=True)
-    you_steps = max(0, round((round(totals["you"]["calories"]) - burn["you"]["total_spent"]) / DATA["people"]["you"]["kcal_per_step"]))
-    varshit_steps = max(0, round((round(totals["varshit"]["calories"]) - burn["varshit"]["total_spent"]) / DATA["people"]["varshit"]["kcal_per_step"]))
-    st.caption(
-        "Walk-step note for weight loss support: "
-        f"You may need about {you_steps} extra steps if in surplus. "
-        f"Varshit may need about {varshit_steps} extra steps if in surplus."
-    )
-    st.caption(
-        "Calories spent formula used here: resting burn estimated as 22 x body weight (kg), "
-        "plus 500 kcal sitting/working, plus calisthenics burn, plus current 2k-step burn."
-    )
+    with st.container(border=True):
+        st.markdown("<div id='calories-section'></div>", unsafe_allow_html=True)
+        st.dataframe(df.style.apply(style_deficit_row, axis=1), use_container_width=True, hide_index=True)
 
 with meal_log_tab:
-    MealLogTab(st.session_state.mealLog)
+    with st.container(border=True):
+        st.markdown("<div id='meal-log-section'></div>", unsafe_allow_html=True)
+        MealLogTab(st.session_state.mealLog)
 
 st.divider()
-st.subheader("Recipe View")
-for dish in all_recipe_dishes():
-    st.markdown(f"<div id='{recipe_slug(dish['name'])}'></div>", unsafe_allow_html=True)
-    with st.expander(dish["name"]):
-        st.write(dish["summary"])
-        st.markdown("**Ingredients**")
-        st.markdown("- " + "\n- ".join(f"{item['name']}: {item.get('qty', '')}".rstrip(": ") for item in dish["ingredients"]))
-        st.markdown("**Method**")
-        st.markdown("- " + "\n- ".join(dish["method"]))
-        if dish.get("youtube"):
-            st.markdown(f"**YouTube:** [Open recipe video]({dish['youtube']})")
-            st.video(dish["youtube"])
+section_intro(
+    "recipes-section",
+    "Recipe View",
+)
+with st.container(border=True):
+    for dish in all_recipe_dishes():
+        st.markdown(f"<div id='{recipe_slug(dish['name'])}'></div>", unsafe_allow_html=True)
+        with st.expander(dish["name"]):
+            st.write(dish["summary"])
+            st.markdown("**Ingredients**")
+            st.markdown("- " + "\n- ".join(f"{item['name']}: {item.get('qty', '')}".rstrip(": ") for item in dish["ingredients"]))
+            st.markdown("**Method**")
+            st.markdown("- " + "\n- ".join(dish["method"]))
+            if dish.get("youtube"):
+                st.markdown(f"**YouTube:** [Open recipe video]({dish['youtube']})")
+                st.video(dish["youtube"])
