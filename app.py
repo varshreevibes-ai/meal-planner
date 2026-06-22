@@ -621,14 +621,14 @@ with ingredients_tab:
             if not available:
                 missing[name] = qty
                 st.session_state.grocery_list[name] = qty
-        st.markdown("**Add-on Ingredients**")
-        addon_cols = st.columns(2)
-        for i, (name, qty) in enumerate(addon_ingredients.items()):
-            label = f"{name}: {qty}" if qty else name
-            available = addon_cols[i % 2].checkbox(label, value=True, key=f"addon_ingredient_{name}")
-            if not available:
-                missing[name] = qty
-                st.session_state.grocery_list[name] = qty
+        with st.expander("Add-on Ingredients", expanded=False):
+            addon_cols = st.columns(2)
+            for i, (name, qty) in enumerate(addon_ingredients.items()):
+                label = f"{name}: {qty}" if qty else name
+                available = addon_cols[i % 2].checkbox(label, value=True, key=f"addon_ingredient_{name}")
+                if not available:
+                    missing[name] = qty
+                    st.session_state.grocery_list[name] = qty
 
         st.markdown("**Next Grocery Buy List**")
         if st.session_state.grocery_list:
