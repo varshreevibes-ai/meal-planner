@@ -246,36 +246,30 @@ sections:
       ingredients:
         - name: dried white peas / safed matar
           qty: 1 cup, soaked overnight
-        - name: cooked white peas
-          qty: about 2 cups optional shortcut
-        - name: onion, finely chopped
+        - name: onion
           qty: 2 medium
-        - name: tomato, finely chopped
+        - name: tomato
           qty: 2 medium
-        - name: green chilies, chopped
-          qty: 1 to 2
+        - name: green chilies
+          qty: 3
         - name: green chutney
           qty: 3 tbsp
-        - name: imli chutney / tamarind chutney
+        - name: imli / tamarind chutney
           qty: 2 tbsp
         - name: chaat masala
           qty: 1 tsp
         - name: roasted cumin powder
           qty: 1/2 tsp
         - name: red chili powder
-          qty: 1/2 tsp, adjust to taste
+          qty: 1/2 tsp
         - name: black salt
           qty: 1/2 tsp
         - name: regular salt
           qty: as needed
         - name: lemon juice
           qty: 1 tbsp
-        - name: fresh coriander leaves, chopped
-          qty: 2 tbsp
-        - name: water
-          qty: as needed, to adjust consistency
-        - name: rotis
-          qty: 6 total: 4 for Varshit, 2 for Shreya
+        - name: fresh dhaniya/ coriander leaves
+          qty: fistful
       method:
         - Soak 1 cup dried white peas overnight.
         - Pressure cook the soaked peas with water and a little salt until soft.
