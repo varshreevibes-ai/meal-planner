@@ -1,13 +1,17 @@
 from collections import OrderedDict
+from datetime import datetime
+import json
 from pathlib import Path
 import re
 import random
+from uuid import uuid4
 
 import pandas as pd
 import streamlit as st
 import yaml
 
 DATA = yaml.safe_load(Path("meal_data.yaml").read_text())
+MEAL_LOG_PATH = Path("meal_log.json")
 NUTRITION = {
     "routine": {"you": {"calories": 260, "protein": 18}, "varshit": {"calories": 480, "protein": 24}},
     "Avocado Toast": {"you": {"calories": 240, "protein": 6}, "varshit": {"calories": 320, "protein": 9}},
@@ -145,12 +149,155 @@ def sedentary_tdee_from_weight(weight_kg):
     return round(22 * weight_kg)
 
 
+def load_meal_log():
+    if not MEAL_LOG_PATH.exists():
+        return []
+    try:
+        data = json.loads(MEAL_LOG_PATH.read_text())
+    except (json.JSONDecodeError, OSError):
+        return []
+    return [normalize_meal_log_entry(entry) for entry in data] if isinstance(data, list) else []
+
+
+def save_meal_log(mealLog):
+    MEAL_LOG_PATH.write_text(json.dumps(mealLog, indent=2))
+
+
+def split_legacy_quantity(quantity):
+    if not quantity:
+        return "", ""
+    parts = [part.strip() for part in str(quantity).split("|")]
+    shreya_quantity = parts[0].replace("Shreya:", "").strip() if parts else ""
+    varshit_quantity = parts[1].replace("Varshit:", "").strip() if len(parts) > 1 else ""
+    return shreya_quantity, varshit_quantity
+
+
+def normalize_meal_log_entry(entry):
+    entry = dict(entry) if isinstance(entry, dict) else {}
+    nutrition = nutrition_for(entry.get("meal_name", ""))
+    shreya_quantity, varshit_quantity = split_legacy_quantity(entry.get("quantity"))
+    logged_at = entry.get("logged_at") or datetime.now().isoformat(timespec="seconds")
+    return {
+        "id": entry.get("id", uuid4().hex),
+        "meal_name": entry.get("meal_name", "Unknown meal"),
+        "shreya_quantity": entry.get("shreya_quantity", shreya_quantity),
+        "varshit_quantity": entry.get("varshit_quantity", varshit_quantity),
+        "logged_at": logged_at,
+        "date": entry.get("date", format_logged_at(logged_at).strftime("%Y-%m-%d") if format_logged_at(logged_at) != datetime.min else ""),
+        "time": entry.get("time", format_logged_at(logged_at).strftime("%I:%M %p") if format_logged_at(logged_at) != datetime.min else ""),
+        "shreya_calories": entry.get("shreya_calories", nutrition["you"]["calories"]),
+        "shreya_protein": entry.get("shreya_protein", nutrition["you"]["protein"]),
+        "varshit_calories": entry.get("varshit_calories", nutrition["varshit"]["calories"]),
+        "varshit_protein": entry.get("varshit_protein", nutrition["varshit"]["protein"]),
+    }
+
+
+def logMeal(mealLog, meal_name, shreya_quantity, varshit_quantity):
+    logged_at = datetime.now().isoformat(timespec="seconds")
+    nutrition = nutrition_for(meal_name)
+    entry = {
+        "id": uuid4().hex,
+        "meal_name": meal_name,
+        "shreya_quantity": shreya_quantity,
+        "varshit_quantity": varshit_quantity,
+        "logged_at": logged_at,
+        "date": datetime.fromisoformat(logged_at).strftime("%Y-%m-%d"),
+        "time": datetime.fromisoformat(logged_at).strftime("%I:%M %p"),
+        "shreya_calories": nutrition["you"]["calories"],
+        "shreya_protein": nutrition["you"]["protein"],
+        "varshit_calories": nutrition["varshit"]["calories"],
+        "varshit_protein": nutrition["varshit"]["protein"],
+    }
+    updated_log = [entry, *mealLog]
+    save_meal_log(updated_log)
+    return updated_log
+
+
+def deleteMealLogEntry(mealLog, entry_id):
+    updated_log = [entry for entry in mealLog if entry.get("id") != entry_id]
+    save_meal_log(updated_log)
+    return updated_log
+
+
+def format_logged_at(value):
+    try:
+        return datetime.fromisoformat(value)
+    except (TypeError, ValueError):
+        return datetime.min
+
+
+def sync_portions_from_selection():
+    brunch_name = st.session_state.get("brunch_name", dish_names("brunch")[0])
+    dinner_name = st.session_state.get("dinner_name", "Morning Portion Only")
+    st.session_state.portion_you = PORTIONS[brunch_name]["you"]
+    st.session_state.portion_varshit = PORTIONS[brunch_name]["varshit"]
+    st.session_state.dinner_portion_you = PORTIONS[dinner_name]["you"] if dinner_name in PORTIONS else PORTIONS[brunch_name]["you"]
+    st.session_state.dinner_portion_varshit = PORTIONS[dinner_name]["varshit"] if dinner_name in PORTIONS else PORTIONS[brunch_name]["varshit"]
+
+
+def choose_random_meals():
+    st.session_state.brunch_name = random.choice(dish_names("brunch"))
+    st.session_state.dinner_name = random.choice(["Morning Portion Only"] + dish_names("brunch"))
+    sync_portions_from_selection()
+
+
+def log_current_meal():
+    meal_name = st.session_state.get("brunch_name")
+    if not meal_name:
+        return
+    st.session_state.mealLog = logMeal(
+        st.session_state.mealLog,
+        meal_name,
+        st.session_state.get("portion_you", ""),
+        st.session_state.get("portion_varshit", ""),
+    )
+    st.session_state.meal_log_flash = f"Logged {meal_name}."
+
+
+def MealLogTab(mealLog):
+    st.subheader("Meal Log")
+    if not mealLog:
+        st.info("No meals logged yet.")
+        return
+
+    sorted_log = sorted(mealLog, key=lambda item: format_logged_at(item.get("logged_at")), reverse=True)
+    meal_log_rows = []
+    for entry in sorted_log:
+        logged_at = format_logged_at(entry.get("logged_at"))
+        meal_log_rows.append(
+            {
+                "Meal": entry.get("meal_name", "Unknown meal"),
+                "Date": logged_at.strftime("%d %b %Y") if logged_at != datetime.min else entry.get("date", ""),
+                "Time": logged_at.strftime("%I:%M %p") if logged_at != datetime.min else entry.get("time", ""),
+                "Shreya Quantity": entry.get("shreya_quantity", ""),
+                "Varshit Quantity": entry.get("varshit_quantity", ""),
+                "Shreya Calories": entry.get("shreya_calories", 0),
+                "Shreya Protein (g)": entry.get("shreya_protein", 0),
+                "Varshit Calories": entry.get("varshit_calories", 0),
+                "Varshit Protein (g)": entry.get("varshit_protein", 0),
+            }
+        )
+    st.dataframe(pd.DataFrame(meal_log_rows), use_container_width=True, hide_index=True)
+
+    delete_options = {
+        f"{entry.get('meal_name', 'Unknown meal')} | {entry.get('date', '')} {entry.get('time', '')}": entry.get("id")
+        for entry in sorted_log
+    }
+    selected_delete_label = st.selectbox("Remove a logged meal", ["Select a meal to remove"] + list(delete_options.keys()))
+    if selected_delete_label != "Select a meal to remove":
+        if st.button("Delete selected meal", type="secondary"):
+            st.session_state.mealLog = deleteMealLogEntry(st.session_state.mealLog, delete_options[selected_delete_label])
+            st.rerun()
+
+
 st.set_page_config(page_title="Meal Planner", page_icon="🥗", layout="wide")
 st.title("Meal Planner")
 st.caption("Plan meals, portions, fixed add-ons, calories, and deficit clearly for each person.")
 
 if "grocery_list" not in st.session_state:
     st.session_state.grocery_list = OrderedDict()
+if "mealLog" not in st.session_state:
+    st.session_state.mealLog = load_meal_log()
 
 top_left, top_right = st.columns([2, 1])
 day = top_left.selectbox("Plan for", DATA["days"])
@@ -161,19 +308,28 @@ if st.session_state.get("selected_day") != day:
     defaults = DAY_PLANS.get(day, DAY_PLANS["Today"])
     st.session_state.brunch_name = defaults["brunch"]
     st.session_state.dinner_name = defaults["dinner"]
+    sync_portions_from_selection()
 
-if st.button("Khane Mein Kya Khaye?"):
-    st.session_state.brunch_name = random.choice(dish_names("brunch"))
-    st.session_state.dinner_name = random.choice(["Morning Portion Only"] + dish_names("brunch"))
+action_left, action_right = st.columns(2)
+action_left.button("Khane Mein Kya Khaye?", on_click=choose_random_meals, use_container_width=True)
+action_right.button(
+    "Log what I ate",
+    on_click=log_current_meal,
+    disabled=not bool(st.session_state.get("brunch_name")),
+    use_container_width=True,
+)
+if st.session_state.get("meal_log_flash"):
+    st.success(st.session_state.meal_log_flash)
+    st.session_state.meal_log_flash = ""
 
 row1, row2 = st.columns(2)
-brunch_name = row1.selectbox("Brunch", dish_names("brunch"), key="brunch_name")
-dinner_name = row2.selectbox("Dinner", ["Morning Portion Only"] + dish_names("brunch"), key="dinner_name")
+brunch_name = row1.selectbox("Brunch", dish_names("brunch"), key="brunch_name", on_change=sync_portions_from_selection)
+dinner_name = row2.selectbox("Dinner", ["Morning Portion Only"] + dish_names("brunch"), key="dinner_name", on_change=sync_portions_from_selection)
 
 st.markdown("**Shreya plan**")
 row4, row5 = st.columns(2)
-portion_you = row4.text_input("Shreya Brunch Portion", value=PORTIONS[brunch_name]["you"])
-dinner_portion_you = row5.text_input("Shreya Dinner Portion", value=PORTIONS[dinner_name]["you"] if dinner_name in PORTIONS else PORTIONS[brunch_name]["you"])
+portion_you = row4.text_input("Shreya Brunch Portion", key="portion_you")
+dinner_portion_you = row5.text_input("Shreya Dinner Portion", key="dinner_portion_you")
 st.markdown("**Shreya fixed add-ons**")
 your_checks = st.columns(4)
 selected_you = []
@@ -186,8 +342,8 @@ for i, item in enumerate(FIXED_ITEM_META["you"]):
 
 st.markdown("**Varshit plan**")
 row6, row7 = st.columns(2)
-portion_varshit = row6.text_input("Varshit Brunch Portion", value=PORTIONS[brunch_name]["varshit"])
-dinner_portion_varshit = row7.text_input("Varshit Dinner Portion", value=PORTIONS[dinner_name]["varshit"] if dinner_name in PORTIONS else PORTIONS[brunch_name]["varshit"])
+portion_varshit = row6.text_input("Varshit Brunch Portion", key="portion_varshit")
+dinner_portion_varshit = row7.text_input("Varshit Dinner Portion", key="dinner_portion_varshit")
 st.markdown("**Varshit fixed add-ons**")
 varshit_checks = st.columns(3)
 selected_varshit = []
@@ -301,9 +457,9 @@ def style_deficit_row(row):
     styles[varshit_idx] = "background-color: #d1fae5; color: #065f46;" if row["Varshit Calories"] >= 0 else "background-color: #fee2e2; color: #991b1b;"
     return styles
 
-home_tab, calories_tab = st.tabs(["Home", "Calories"])
+ingredients_tab, calories_tab, meal_log_tab = st.tabs(["Ingredients & Recipe", "Calories", "Meal Log"])
 
-with home_tab:
+with ingredients_tab:
     st.subheader("Ingredients Needed")
     all_ingredients = collect_ingredients([brunch, dinner])
     main_ingredients = collect_ingredients([brunch, dinner])
@@ -377,6 +533,9 @@ with calories_tab:
         "Calories spent formula used here: resting burn estimated as 22 x body weight (kg), "
         "plus 500 kcal sitting/working, plus calisthenics burn, plus current 2k-step burn."
     )
+
+with meal_log_tab:
+    MealLogTab(st.session_state.mealLog)
 
 st.divider()
 st.subheader("Recipe View")
