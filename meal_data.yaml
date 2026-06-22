@@ -234,21 +234,63 @@ sections:
         - Add chilli flakes, black pepper, salt, and black salt.
         - Prepare sliced onion, sliced cucumber, and green chutney for topping.
         - Fill and assemble the tacos with the chole-tofu mixture and toppings.
-    - name: Matra
-      summary: Matra as a street-style brunch option with recipe reference from the linked Short.
+    - name: Delhi Style Matar Chaat
+      summary: Delhi-style matar chaat with thick safed matar, chutneys, and roti for a filling street-style brunch.
       youtube: https://youtube.com/shorts/NDObjug7vXU?si=F9VYAnajdjsvBw1h
       cook_time: 35 min
-      cook_summary: Prepare the matra base and serve it fresh with toppings as shown in the video.
+      cook_summary: Soak and cook safed matar, finish it with onion, tomato, chutneys, and serve hot with measured rotis.
       complexity: medium
-      protein_note: moderate protein depending on pea quantity and toppings
+      protein_note: moderate protein from white peas, with better satiety than lighter chaat-style brunches
       for_you: Keep the masala lighter and the portion moderate if digestion feels sensitive.
-      for_varshit: Good as a filling brunch, especially with a stronger pea portion before adding more toppings.
+      for_varshit: Good as a filling brunch; keep the matar portion strong and use the planned rotis instead of adding extra carbs.
       ingredients:
-        - name: matra ingredients
-          qty: follow video recipe for now
+        - name: dried white peas / safed matar
+          qty: 1 cup, soaked overnight
+        - name: cooked white peas
+          qty: about 2 cups optional shortcut
+        - name: onion, finely chopped
+          qty: 2 medium
+        - name: tomato, finely chopped
+          qty: 2 medium
+        - name: green chilies, chopped
+          qty: 1 to 2
+        - name: green chutney
+          qty: 3 tbsp
+        - name: imli chutney / tamarind chutney
+          qty: 2 tbsp
+        - name: chaat masala
+          qty: 1 tsp
+        - name: roasted cumin powder
+          qty: 1/2 tsp
+        - name: red chili powder
+          qty: 1/2 tsp, adjust to taste
+        - name: black salt
+          qty: 1/2 tsp
+        - name: regular salt
+          qty: as needed
+        - name: lemon juice
+          qty: 1 tbsp
+        - name: fresh coriander leaves, chopped
+          qty: 2 tbsp
+        - name: water
+          qty: as needed, to adjust consistency
+        - name: rotis
+          qty: 6 total: 4 for Varshit, 2 for Shreya
       method:
-        - Follow the linked recipe video for the current version.
-        - Update the ingredient list locally later once the exact house version is finalized.
+        - Soak 1 cup dried white peas overnight.
+        - Pressure cook the soaked peas with water and a little salt until soft.
+        - Lightly mash some peas so the mixture becomes thick.
+        - Heat a pan and add the cooked matar.
+        - Add chopped onions, tomatoes, and green chilies.
+        - Add chaat masala, roasted cumin powder, red chili powder, black salt, and regular salt.
+        - Mix well and cook for 4 to 6 minutes until the onions and tomatoes soften slightly.
+        - Add a little water if the mixture looks too dry.
+        - Add green chutney and imli chutney.
+        - Mix everything well and cook for 1 to 2 minutes.
+        - Add lemon juice and chopped coriander.
+        - Taste and adjust salt, spice, or chutney as needed.
+        - Keep the matar mixture thick, not watery, so it goes well with rotis.
+        - Serve hot with 6 rotis.
     - name: Poha
       summary: Light vegetable poha for an easy home brunch.
       cook_time: 20 min
