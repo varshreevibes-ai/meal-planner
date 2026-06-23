@@ -4,3 +4,4 @@ __pycache__/
 .DS_Store
 .streamlit/
 meal_log.json
+profiles_data.json
