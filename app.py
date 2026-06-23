@@ -993,6 +993,7 @@ def render_user_gate():
             st.error("Enter a valid user ID using letters, numbers, hyphens, or underscores.")
         else:
             st.session_state.planner_user_id = normalized
+            st.query_params["user_id"] = normalized
             for key in [
                 "active_profile_loaded",
                 "grocery_list",
@@ -1354,6 +1355,10 @@ def render_setup_panel(profile):
 
 st.set_page_config(page_title="Meal Planner", page_icon="🥗", layout="wide")
 inject_ui_styles()
+
+query_user_id = normalize_user_id(st.query_params.get("user_id", ""))
+if query_user_id and not st.session_state.get("planner_user_id"):
+    st.session_state.planner_user_id = query_user_id
 
 if not st.session_state.get("planner_user_id"):
     render_user_gate()
