@@ -15,6 +15,7 @@ import yaml
 DATA = yaml.safe_load(Path("meal_data.yaml").read_text())
 MEAL_LOG_PATH = Path("meal_log.json")
 PROFILE_STORE_PATH = Path("profiles_data.json")
+DATA_ROOT = Path("data")
 MAX_PROFILE_MEMBERS = 5
 NUTRITION = {
     "routine": {"you": {"calories": 260, "protein": 18}, "varshit": {"calories": 480, "protein": 24}},
@@ -33,10 +34,6 @@ NUTRITION = {
     "Daal Chawal": {"you": {"calories": 270, "protein": 10}, "varshit": {"calories": 340, "protein": 13}},
     "Rajma Chawal": {"you": {"calories": 310, "protein": 11}, "varshit": {"calories": 390, "protein": 15}},
     "Uttapam and Ghee Podi Dosa": {"you": {"calories": 300, "protein": 7}, "varshit": {"calories": 370, "protein": 9}},
-    "Daily Fixed Add-ons": {"you": {"calories": 210, "protein": 8}, "varshit": {"calories": 260, "protein": 10}},
-    "Daily Add-ons plus Mango": {"you": {"calories": 300, "protein": 8}, "varshit": {"calories": 260, "protein": 10}},
-    "Daily Add-ons plus Papaya": {"you": {"calories": 250, "protein": 8}, "varshit": {"calories": 260, "protein": 10}},
-    "Daily Add-ons plus Air-Fried Chana": {"you": {"calories": 280, "protein": 12}, "varshit": {"calories": 330, "protein": 16}},
     "Morning Portion Only": {"you": {"calories": 180, "protein": 6}, "varshit": {"calories": 240, "protein": 9}},
     "Light Soup or Salad Plate": {"you": {"calories": 110, "protein": 3}, "varshit": {"calories": 150, "protein": 4}},
     "Moong Chilla Light Dinner": {"you": {"calories": 210, "protein": 10}, "varshit": {"calories": 280, "protein": 13}},
@@ -68,10 +65,6 @@ PORTIONS = {
     "Daal Chawal": {"you": "1 bowl dal + 1/2 to 3/4 bowl rice", "varshit": "1.5 bowls dal + 1 bowl rice"},
     "Rajma Chawal": {"you": "1 bowl rajma + 1/2 bowl rice", "varshit": "1.5 bowls rajma + 3/4 to 1 bowl rice"},
     "Uttapam and Ghee Podi Dosa": {"you": "1 ghee podi dosa", "varshit": "1 uttapam + sambar"},
-    "Daily Fixed Add-ons": {"you": "anar + soaked items + sattu", "varshit": "anar + sattu"},
-    "Daily Add-ons plus Mango": {"you": "fixed add-ons + Amrapali or Kesar ripe mango", "varshit": "fixed add-ons"},
-    "Daily Add-ons plus Papaya": {"you": "fixed add-ons + papaya", "varshit": "fixed add-ons + papaya"},
-    "Daily Add-ons plus Air-Fried Chana": {"you": "fixed add-ons + small chana", "varshit": "fixed add-ons + chana"},
     "Morning Portion Only": {"you": "1 small leftover bowl", "varshit": "1 medium leftover bowl"},
     "Light Soup or Salad Plate": {"you": "1 soup bowl", "varshit": "1 soup bowl + cucumber salad"},
     "Moong Chilla Light Dinner": {"you": "1 to 2 soft chilla", "varshit": "2 chilla"},
@@ -81,6 +74,19 @@ PORTIONS = {
 
 def recipe_slug(name):
     return re.sub(r"[^a-z0-9]+", "-", str(name).lower()).strip("-")
+
+
+def normalize_user_id(raw_value):
+    value = re.sub(r"[^a-z0-9_-]+", "-", str(raw_value).strip().lower()).strip("-_")
+    return value[:40]
+
+
+def user_storage_dir(user_id):
+    return DATA_ROOT / user_id
+
+
+def user_profile_store_path(user_id):
+    return user_storage_dir(user_id) / "profiles_data.json"
 
 
 def recipe_anchor_id(name):
@@ -390,20 +396,22 @@ def normalize_profile_store(store):
     return {"version": 2, "active_profile_id": active_profile_id, "profiles": profiles}
 
 
-def load_profile_store():
-    if not PROFILE_STORE_PATH.exists():
+def load_profile_store(store_path):
+    store_path.parent.mkdir(parents=True, exist_ok=True)
+    if not store_path.exists():
         store = default_profile_store()
-        PROFILE_STORE_PATH.write_text(json.dumps(store, indent=2))
+        store_path.write_text(json.dumps(store, indent=2))
         return store
     try:
-        raw = json.loads(PROFILE_STORE_PATH.read_text())
+        raw = json.loads(store_path.read_text())
     except (json.JSONDecodeError, OSError):
         return default_profile_store()
     return normalize_profile_store(raw)
 
 
-def save_profile_store(store):
-    PROFILE_STORE_PATH.write_text(json.dumps(normalize_profile_store(store), indent=2))
+def save_profile_store(store, store_path):
+    store_path.parent.mkdir(parents=True, exist_ok=True)
+    store_path.write_text(json.dumps(normalize_profile_store(store), indent=2))
 
 
 def get_active_profile(store):
@@ -846,9 +854,13 @@ def MealLogTab(profile):
 
 
 def persist_active_profile(profile):
-    store = load_profile_store()
+    user_id = st.session_state.get("planner_user_id", "")
+    if not user_id:
+        return
+    store_path = user_profile_store_path(user_id)
+    store = load_profile_store(store_path)
     store = replace_profile(store, normalize_profile(profile))
-    save_profile_store(store)
+    save_profile_store(store, store_path)
 
 
 def sync_profile_state(profile):
@@ -969,6 +981,37 @@ def inject_ui_styles():
     )
 
 
+def render_user_gate():
+    st.title("Meal Planner")
+    st.write("Enter your user ID to open your planner.")
+    with st.form("user_gate_form"):
+        raw_user_id = st.text_input("User ID")
+        open_planner = st.form_submit_button("Open planner")
+    if open_planner:
+        normalized = normalize_user_id(raw_user_id)
+        if not normalized:
+            st.error("Enter a valid user ID using letters, numbers, hyphens, or underscores.")
+        else:
+            st.session_state.planner_user_id = normalized
+            for key in [
+                "active_profile_loaded",
+                "grocery_list",
+                "mealLog",
+                "selected_recipe_slug",
+                "portion_you",
+                "portion_varshit",
+                "dinner_portion_you",
+                "dinner_portion_varshit",
+                "portion_you_suggestion",
+                "portion_varshit_suggestion",
+                "dinner_portion_you_suggestion",
+                "dinner_portion_varshit_suggestion",
+            ]:
+                st.session_state.pop(key, None)
+            st.rerun()
+    st.stop()
+
+
 def section_intro(anchor, title):
     st.markdown(
         f"""
@@ -1040,12 +1083,10 @@ def render_household_manager(profile, key_scope="default"):
         walk_value = selected_member.get("walks_regularly", "Yes") if selected_member else "Yes"
         goes_to_gym = st.selectbox("Gym", ["No", "Yes"], index=["No", "Yes"].index(gym_value))
         walks_regularly = st.selectbox("Walk", ["No", "Yes"], index=["No", "Yes"].index(walk_value))
-        st.markdown("**Supplements / Protein / Medicine / Intake**")
-        intake_items = st.text_area(
-            "All intake items",
+        intake_items = st.text_input(
+            "Supplements / Protein / Medicine / Intake",
             value=selected_member.get("intake_items", "") if selected_member else "",
-            height=140,
-            placeholder="Supplements\nMedicines\nJuice\nProtein\nDry fruits\nOther intake items",
+            placeholder="Supplements, medicines, juice, protein, dry fruits",
         )
         save_member = st.form_submit_button("Save member")
         delete_member = st.form_submit_button("Delete member") if selected_member else False
@@ -1078,7 +1119,7 @@ def render_household_manager(profile, key_scope="default"):
             st.rerun()
     if delete_member and selected_member:
         st.session_state[confirm_delete_key] = selected_member["id"]
-        st.session_state[editor_key] = selected_member["id"]
+        st.rerun()
     pending_delete_id = st.session_state.get(confirm_delete_key)
     if pending_delete_id:
         member_to_delete = next((item for item in profile.get("household_members", []) if item["id"] == pending_delete_id), None)
@@ -1088,12 +1129,11 @@ def render_household_manager(profile, key_scope="default"):
             if confirm_col.button("Confirm delete", key=f"confirm_delete_btn_{key_scope}_{profile['id']}", type="primary", use_container_width=True):
                 profile["household_members"] = [item for item in profile.get("household_members", []) if item["id"] != pending_delete_id]
                 st.session_state.pop(confirm_delete_key, None)
-                st.session_state[editor_key] = ""
                 persist_active_profile(profile)
                 st.rerun()
             if cancel_col.button("Cancel", key=f"cancel_delete_btn_{key_scope}_{profile['id']}", use_container_width=True):
                 st.session_state.pop(confirm_delete_key, None)
-                st.session_state[editor_key] = pending_delete_id
+                st.rerun()
         else:
             st.session_state.pop(confirm_delete_key, None)
 
@@ -1315,7 +1355,10 @@ def render_setup_panel(profile):
 st.set_page_config(page_title="Meal Planner", page_icon="🥗", layout="wide")
 inject_ui_styles()
 
-profile_store = load_profile_store()
+if not st.session_state.get("planner_user_id"):
+    render_user_gate()
+
+profile_store = load_profile_store(user_profile_store_path(st.session_state["planner_user_id"]))
 active_profile = get_active_profile(profile_store)
 
 if st.session_state.get("active_profile_loaded") != active_profile["id"]:
