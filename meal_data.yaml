@@ -272,16 +272,14 @@ sections:
           qty: fistful
       method:
         - Soak 1 cup dried white peas overnight.
-        - Pressure cook the soaked peas with water and a little salt until soft.
+        - Pressure cook the soaked peas with water, baking soda and a little salt until soft.
         - Lightly mash some peas so the mixture becomes thick.
-        - Heat a pan and add the cooked matar.
-        - Add chopped onions, tomatoes, and green chilies.
-        - Add chaat masala, roasted cumin powder, red chili powder, black salt, and regular salt.
-        - Mix well and cook for 4 to 6 minutes until the onions and tomatoes soften slightly.
-        - Add a little water if the mixture looks too dry.
-        - Add green chutney and imli chutney.
+        - Add green chutney and imli chutney, chopped onions, little tomatoes, and green chilies.
+        - Add cooked matar, bhuna jeera pisa, lal mirch pisi, kala namak, and regular namak.
+        - Mix well. Add a little water if the mixture looks too dry.
+        - Take a pan, put butter - add sliced onion, tomoatoes and 
         - Mix everything well and cook for 1 to 2 minutes.
-        - Add lemon juice and chopped coriander.
+        - Add lemon juice and chopped dhaniya patti.
         - Taste and adjust salt, spice, or chutney as needed.
         - Keep the matar mixture thick, not watery, so it goes well with rotis.
         - Serve hot with 6 rotis.
@@ -498,7 +496,7 @@ sections:
         - Serve with measured roti portions.
     - name: Tofu Tikka Roll
       summary: Tofu tikka roll with vegetables, filling enough for brunch and possible dinner reuse.
-      youtube: https://www.youtube.com/watch?v=W1Y4wB8YB2Q
+      youtube: https://youtube.com/shorts/ByyGG8cTWHI?si=34WmqicnjhoMnKHj
       cook_time: 35 min
       cook_summary: Marinate and cook tofu, fill wraps, keep one lighter portion if needed.
       complexity: medium
@@ -510,20 +508,33 @@ sections:
           qty: 1 cup
         - name: whole wheat wraps
           qty: 4
-        - name: onion
+        - name: Pyaj
           qty: 1
-        - name: capsicum
+        - name: Shimla mirch
           qty: 1
-        - name: ginger
-          qty: 1 inch
-        - name: cumin
+        - name: ginger garlic paste
+          qty: 1 tbsp
+        - name: BHuna jeera pisa
           qty: 1 tsp
-        - name: coriander
+        - name: Lal mirch pisi
+          qty: 1/2 tsp
+        - name: namak
+          qty: as needed
+        - name: lemon juice
+          qty: 1 tbsp
+        - name: kali mirch pisi
+          qty: 1/2 tsp
+        - name: Dhaniya powder
+        - name: fresh coriander leaves
           qty: 1 small bunch
+        - name: besan 
+          qty: 1 tbsp
       method:
-        - Marinate tofu in soy curd and spices.
-        - Pan cook with onion and capsicum.
-        - Fill wraps and keep one lighter portion if saving for dinner.
+        - Marinate tofu in soy curd and spices and smoky hot oil and rest for 10 minutes.
+        - Pan cook marinated tofu until raw smells disappears and then add onion, capsicum and tomatoes
+        - make a sauce with Dahi, tofu ginding, garlic paste and spices.
+        - Make paratha and put the sauce and filling in the wraps
+        - Roll the wraps and pan cook until crispy and serve hot.
     - name: Daal Chawal
       summary: Simple daal chawal, comfortable and easy to digest when kept light.
       youtube: https://www.youtube.com/watch?v=6n7kLQjB8l8
