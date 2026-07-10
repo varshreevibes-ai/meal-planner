@@ -1,3 +1,4 @@
+import base64
 from collections import OrderedDict
 from copy import deepcopy
 import csv
@@ -117,6 +118,16 @@ def recipe_slug(name):
 def normalize_user_id(raw_value):
     value = re.sub(r"[^a-z0-9_-]+", "-", str(raw_value).strip().lower()).strip("-_")
     return value[:40]
+
+
+def asset_data_uri(path):
+    asset_path = Path(path)
+    if not asset_path.exists():
+        return "none"
+    encoded = base64.b64encode(asset_path.read_bytes()).decode("ascii")
+    suffix = asset_path.suffix.lower().lstrip(".") or "png"
+    mime = "image/png" if suffix == "png" else f"image/{suffix}"
+    return f"data:{mime};base64,{encoded}"
 
 
 def user_storage_dir(user_id):
@@ -1188,9 +1199,17 @@ def jump_to_anchor(anchor, force_setup_open=False):
         st.session_state.force_open_setup = True
 
 
-DESKTOP_WORKSPACE_TABS = ["Planner", "Recipes", "Inventory", "Home Supplies", "Shopping", "Insights", "Setup"]
-MOBILE_PRIMARY_WORKSPACES = ["Planner", "Inventory", "Shopping", "Recipes", "More"]
-MOBILE_MORE_WORKSPACES = ["Home Supplies", "Insights", "Setup"]
+DESKTOP_WORKSPACE_TABS = ["Planner", "Recipes", "Shopping", "Inventory", "Home Supplies", "Insights", "Setup"]
+WORKSPACE_LABELS = {
+    "Planner": "Meal planner",
+    "Recipes": "Recipes",
+    "Inventory": "Kitchen Inventory",
+    "Shopping": "Shopping List",
+    "Home Supplies": "House Inventory",
+    "Insights": "Insights",
+    "Setup": "Preferences",
+}
+PLANNER_NAV_WORKSPACES = ["Planner", "Recipes", "Shopping", "Inventory", "Home Supplies", "Insights"]
 MOBILE_SECTION_LABELS = {
     "Overview": "Overview",
     "Items": "Items",
@@ -1205,26 +1224,14 @@ def set_active_workspace(workspace):
     if workspace not in DESKTOP_WORKSPACE_TABS:
         return
     st.session_state.active_workspace = workspace
-    st.session_state.workspace_selector_desktop = workspace
-    st.session_state.workspace_selector_mobile = workspace if workspace in MOBILE_PRIMARY_WORKSPACES else "More"
-    if workspace in MOBILE_MORE_WORKSPACES:
-        st.session_state.mobile_more_workspace = workspace
 
 
-def on_desktop_workspace_change():
-    set_active_workspace(st.session_state.get("workspace_selector_desktop", "Planner"))
-
-
-def on_mobile_workspace_change():
-    choice = st.session_state.get("workspace_selector_mobile", "Planner")
-    if choice == "More":
-        set_active_workspace(st.session_state.get("mobile_more_workspace", MOBILE_MORE_WORKSPACES[0]))
-    else:
-        set_active_workspace(choice)
-
-
-def on_mobile_more_workspace_change():
-    set_active_workspace(st.session_state.get("mobile_more_workspace", MOBILE_MORE_WORKSPACES[0]))
+def render_sidebar_nav_button(workspace):
+    label = WORKSPACE_LABELS.get(workspace, workspace)
+    if st.session_state.get("active_workspace") == workspace:
+        st.markdown(f"<div class='sidebar-nav-active'>{label}</div>", unsafe_allow_html=True)
+        return False
+    return st.button(label, use_container_width=True, key=f"nav_{workspace}")
 
 
 def set_inventory_section(section):
@@ -1365,111 +1372,403 @@ def sync_profile_state(profile):
 
 
 def inject_ui_styles():
+    page_background = asset_data_uri("assets/pichwai-page-bg-optimized.jpg")
+    sidebar_background = asset_data_uri("assets/pichwai-sidebar-bg-optimized.jpg")
+    header_background = asset_data_uri("assets/mandala-ribbon.jpg")
+    button_background = asset_data_uri("assets/mandala-button.jpg")
     st.markdown(
         """
         <style>
         :root {
             color-scheme: light dark;
-            --soft-green-bg: #e8f5ec;
-            --soft-green-border: #c8e2cf;
-            --soft-green-text: #14532d;
-            --soft-hover-bg: #f3faf5;
+            --color-bg: #F8F1E4;
+            --color-bg-soft: #FBF5EA;
+            --color-surface: #FFF9EF;
+            --color-panel: #EFE1CB;
+            --color-elevated: #FFFCF5;
+            --color-primary: #9E3F2F;
+            --color-primary-hover: #873326;
+            --color-secondary: #234E70;
+            --color-accent-brass: #B88A44;
+            --color-sandstone: #C98963;
+            --color-red-sandstone: #B7654B;
+            --color-banana-leaf: #6F7F4F;
+            --color-banana-leaf-strong: #4E6437;
+            --color-leaf-soft: #A6AD7D;
+            --color-pale-leaf-wash: #E7E8D4;
+            --color-lotus-muted: #B97A7A;
+            --color-peacock-teal: #2F6F73;
+            --color-diya-flame: #C7833B;
+            --color-text-primary: #2D2520;
+            --color-text-secondary: #6F6258;
+            --color-border: #D8C7AD;
+            --soft-shadow: 0 8px 22px rgba(77, 54, 37, 0.05);
+            --page-overlay: rgba(248, 241, 228, 0.84);
+            --sidebar-overlay: rgba(239, 225, 203, 0.8);
+            --header-overlay: rgba(248, 241, 228, 0.78);
+            --motif-page: none;
+            --motif-sidebar: none;
+            --motif-card: none;
+            --motif-empty: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3Cg fill='none' stroke='%232F6F73' stroke-opacity='.12' stroke-width='1.2'%3E%3Cpath d='M140 38c18 28 28 56 28 82 0 34-18 68-28 86-10-18-28-52-28-86 0-26 10-54 28-82Z'/%3E%3Cpath d='M140 58c26 8 48 26 64 54'/%3E%3C/g%3E%3Cg fill='none' stroke='%23C7833B' stroke-opacity='.12' stroke-width='1'%3E%3Cpath d='M76 210c18-14 38-22 64-22s46 8 64 22'/%3E%3C/g%3E%3C/svg%3E");
+            --button-mandala: none;
+            --button-inset: inset 0 1px 0 rgba(255,255,255,0.12), inset 0 -1px 0 rgba(0,0,0,0.03);
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: #121821;
+                --color-bg-soft: #171F2B;
+                --color-surface: #202837;
+                --color-panel: #182130;
+                --color-elevated: #273142;
+                --color-primary: #C0644F;
+                --color-primary-hover: #D17660;
+                --color-secondary: #7F9CC4;
+                --color-accent-brass: #C49A5A;
+                --color-sandstone: #A96F56;
+                --color-red-sandstone: #C0644F;
+                --color-banana-leaf: #9DAF7A;
+                --color-banana-leaf-strong: #6F8756;
+                --color-leaf-soft: #7F8F68;
+                --color-deep-leaf-shadow: #2E3F34;
+                --color-lotus-muted: #D09A9A;
+                --color-peacock-teal: #5FA4A5;
+                --color-diya-flame: #D49A59;
+                --color-text-primary: #F3EBDD;
+                --color-text-secondary: #B9AB99;
+                --color-border: #3A332B;
+                --soft-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+                --page-overlay: rgba(18, 24, 33, 0.76);
+                --sidebar-overlay: rgba(24, 33, 48, 0.76);
+                --header-overlay: rgba(18, 24, 33, 0.72);
+                --motif-page: none;
+                --motif-sidebar: none;
+                --motif-card: none;
+                --motif-empty: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3Cg fill='none' stroke='%235FA4A5' stroke-opacity='.12' stroke-width='1.2'%3E%3Cpath d='M140 38c18 28 28 56 28 82 0 34-18 68-28 86-10-18-28-52-28-86 0-26 10-54 28-82Z'/%3E%3Cpath d='M140 58c26 8 48 26 64 54'/%3E%3C/g%3E%3Cg fill='none' stroke='%23D49A59' stroke-opacity='.12' stroke-width='1'%3E%3Cpath d='M76 210c18-14 38-22 64-22s46 8 64 22'/%3E%3C/g%3E%3C/svg%3E");
+                --button-mandala: none;
+                --button-inset: inset 0 1px 0 rgba(255,255,255,0.05), inset 0 -1px 0 rgba(0,0,0,0.08);
+            }
         }
         html {
             scroll-behavior: smooth;
         }
+        [data-testid="stHeader"] {
+            background-color: transparent;
+            background-image: linear-gradient(var(--header-overlay), var(--header-overlay)), var(--motif-page);
+            background-repeat: no-repeat;
+            background-size: 100vw auto;
+            background-position: calc(var(--header-crop-offset, 0px) * -1) top;
+            border-bottom: 1px solid rgba(184, 138, 68, 0.24);
+            backdrop-filter: blur(1px);
+            overflow: hidden;
+        }
+        [data-testid="stHeader"]::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            box-shadow: inset 0 -16px 24px rgba(0, 0, 0, 0.06);
+        }
+        [data-testid="stDecoration"] {
+            display: none;
+        }
+        [data-testid="stToolbar"] {
+            background: transparent;
+        }
         .stApp {
-            color: var(--text-color);
-            background: var(--background-color);
+            color: var(--color-text-primary);
+            background-color: var(--color-bg);
+            background-image: linear-gradient(var(--page-overlay), var(--page-overlay)), var(--motif-page);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center top;
+            background-attachment: fixed;
         }
         .block-container {
-            padding-top: 1.2rem;
-            padding-bottom: 2rem;
+            padding-top: 1.35rem;
+            padding-bottom: 2.3rem;
+            max-width: 1480px;
         }
         @media (max-width: 768px) {
             .block-container {
                 padding-top: 1rem;
-                padding-bottom: 6.25rem;
+                padding-bottom: 2rem;
             }
         }
         .section-title {
             font-size: 1.15rem;
             font-weight: 700;
-            color: var(--text-color);
+            color: var(--color-text-primary);
             margin: 1rem 0 0.55rem;
         }
         .library-note {
             padding: 0.7rem 0.9rem;
             border-radius: 12px;
-            background: color-mix(in srgb, var(--secondary-background-color) 74%, var(--background-color) 26%);
-            border: 1px solid color-mix(in srgb, var(--text-color) 12%, transparent 88%);
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
         }
         .recipe-anchor {
             display: block;
             scroll-margin-top: 5rem;
         }
+        [data-testid="stSidebar"] {
+            background-color: var(--color-panel);
+            background-image: linear-gradient(var(--sidebar-overlay), var(--sidebar-overlay)), var(--motif-sidebar);
+            background-repeat: no-repeat;
+            background-position: center top;
+            background-size: cover;
+            border-right: 1px solid var(--color-border);
+        }
+        [data-testid="stSidebar"] > div:first-child {
+            background: transparent;
+        }
+        [data-testid="stSidebar"] .block-container {
+            padding-top: 1.1rem;
+            padding-bottom: 1.2rem;
+        }
+        [data-testid="stSidebar"] .stButton button {
+            width: 100%;
+            justify-content: flex-start;
+            background: transparent;
+            color: var(--color-text-secondary);
+            border: 1px solid rgba(0, 0, 0, 0);
+            border-radius: 14px;
+            box-shadow: none;
+            padding: 0.78rem 0.95rem 0.78rem 1rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            position: relative;
+        }
+        [data-testid="stSidebar"] .stButton button::before {
+            content: "";
+            position: absolute;
+            left: 0.9rem;
+            right: 0.9rem;
+            top: 0.3rem;
+            height: 1px;
+            background: rgba(184, 138, 68, 0.16);
+            opacity: 0.7;
+        }
+        [data-testid="stSidebar"] .stButton button:hover {
+            background: color-mix(in srgb, var(--color-surface) 62%, transparent 38%);
+            color: var(--color-text-primary);
+            border-color: rgba(184, 138, 68, 0.14);
+            transform: none;
+        }
+        [data-testid="stSidebar"] .stExpander {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+        [data-testid="stSidebar"] .stExpander summary {
+            border-radius: 14px;
+            padding: 0.2rem 0;
+        }
+        .sidebar-brand {
+            padding: 0.55rem 0.35rem 1rem;
+            border-bottom: 1px solid rgba(184, 138, 68, 0.32);
+            margin-bottom: 1rem;
+            background: color-mix(in srgb, var(--color-surface) 70%, transparent 30%);
+            border-radius: 18px;
+            box-shadow: inset 0 0 0 1px rgba(184, 138, 68, 0.08);
+        }
+        .sidebar-brand .brand-art {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 14px;
+        }
+        .gate-title-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+        .gate-title-art {
+            width: min(100%, 760px);
+            height: auto;
+            border-radius: 18px;
+            box-shadow: 0 10px 28px rgba(77, 54, 37, 0.08);
+        }
+        .sidebar-user-frame {
+            margin-top: 1rem;
+            padding: 0.95rem;
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            background-color: var(--color-surface);
+            box-shadow: var(--soft-shadow);
+        }
         [data-testid="stVerticalBlockBorderWrapper"] {
-            background: color-mix(in srgb, var(--secondary-background-color) 72%, var(--background-color) 28%);
-            border: 1px solid color-mix(in srgb, var(--text-color) 12%, transparent 88%);
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-            padding: 0.2rem;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            box-shadow: var(--soft-shadow);
+            padding: 0.22rem;
             margin-bottom: 1rem;
         }
         .stApp h1, .stApp h2, .stApp h3, .stApp h4,
         .stApp p, .stApp li, .stApp label, .stApp div, .stApp span,
         .stApp [data-baseweb="select"] *, .stApp [data-baseweb="tab"] * {
-            color: var(--text-color);
+            color: var(--color-text-primary);
         }
         .stApp a {
-            color: var(--link-color, #0f766e);
-            text-decoration-color: var(--link-color, #0f766e);
+            color: var(--color-secondary);
+            text-decoration-color: var(--color-secondary);
         }
         .stApp .stTabs button[role="tab"] {
-            color: var(--text-color);
+            color: var(--color-text-secondary);
             background: transparent;
             font-weight: 600;
             border-radius: 999px;
             padding-inline: 0.8rem;
         }
         .stApp .stTabs button[aria-selected="true"] {
-            color: var(--text-color);
-            background: color-mix(in srgb, var(--soft-green-bg) 88%, var(--background-color) 12%);
+            color: var(--color-primary);
+            background: var(--color-elevated);
+            box-shadow: inset 0 0 0 1px rgba(184, 138, 68, 0.2);
         }
         .stApp .stButton button {
             font-weight: 600;
-            color: var(--text-color);
-            border-radius: 12px;
+            color: var(--color-surface) !important;
+            background-color: var(--color-primary) !important;
+            background-image: linear-gradient(rgba(158, 63, 47, 0.96), rgba(158, 63, 47, 0.96)), var(--button-mandala) !important;
+            background-repeat: no-repeat !important;
+            background-position: center center !important;
+            background-size: cover !important;
+            border: 1px solid var(--color-primary) !important;
+            border-radius: 15px;
+            box-shadow: var(--button-inset), 0 4px 10px rgba(158, 63, 47, 0.09);
+            transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+            clip-path: polygon(0 7%, 6% 0, 94% 0, 100% 7%, 100% 100%, 0 100%);
+        }
+        .stApp .stButton button:hover {
+            background-color: var(--color-primary-hover) !important;
+            background-image: linear-gradient(rgba(135, 51, 38, 0.97), rgba(135, 51, 38, 0.97)), var(--button-mandala) !important;
+            border-color: var(--color-primary-hover) !important;
+            color: var(--color-surface) !important;
+            transform: translateY(-1px);
+            box-shadow: var(--button-inset), 0 6px 12px rgba(158, 63, 47, 0.11);
+        }
+        .stApp .stButton button[kind="secondary"] {
+            background-color: var(--color-banana-leaf-strong) !important;
+            background-image: linear-gradient(rgba(78, 100, 55, 0.95), rgba(78, 100, 55, 0.95)), var(--button-mandala) !important;
+            background-repeat: no-repeat !important;
+            background-position: center center !important;
+            background-size: cover !important;
+            color: var(--color-surface) !important;
+            border: 1px solid color-mix(in srgb, var(--color-banana-leaf-strong) 72%, black 28%) !important;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+        }
+        .stApp .stButton button[kind="secondary"]:hover {
+            background-color: color-mix(in srgb, var(--color-banana-leaf-strong) 88%, black 12%) !important;
+            background-image: linear-gradient(rgba(63, 84, 44, 0.97), rgba(63, 84, 44, 0.97)), var(--button-mandala) !important;
+            border-color: color-mix(in srgb, var(--color-banana-leaf-strong) 60%, black 40%) !important;
+            color: var(--color-surface) !important;
         }
         .stApp [data-baseweb="select"] > div,
         .stApp .stTextInput input,
         .stApp .stNumberInput input,
         .stApp textarea {
-            color: var(--text-color);
-            background: color-mix(in srgb, var(--background-color) 85%, var(--secondary-background-color) 15%);
+            color: var(--color-text-primary);
+            background: var(--color-elevated);
+            border-color: var(--color-border);
         }
         .stApp [data-baseweb="select"] svg,
         .stApp .stExpander svg {
-            fill: var(--text-color);
+            fill: var(--color-text-secondary);
         }
         .stApp .stExpander {
-            border: 1px solid color-mix(in srgb, var(--text-color) 12%, transparent 88%);
-            border-radius: 12px;
-            background: color-mix(in srgb, var(--background-color) 86%, var(--secondary-background-color) 14%);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            background: var(--color-elevated);
         }
         .stApp .stExpander summary,
         .stApp .stExpander summary p {
-            color: var(--text-color);
+            color: var(--color-text-primary);
             font-weight: 600;
         }
         .stApp [data-testid="stDataFrame"],
         .stApp [data-testid="stDataFrame"] * {
-            color: var(--text-color);
+            color: var(--color-text-primary);
         }
         .stApp .stAlert,
         .stApp .stAlert * {
-            color: var(--text-color);
+            color: var(--color-text-primary);
         }
+        .sidebar-nav-active {
+            width: 100%;
+            padding: 0.76rem 0.95rem;
+            margin: 0.15rem 0 0.35rem;
+            border-radius: 14px;
+            background: color-mix(in srgb, var(--color-surface) 88%, var(--color-panel) 12%);
+            color: var(--color-primary);
+            font-weight: 700;
+            border: 1px solid rgba(184, 138, 68, 0.14);
+            border-left: 4px solid var(--color-primary);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.16);
+        }
+        .sidebar-nav-active::before {
+            content: "";
+            display: block;
+            height: 1px;
+            margin-bottom: 0.25rem;
+            background: rgba(184, 138, 68, 0.18);
+        }
+        .today-hero-copy {
+            margin-bottom: 1rem;
+            padding: 0.2rem 0 0.35rem;
+        }
+        .today-hero-copy .hero-title {
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 0.25rem;
+        }
+        .today-hero-copy .hero-kicker {
+            font-size: 1rem;
+            line-height: 1.45;
+            color: var(--color-primary);
+            margin-bottom: 0.22rem;
+        }
+        .today-hero-copy .hero-subtitle {
+            color: var(--color-text-secondary);
+            line-height: 1.55;
+            max-width: 40rem;
+        }
+        .today-planner-shell {
+            position: relative;
+            padding: 0.25rem;
+        }
+        .today-planner-shell::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 22px;
+            background: linear-gradient(rgba(255, 249, 239, 0.78), rgba(255, 249, 239, 0.78));
+            opacity: 0.16;
+            pointer-events: none;
+        }
+        .today-planner-shell > * {
+            position: relative;
+            z-index: 1;
+        }
+        .stApp [data-testid="stAlertContainer"] > div {
+            background-image: var(--motif-empty);
+            background-repeat: no-repeat;
+            background-position: right -30px center;
+            background-size: 140px 140px;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        f"""
+        <style>
+        :root {{
+            --motif-page: url("{page_background}");
+            --motif-sidebar: url("{sidebar_background}");
+            --header-ribbon: url("{header_background}");
+            --button-mandala: url("{button_background}");
+        }}
         </style>
         """,
         unsafe_allow_html=True,
@@ -1495,8 +1794,16 @@ def reset_user_session_state():
 
 
 def render_user_gate():
-    st.title("Main Meal Planner Varhshree")
-    st.write("Enter your user ID to open your Varhshree planner.")
+    title_art = asset_data_uri("assets/griha-prabandh-title.webp")
+    st.markdown(
+        f"""
+        <div class="gate-title-wrap">
+          <img class="gate-title-art" src="{title_art}" alt="गृह प्रबंध" />
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.write("Enter your user ID to open गृह प्रबंध.")
     with st.form("user_gate_form"):
         raw_user_id = st.text_input("User ID")
         remember_user = st.checkbox("Remember this User ID on this device", value=True)
@@ -1514,6 +1821,18 @@ def render_user_gate():
                 clear_remembered_user_id()
             st.rerun()
     st.stop()
+
+
+def render_planner_intro():
+    st.markdown(
+        """
+        <div class="today-hero-copy">
+          <div class="hero-kicker">घर, भोजन और आवश्यकताओं का प्रबंध</div>
+          <div class="hero-title">Meal planner</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 def section_intro(anchor, title):
@@ -1700,7 +2019,6 @@ def render_template_manager(profile, favorites_only):
 
 
 def render_recipe_manager(profile, favorites_only):
-    st.markdown("**Recipes**")
     recipes = profile.get("recipes", [])
     builtin_count = len(all_recipe_dishes())
     visible_recipes = [item for item in recipes if not favorites_only or item.get("favorite")]
@@ -1722,51 +2040,8 @@ def render_recipe_manager(profile, favorites_only):
     else:
         st.info(f"No custom recipes yet. The planner still includes {builtin_count} built-in YAML recipes below.")
         if st.button("Add Recipes", key=f"empty_recipes_{profile['id']}", use_container_width=True):
-            jump_to_anchor("recipes-section")
+            st.session_state.recipe_show_add = True
             st.rerun()
-
-    recipe_options = {"Add new recipe": ""}
-    for item in recipes:
-        recipe_options[f"Edit {item['name']}"] = item["id"]
-    selected_recipe_id = st.selectbox("Recipe", list(recipe_options.values()), format_func=lambda item: next(label for label, value in recipe_options.items() if value == item), key=f"recipe_editor_{profile['id']}")
-    selected_recipe = next((item for item in recipes if item["id"] == selected_recipe_id), None)
-    with st.form(f"recipe_form_{profile['id']}"):
-        recipe_name = st.text_input("Recipe name", value=selected_recipe.get("name", "") if selected_recipe else "")
-        recipe_description = st.text_area("Description", value=selected_recipe.get("description", "") if selected_recipe else "", height=80)
-        base_servings = st.number_input("Base serving count", min_value=1.0, max_value=12.0, step=0.5, value=float(selected_recipe.get("base_servings", 2.0) if selected_recipe else 2.0))
-        recipe_ingredients = st.text_area("Ingredients (one per line: name | quantity | unit | notes)", value=ingredient_lines_from_recipe(selected_recipe) if selected_recipe else "", height=150)
-        recipe_instructions = st.text_area("Instructions (one step per line)", value=instructions_text(selected_recipe.get("instructions", [])) if selected_recipe else "", height=150)
-        recipe_youtube_link = st.text_input("Optional YouTube link", value=selected_recipe.get("youtube", "") if selected_recipe else "")
-        favorite_recipe = st.checkbox("Favorite recipe", value=selected_recipe.get("favorite", False) if selected_recipe else False)
-        save_recipe = st.form_submit_button("Save recipe")
-        delete_recipe = st.form_submit_button("Delete recipe") if selected_recipe else False
-    if save_recipe:
-        if not recipe_name.strip():
-            st.error("Recipe name is required.")
-        else:
-            recipe = normalize_recipe(
-                {
-                    "id": selected_recipe["id"] if selected_recipe else uuid4().hex,
-                    "name": recipe_name.strip(),
-                    "description": recipe_description.strip(),
-                    "base_servings": base_servings,
-                    "ingredients": parse_ingredient_lines(recipe_ingredients),
-                    "instructions": [line.strip() for line in recipe_instructions.splitlines() if line.strip()],
-                    "youtube": recipe_youtube_link.strip(),
-                    "favorite": favorite_recipe,
-                }
-            )
-            profile["recipes"] = [item for item in recipes if item["id"] != recipe["id"]] + [recipe]
-            persist_active_profile(profile)
-            st.rerun()
-    if delete_recipe and selected_recipe:
-        profile["recipes"] = [item for item in recipes if item["id"] != selected_recipe["id"]]
-        profile["meal_templates"] = [
-            {**template, "linked_recipe_ref": "" if template.get("linked_recipe_ref") == f"profile::{selected_recipe['id']}" else template.get("linked_recipe_ref", "")}
-            for template in profile.get("meal_templates", [])
-        ]
-        persist_active_profile(profile)
-        st.rerun()
 
     st.markdown(
         f"<div class='library-note'>Current household serving total: <strong>{format_number(household_servings(profile))}</strong>. "
@@ -3289,7 +3564,7 @@ def render_setup_panel(profile):
 
 
 def render_setup_workspace(profile):
-    st.markdown("**Setup**")
+    st.markdown("## Preferences")
     render_setup_panel(profile)
 
 
@@ -4063,39 +4338,31 @@ def render_adjustment_form_for_items(profile, items, key_prefix="inventory_adjus
 
 
 def render_inventory_workspace(profile):
-    st.markdown("**Inventory**")
+    st.markdown("## Kitchen Inventory")
     current_section = st.session_state.get("inventory_section", "Overview")
     inventory_items = food_inventory_items(profile)
-    left_col, main_col = st.columns([1, 3], gap="large")
-    with left_col:
-        st.caption("Inventory sections")
-        desktop_section = st.radio("Section", INVENTORY_SECTIONS, index=INVENTORY_SECTIONS.index(current_section), label_visibility="collapsed")
-        if desktop_section != current_section:
-            set_inventory_section(desktop_section)
-            current_section = desktop_section
-        category_choices = [item["name"] for item in profile.get("inventory_categories", []) if not is_home_supply_category_name(item["name"])]
-        selected_categories = st.multiselect("Categories", category_choices, default=st.session_state.get("inventory_category_filters", []))
-        st.session_state.inventory_category_filters = selected_categories
-    with main_col:
-        if hasattr(st, "segmented_control"):
-            mobile_section = st.segmented_control("Inventory section", INVENTORY_SECTIONS, default=current_section, selection_mode="single")
-        else:
-            mobile_section = st.selectbox("Inventory section", INVENTORY_SECTIONS, index=INVENTORY_SECTIONS.index(current_section))
-        if mobile_section != current_section:
-            set_inventory_section(mobile_section)
-            current_section = mobile_section
+    if hasattr(st, "segmented_control"):
+        selected_section = st.segmented_control("Kitchen inventory section", INVENTORY_SECTIONS, default=current_section, selection_mode="single")
+    else:
+        selected_section = st.selectbox("Kitchen inventory section", INVENTORY_SECTIONS, index=INVENTORY_SECTIONS.index(current_section))
+    if selected_section != current_section:
+        set_inventory_section(selected_section)
+        current_section = selected_section
+    category_choices = [item["name"] for item in profile.get("inventory_categories", []) if not is_home_supply_category_name(item["name"])]
+    selected_categories = st.multiselect("Categories", category_choices, default=st.session_state.get("inventory_category_filters", []))
+    st.session_state.inventory_category_filters = selected_categories
 
-        filtered_items = []
-        allowed_categories = set(st.session_state.get("inventory_category_filters", []))
-        for item in inventory_items:
-            if allowed_categories and category_name(profile, item.get("category_id", "")) not in allowed_categories:
-                continue
-            filtered_items.append(item)
+    filtered_items = []
+    allowed_categories = set(st.session_state.get("inventory_category_filters", []))
+    for item in inventory_items:
+        if allowed_categories and category_name(profile, item.get("category_id", "")) not in allowed_categories:
+            continue
+        filtered_items.append(item)
 
-        if inventory_empty(profile, inventory_items):
-            render_inventory_empty_state(profile)
+    if inventory_empty(profile, inventory_items):
+        render_inventory_empty_state(profile)
 
-        if current_section == "Overview":
+    if current_section == "Overview":
             overview = inventory_overview(profile)
             card1, card2, card3, card4, card5 = st.columns(5)
             card1.metric("Low Stock", len(overview["low_stock"]))
@@ -4172,7 +4439,7 @@ def render_inventory_workspace(profile):
                 st.markdown("**Seasonal picks**")
                 st.write("Seasonal suggestions and planner links will connect here in a later phase.")
 
-        elif current_section == "Items":
+    elif current_section == "Items":
             quick_action = st.session_state.pop("inventory_quick_action", "")
             add_item_expanded = quick_action == "add_item"
             add_purchase_expanded = quick_action == "add_purchase"
@@ -4248,7 +4515,7 @@ def render_inventory_workspace(profile):
             if selected_item:
                 render_item_detail(profile, selected_item, "Inventory")
 
-        elif current_section == "Expiry":
+    elif current_section == "Expiry":
             urgency_groups = {"Use today": [], "Use in next 3 days": [], "Use in next 7 days": [], "Watch list": []}
             for item in filtered_items:
                 nearest = None
@@ -4277,7 +4544,7 @@ def render_inventory_workspace(profile):
                     else:
                         st.write("No items in this group.")
 
-        elif current_section == "Adjustments":
+    elif current_section == "Adjustments":
             with st.container(border=True):
                 st.markdown("**Adjust Stock**")
                 render_adjustment_form_for_items(profile, filtered_items, key_prefix=f"inventory_adjust_food_{profile['id']}", allow_expired=True)
@@ -4308,7 +4575,7 @@ def render_inventory_workspace(profile):
             else:
                 st.write("No adjustments yet.")
 
-        elif current_section == "Storage":
+    elif current_section == "Storage":
             st.markdown("**Storage locations**")
             location_rows = []
             for location in profile.get("storage_locations", []):
@@ -4353,7 +4620,7 @@ def render_inventory_workspace(profile):
                 persist_active_profile(profile)
                 st.rerun()
 
-        elif current_section == "Analytics":
+    elif current_section == "Analytics":
             rows = inventory_rows_for_items(profile, filtered_items)
             if rows:
                 by_category = {}
@@ -4369,7 +4636,7 @@ def render_inventory_workspace(profile):
 
 
 def render_home_supplies_workspace(profile):
-    st.markdown("**Home Supplies**")
+    st.markdown("## House Inventory")
     current_section = st.session_state.get("home_supply_section", "Overview")
     items = home_supply_items(profile)
     left_col, main_col = st.columns([1, 3], gap="large")
@@ -4599,7 +4866,7 @@ def build_recipe_dishes(profile):
 
 
 def render_shopping_workspace(profile):
-    st.markdown("**Shopping**")
+    st.markdown("## Shopping List")
     suggestions = build_shopping_suggestions(profile)
     show_manual_item = st.session_state.pop("shopping_manual_quick_add", False)
     with st.expander("Manual shopping item", expanded=show_manual_item):
@@ -4805,7 +5072,7 @@ def render_shopping_workspace(profile):
 
 
 def render_insights_workspace(profile):
-    st.markdown("**Insights**")
+    st.markdown("## Insights")
     total_signals = len(profile.get("inventory_transactions", [])) + sum(len(item.get("lots", [])) for item in profile.get("inventory", []))
     if total_signals < 6:
         with st.container(border=True):
@@ -4961,14 +5228,16 @@ def render_planner_workspace(active_profile):
     if "portion_you_suggestion" not in st.session_state:
         sync_portions_from_selection(active_profile)
 
+    render_planner_intro()
     with st.container(border=True):
         st.markdown("<div id='planner-section'></div>", unsafe_allow_html=True)
+        st.markdown("<div class='today-planner-shell'>", unsafe_allow_html=True)
         st.markdown("**Plan for your meal here**")
         action_left, action_right = st.columns(2)
-        if action_left.button("Khane Mein Kya Khaye?", use_container_width=True):
+        if action_left.button("Khane Mein Kya Khaye?", use_container_width=True, type="primary"):
             choose_random_meals(active_profile, brunch_options, dinner_options)
             st.rerun()
-        if action_right.button("Note what I ate today", use_container_width=True):
+        if action_right.button("Note what I ate today", use_container_width=True, type="secondary"):
             brunch_dish = option_to_dish(active_profile, st.session_state.brunch_option_id)
             planned_servings = portion_factor(st.session_state.get("portion_you", "")) + portion_factor(st.session_state.get("portion_varshit", ""))
             active_profile = logMeal(
@@ -5045,6 +5314,7 @@ def render_planner_workspace(active_profile):
                                 st.session_state.grocery_list[name] = qty
                 else:
                     st.write("No routine add-ons set up yet.")
+        st.markdown("</div>", unsafe_allow_html=True)
 
     brunch = option_to_dish(active_profile, st.session_state.brunch_option_id)
     dinner = option_to_dish(active_profile, st.session_state.dinner_option_id, brunch)
@@ -5200,39 +5470,44 @@ def render_recipes_workspace(active_profile):
     recipe_dishes = build_recipe_dishes(active_profile)
     recipe_slugs = {recipe_slug(dish["name"]) for dish in recipe_dishes}
     selected_recipe_slug = st.session_state.get("selected_recipe_slug", "")
+    show_add_recipe = st.session_state.pop("recipe_show_add", False)
     if selected_recipe_slug not in recipe_slugs:
         st.session_state.selected_recipe_slug = ""
         selected_recipe_slug = ""
+    st.markdown("## Recipes")
     with st.container(border=True):
         render_recipe_manager(active_profile, favorites_only=False)
-    st.divider()
-    section_intro("recipes-section", "Recipe View")
+    add_recipe_cols = st.columns([1, 4])
+    if add_recipe_cols[0].button("Add Recipe", use_container_width=True, key=f"recipes_add_button_{active_profile['id']}"):
+        show_add_recipe = True
+    st.markdown("<div id='recipes-section'></div>", unsafe_allow_html=True)
     with st.container(border=True):
         if st.session_state.get("recipe_flash"):
             st.success(st.session_state.recipe_flash)
             st.session_state.recipe_flash = ""
-        with st.expander("Add Recipe", expanded=False):
-            with st.form(f"quick_recipe_form_{active_profile['id']}"):
-                quick_recipe_name = st.text_input("Recipe name")
-                quick_recipe_description = st.text_area("Description", height=80)
-                quick_base_servings = st.number_input("Base serving count", min_value=1.0, max_value=12.0, step=0.5, value=2.0)
-                quick_recipe_ingredients = st.text_area("Ingredients (one per line: name | quantity | unit | notes)", height=150)
-                quick_cooking_style = st.text_input("Cooking style or method")
-                quick_recipe_instructions = st.text_area("Instructions (one step per line)", height=150)
-                quick_recipe_youtube = st.text_input("Optional YouTube link")
-                quick_save_recipe = st.form_submit_button("Save recipe")
-            if quick_save_recipe:
-                if not quick_recipe_name.strip():
-                    st.error("Recipe name is required.")
-                else:
-                    instructions = [line.strip() for line in quick_recipe_instructions.splitlines() if line.strip()]
-                    if quick_cooking_style.strip():
-                        instructions = [f"Cooking style: {quick_cooking_style.strip()}"] + instructions
-                    quick_recipe = normalize_recipe({"id": uuid4().hex, "name": quick_recipe_name.strip(), "description": quick_recipe_description.strip(), "base_servings": quick_base_servings, "ingredients": parse_ingredient_lines(quick_recipe_ingredients), "instructions": instructions, "youtube": quick_recipe_youtube.strip(), "favorite": False})
-                    active_profile["recipes"] = [item for item in active_profile.get("recipes", []) if item["name"].strip().lower() != quick_recipe["name"].strip().lower()] + [quick_recipe]
-                    persist_active_profile(active_profile)
-                    st.session_state.recipe_flash = f"Saved recipe {quick_recipe['name']}."
-                    st.rerun()
+        if show_add_recipe:
+            with st.expander("Add Recipe", expanded=True):
+                with st.form(f"quick_recipe_form_{active_profile['id']}"):
+                    quick_recipe_name = st.text_input("Recipe name")
+                    quick_recipe_description = st.text_area("Description", height=80)
+                    quick_base_servings = st.number_input("Base serving count", min_value=1.0, max_value=12.0, step=0.5, value=2.0)
+                    quick_recipe_ingredients = st.text_area("Ingredients (one per line: name | quantity | unit | notes)", height=150)
+                    quick_cooking_style = st.text_input("Cooking style or method")
+                    quick_recipe_instructions = st.text_area("Instructions (one step per line)", height=150)
+                    quick_recipe_youtube = st.text_input("Optional YouTube link")
+                    quick_save_recipe = st.form_submit_button("Save recipe")
+                if quick_save_recipe:
+                    if not quick_recipe_name.strip():
+                        st.error("Recipe name is required.")
+                    else:
+                        instructions = [line.strip() for line in quick_recipe_instructions.splitlines() if line.strip()]
+                        if quick_cooking_style.strip():
+                            instructions = [f"Cooking style: {quick_cooking_style.strip()}"] + instructions
+                        quick_recipe = normalize_recipe({"id": uuid4().hex, "name": quick_recipe_name.strip(), "description": quick_recipe_description.strip(), "base_servings": quick_base_servings, "ingredients": parse_ingredient_lines(quick_recipe_ingredients), "instructions": instructions, "youtube": quick_recipe_youtube.strip(), "favorite": False})
+                        active_profile["recipes"] = [item for item in active_profile.get("recipes", []) if item["name"].strip().lower() != quick_recipe["name"].strip().lower()] + [quick_recipe]
+                        persist_active_profile(active_profile)
+                        st.session_state.recipe_flash = f"Saved recipe {quick_recipe['name']}."
+                        st.rerun()
         for dish in recipe_dishes:
             st.markdown(f"<div id='{recipe_anchor_id(dish['name'])}' class='recipe-anchor'></div>", unsafe_allow_html=True)
             with st.expander(dish["name"], expanded=recipe_slug(dish["name"]) == selected_recipe_slug):
@@ -5260,7 +5535,7 @@ def render_recipes_workspace(active_profile):
             """,
             height=0,
         )
-st.set_page_config(page_title="Main Meal Planner Varhshree", page_icon="🥗", layout="wide")
+st.set_page_config(page_title="गृह प्रबंध", page_icon="🥗", layout="wide", initial_sidebar_state="collapsed")
 inject_ui_styles()
 
 if not st.session_state.get("planner_user_id"):
@@ -5280,7 +5555,6 @@ if st.session_state.get("active_profile_loaded") != active_profile["id"]:
     st.session_state.mealLog = list(active_profile.get("meal_log", []))
     st.session_state.selected_recipe_slug = ""
     set_active_workspace("Planner")
-    st.session_state.mobile_more_workspace = MOBILE_MORE_WORKSPACES[0]
     st.session_state.pending_workspace = ""
     st.session_state.purchase_review_items = []
     st.session_state.purchase_review_error = ""
@@ -5288,33 +5562,37 @@ if st.session_state.get("active_profile_loaded") != active_profile["id"]:
     for key in ["portion_you", "portion_varshit", "dinner_portion_you", "dinner_portion_varshit"]:
         st.session_state[key] = ""
 
-st.title("Main Meal Planner Varhshree")
-user_bar_left, user_bar_right = st.columns([3, 2])
-user_bar_left.caption(f"Using User ID: `{st.session_state.get('planner_user_id', '')}`")
-user_actions = user_bar_right.columns(2)
-if user_actions[0].button("Switch User", use_container_width=True):
-    st.session_state.pop("planner_user_id", None)
-    reset_user_session_state()
-    st.rerun()
-if user_actions[1].button("Forget This Device", use_container_width=True):
-    clear_remembered_user_id()
-    st.session_state.pop("planner_user_id", None)
-    reset_user_session_state()
-    st.rerun()
 pending_workspace = st.session_state.pop("pending_workspace", "")
 if pending_workspace in DESKTOP_WORKSPACE_TABS:
     set_active_workspace(pending_workspace)
 if st.session_state.get("active_workspace") not in DESKTOP_WORKSPACE_TABS:
     set_active_workspace("Planner")
-current_workspace = st.radio(
-    "Workspace",
-    DESKTOP_WORKSPACE_TABS,
-    index=DESKTOP_WORKSPACE_TABS.index(st.session_state.get("active_workspace", "Planner")),
-    horizontal=True,
-    label_visibility="collapsed",
-)
-if current_workspace != st.session_state.get("active_workspace"):
-    set_active_workspace(current_workspace)
+with st.sidebar:
+    nav_workspaces = [*PLANNER_NAV_WORKSPACES, "Setup"]
+    for workspace in nav_workspaces:
+        if render_sidebar_nav_button(workspace):
+            set_active_workspace(workspace)
+            st.rerun()
+
+    st.divider()
+    st.markdown(f"<div class='sidebar-user-frame'><div style='color: var(--color-text-secondary); margin-bottom: 0.35rem;'>User: {st.session_state.get('planner_user_id', '')}</div>", unsafe_allow_html=True)
+    with st.expander("Manage User", expanded=False):
+        st.caption(f"Current User ID: {st.session_state.get('planner_user_id', '')}")
+        if st.button("Switch User", use_container_width=True, key="sidebar_switch_user"):
+            st.session_state.pop("planner_user_id", None)
+            reset_user_session_state()
+            st.rerun()
+        if st.button("Forget ID", use_container_width=True, key="sidebar_forget_id"):
+            clear_remembered_user_id()
+            st.session_state.pop("planner_user_id", None)
+            reset_user_session_state()
+            st.rerun()
+        if st.button("Forget this device", use_container_width=True, key="sidebar_forget_device"):
+            clear_remembered_user_id()
+            st.info("This device will ask for a User ID next time.")
+    st.markdown("</div>", unsafe_allow_html=True)
+
+current_workspace = st.session_state.get("active_workspace", "Planner")
 if current_workspace == "Planner":
     render_planner_workspace(active_profile)
 elif current_workspace == "Recipes":
@@ -5329,6 +5607,52 @@ elif current_workspace == "Insights":
     render_insights_workspace(active_profile)
 else:
     render_setup_workspace(active_profile)
+
+components.html(
+    f"""
+    <script>
+    const doc = window.parent.document;
+    const header = doc.querySelector('[data-testid="stHeader"]');
+    const updateHeaderDecor = () => {{
+      const activeHeader = doc.querySelector('[data-testid="stHeader"]');
+      if (!activeHeader) return;
+      const leftOffset = Math.max(0, Math.round(activeHeader.getBoundingClientRect().left));
+      activeHeader.style.setProperty('--header-crop-offset', `${{leftOffset}}px`);
+      let titleNode = doc.getElementById('griha-prabandh-header-title');
+      if (!titleNode) {{
+        titleNode = doc.createElement('div');
+        titleNode.id = 'griha-prabandh-header-title';
+        titleNode.textContent = 'गृह प्रबंध';
+        Object.assign(titleNode.style, {{
+          position: 'absolute',
+          left: '3.6rem',
+          top: '0.56rem',
+          fontSize: '1.55rem',
+          fontWeight: '700',
+          color: 'var(--color-text-primary)',
+          letterSpacing: '0.01em',
+          zIndex: '1000',
+          pointerEvents: 'none',
+          textShadow: '0 1px 0 rgba(255,255,255,0.18)'
+        }});
+        activeHeader.appendChild(titleNode);
+      }}
+      titleNode.style.display = 'block';
+    }};
+    updateHeaderDecor();
+    if (!window.parent.__grihaPrabandhHeaderObserver) {{
+      const headerObserver = new window.parent.ResizeObserver(() => updateHeaderDecor());
+      const sidebar = doc.querySelector('[data-testid="stSidebar"]');
+      const activeHeader = doc.querySelector('[data-testid="stHeader"]');
+      if (activeHeader) headerObserver.observe(activeHeader);
+      if (sidebar) headerObserver.observe(sidebar);
+      window.parent.addEventListener('resize', updateHeaderDecor);
+      window.parent.__grihaPrabandhHeaderObserver = headerObserver;
+    }}
+    </script>
+    """,
+    height=0,
+)
 
 pending_anchor = st.session_state.pop("jump_anchor", "")
 if pending_anchor:
