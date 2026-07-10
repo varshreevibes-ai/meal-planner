@@ -1452,13 +1452,8 @@ def inject_ui_styles():
             scroll-behavior: smooth;
         }
         [data-testid="stHeader"] {
-            background-color: transparent;
-            background-image: linear-gradient(var(--header-overlay), var(--header-overlay)), var(--motif-page);
-            background-repeat: no-repeat;
-            background-size: 100vw auto;
-            background-position: calc(var(--header-crop-offset, 0px) * -1) top;
+            background: transparent;
             border-bottom: 1px solid rgba(184, 138, 68, 0.24);
-            backdrop-filter: blur(1px);
             overflow: hidden;
         }
         [data-testid="stHeader"]::before {
