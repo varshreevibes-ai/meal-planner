@@ -4550,7 +4550,7 @@ def simple_filter_and_sort_rows(rows, search, vendor_filter, category_filter, so
     return filtered
 
 
-def simple_table_controls(rows, prefix, visible_keys, default_sort_key):
+def simple_table_controls(rows, prefix, visible_keys, default_sort_key, default_descending=False):
     vendors = sorted({simple_clean_text(row.get("vendor", "")) for row in rows if simple_clean_text(row.get("vendor", ""))})
     categories = sorted({simple_clean_text(row.get("category", "")) for row in rows if simple_clean_text(row.get("category", ""))})
     ctrl1, ctrl2, ctrl3, ctrl4, ctrl5 = st.columns([2.2, 1.2, 1.2, 1, 1])
@@ -4564,7 +4564,12 @@ def simple_table_controls(rows, prefix, visible_keys, default_sort_key):
         format_func=lambda value: value.replace("_", " ").title(),
         key=f"{prefix}_sort",
     )
-    descending = ctrl5.selectbox("Order", ["A-Z", "Z-A"], key=f"{prefix}_order") == "Z-A"
+    descending = ctrl5.selectbox(
+        "Order",
+        ["A-Z", "Z-A"],
+        index=1 if default_descending else 0,
+        key=f"{prefix}_order",
+    ) == "Z-A"
     return search, vendor_filter, category_filter, sort_key, descending
 
 
@@ -4601,10 +4606,10 @@ def simple_merge_editor_rows(profile, all_rows, filtered_ids, edited_df, column_
     return untouched + edited_rows
 
 
-def simple_render_editable_table(profile, rows_key, column_map, normalize_fn, row_kind, prefix, default_sort_key="item"):
+def simple_render_editable_table(profile, rows_key, column_map, normalize_fn, row_kind, prefix, default_sort_key="item", default_descending=False):
     rows = [simple_apply_memory(profile, normalize_fn(row)) for row in profile.get(rows_key, [])]
     visible_keys = [key for key in column_map if key not in {"in_stock", "purchased"}]
-    search, vendor_filter, category_filter, sort_key, descending = simple_table_controls(rows, prefix, visible_keys, default_sort_key)
+    search, vendor_filter, category_filter, sort_key, descending = simple_table_controls(rows, prefix, visible_keys, default_sort_key, default_descending)
     filtered_rows = simple_filter_and_sort_rows(rows, search, vendor_filter, category_filter, sort_key, descending, visible_keys)
     if not filtered_rows:
         filtered_rows = [simple_blank_row(column_map.keys())]
@@ -5020,7 +5025,7 @@ def render_purchase_log_workspace(profile):
         value=st.session_state.get("purchase_log_input_text", ""),
         height=120,
         label_visibility="collapsed",
-        placeholder="Blinkit se doodh 2 litre 120, chawal 5kg 450, harpic 1 litre 180",
+        placeholder="Vendor: item | quantity | price",
         key="purchase_log_input_text",
     )
     if st.button("Parse and review", type="primary", use_container_width=True):
@@ -5047,6 +5052,7 @@ def render_purchase_log_workspace(profile):
             raw = {"id": record.get("_id") or uuid4().hex}
             for key, label in SIMPLE_PURCHASE_REVIEW_COLUMNS.items():
                 raw[key] = record.get(label)
+            raw["category"] = raw.get("category") or simple_category_for_item(profile, raw.get("item", ""))
             normalized = simple_apply_memory(profile, simple_normalize_purchase_row(raw))
             if simple_is_meaningful_row(normalized, "purchase"):
                 updated_review.append(normalized)
@@ -5076,6 +5082,7 @@ def render_purchase_log_workspace(profile):
         "purchase",
         "purchase_history",
         default_sort_key="date_time",
+        default_descending=True,
     )
 
 
