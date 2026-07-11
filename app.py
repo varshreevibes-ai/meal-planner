@@ -384,27 +384,6 @@ def project_default_members():
     return [normalize_member(member) for member in PROJECT_DEFAULT_MEMBERS]
 
 
-def should_bootstrap_project_household(profile):
-    return (
-        not profile.get("household_members")
-        and not profile.get("meal_templates")
-        and not profile.get("recipes")
-        and not profile.get("inventory")
-        and not profile.get("meal_log")
-    )
-
-
-def apply_project_household_defaults(profile):
-    if not should_bootstrap_project_household(profile):
-        return profile
-    profile["name"] = profile.get("name") or "Varhshree Household"
-    profile["household_members"] = project_default_members()
-    profile["preferences"]["before_didi_arrives"] = profile.get("preferences", {}).get("before_didi_arrives") or PROJECT_DEFAULT_BEFORE_DIDI
-    profile["preferences"]["morning_routine"] = profile.get("preferences", {}).get("morning_routine") or PROJECT_DEFAULT_MORNING
-    profile["preferences"]["setup_complete"] = True
-    return profile
-
-
 def normalize_template(template):
     return {
         "id": template.get("id", uuid4().hex),
@@ -720,8 +699,7 @@ def load_legacy_meal_log():
 
 
 def default_profile(name="New Household"):
-    return apply_project_household_defaults(
-        {
+    return {
         "id": uuid4().hex,
         "name": name,
         "household_members": [],
@@ -757,7 +735,7 @@ def default_profile(name="New Household"):
         "planner_preferences": {},
         "shopping_preferences": {"suggestion_overrides": {}},
     }
-    )
+    
 
 
 def normalize_profile(profile):
@@ -828,7 +806,7 @@ def normalize_profile(profile):
         normalized["household_inventory_rows"] = simple_seed_inventory_rows(normalized, household=True)
     simple_refresh_item_memory(normalized)
     simple_sync_rows_from_memory(normalized)
-    return apply_project_household_defaults(normalized)
+    return normalized
 
 
 def default_profile_store():
@@ -861,6 +839,33 @@ def load_profile_store(store_path):
     except (json.JSONDecodeError, OSError):
         return default_profile_store()
     return normalize_profile_store(raw)
+
+
+def load_legacy_profile_store():
+    if not PROFILE_STORE_PATH.exists():
+        return None
+    try:
+        raw = json.loads(PROFILE_STORE_PATH.read_text())
+    except (json.JSONDecodeError, OSError):
+        return None
+    return normalize_profile_store(raw)
+
+
+def migrate_legacy_profile_store_for_user(user_id, store_path):
+    if normalize_user_id(user_id) != "shreya" or store_path.exists():
+        return
+    legacy_store = load_legacy_profile_store()
+    legacy_profile = normalize_profile(get_active_profile(legacy_store)) if legacy_store else default_profile()
+    if not legacy_profile.get("household_members") and PROJECT_DEFAULT_MEMBERS:
+        legacy_profile["name"] = legacy_profile.get("name") or "Varhshree Household"
+        legacy_profile["household_members"] = project_default_members()
+        legacy_profile["preferences"]["before_didi_arrives"] = legacy_profile.get("preferences", {}).get("before_didi_arrives") or PROJECT_DEFAULT_BEFORE_DIDI
+        legacy_profile["preferences"]["morning_routine"] = legacy_profile.get("preferences", {}).get("morning_routine") or PROJECT_DEFAULT_MORNING
+        legacy_profile["preferences"]["setup_complete"] = True
+    if not legacy_profile.get("meal_log"):
+        legacy_profile["meal_log"] = load_legacy_meal_log()
+    migrated_store = {"version": 2, "active_profile_id": legacy_profile["id"], "profiles": [legacy_profile]}
+    save_profile_store(migrated_store, store_path)
 
 
 def save_profile_store(store, store_path):
@@ -1380,6 +1385,7 @@ def persist_active_profile(profile):
     if not user_id:
         return
     store_path = user_profile_store_path(user_id)
+    migrate_legacy_profile_store_for_user(user_id, store_path)
     store = load_profile_store(store_path)
     store = replace_profile(store, normalize_profile(profile))
     save_profile_store(store, store_path)
@@ -5315,6 +5321,13 @@ def render_planner_workspace(active_profile):
             st.success(st.session_state.meal_log_flash)
             st.session_state.meal_log_flash = ""
 
+        if st.session_state.get("show_planner_member_manager"):
+            with st.expander("Household members", expanded=True):
+                render_household_manager(active_profile, key_scope="planner")
+                if st.button("Close member editor", use_container_width=True, key=f"close_planner_members_{active_profile['id']}"):
+                    st.session_state.show_planner_member_manager = False
+                    st.rerun()
+
         row1, row2 = st.columns(2)
         row1.selectbox(
             "Brunch",
@@ -5335,7 +5348,11 @@ def render_planner_workspace(active_profile):
             args=(active_profile,),
         )
 
-        st.markdown(f"**{primary_label} plan**")
+        member_heading_col, member_action_col = st.columns([6, 1.4])
+        member_heading_col.markdown(f"**{primary_label} plan**")
+        if member_action_col.button("Add member", key=f"planner_add_member_{active_profile['id']}", use_container_width=True):
+            st.session_state.show_planner_member_manager = True
+            st.rerun()
         row4, row5 = st.columns(2)
         portion_you = row4.text_input(f"{primary_label} Brunch Portion", key="portion_you", placeholder=st.session_state.get("portion_you_suggestion", ""))
         dinner_portion_you = row5.text_input(f"{primary_label} Dinner Portion", key="dinner_portion_you", placeholder=st.session_state.get("dinner_portion_you_suggestion", ""))
@@ -5603,7 +5620,10 @@ if not st.session_state.get("planner_user_id"):
 if not st.session_state.get("planner_user_id"):
     render_user_gate()
 
-profile_store = load_profile_store(user_profile_store_path(st.session_state["planner_user_id"]))
+active_user_id = st.session_state["planner_user_id"]
+active_store_path = user_profile_store_path(active_user_id)
+migrate_legacy_profile_store_for_user(active_user_id, active_store_path)
+profile_store = load_profile_store(active_store_path)
 active_profile = get_active_profile(profile_store)
 
 if st.session_state.get("active_profile_loaded") != active_profile["id"]:
