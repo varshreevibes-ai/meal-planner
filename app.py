@@ -2108,9 +2108,6 @@ def render_recipe_manager(profile, favorites_only):
         )
     else:
         st.info(f"No custom recipes yet. The planner still includes {builtin_count} built-in YAML recipes below.")
-        if st.button("Add Recipes", key=f"empty_recipes_{profile['id']}", use_container_width=True):
-            st.session_state.recipe_show_add = True
-            st.rerun()
 
     st.markdown(
         f"<div class='library-note'>Current household serving total: <strong>{format_number(household_servings(profile))}</strong>. "
@@ -5542,7 +5539,7 @@ def render_recipes_workspace(active_profile):
             with st.expander("Add Recipe", expanded=True):
                 with st.form(f"quick_recipe_form_{active_profile['id']}"):
                     quick_recipe_name = st.text_input("Recipe name")
-                    quick_recipe_description = st.text_area("Description", height=80)
+                    quick_recipe_description = st.text_area("Description", height=56)
                     quick_base_servings = st.number_input("Base serving count", min_value=1.0, max_value=12.0, step=0.5, value=2.0)
                     quick_recipe_ingredients = st.text_area("Ingredients (one per line: name | quantity | unit | notes)", height=150)
                     quick_cooking_style = st.text_input("Cooking style or method")
