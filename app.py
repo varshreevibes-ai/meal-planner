@@ -827,6 +827,7 @@ def normalize_profile(profile):
     if not normalized["household_inventory_rows"] and normalized["inventory"]:
         normalized["household_inventory_rows"] = simple_seed_inventory_rows(normalized, household=True)
     simple_refresh_item_memory(normalized)
+    simple_sync_rows_from_memory(normalized)
     return apply_project_household_defaults(normalized)
 
 
@@ -2976,7 +2977,7 @@ def vendor_price_rows(profile):
                     "item_name": item["name"],
                     "vendor": row["vendor"] or item.get("preferred_vendor", "Other"),
                     "brand": row["brand"] or item.get("preferred_brand", ""),
-                    "category": category_name(profile, item.get("category_id", "")),
+                    "category": simple_category_for_item(profile, item["name"], category_name(profile, item.get("category_id", ""))),
                     "price": row["price"],
                     "price_per_unit": row["price_per_unit"],
                     "quantity": row["quantity"],
@@ -3072,7 +3073,6 @@ def current_season_label():
 
 
 def seasonal_insight_rows(profile):
-    season = current_season_label()
     rows = []
     for item in profile.get("inventory", []):
         lowered = item.get("name", "").lower()
@@ -3080,16 +3080,12 @@ def seasonal_insight_rows(profile):
         if not matched_season:
             continue
         waste_rows = waste_transactions_for_item(profile, item)
-        weather_mode = profile.get("preferences", {}).get("weather_mode", "Normal")
-        reason = f"{item['name']} is commonly used in {matched_season.lower()}."
-        if weather_mode == "Hot / Humid" and category_name(profile, item.get("category_id", "")) in {"Fruits", "Vegetables", "Dairy / Eggs"}:
-            reason += " Hot/humid conditions make spoilage risk higher."
+        reason = "Relevant from purchase history."
         if waste_rows:
             reason += " Past waste suggests buying a little less."
         rows.append(
             {
                 "Item": item["name"],
-                "Season": matched_season,
                 "Current stock": format_number(inventory_total_quantity(item)),
                 "Reason": reason,
                 "Confidence": "Medium" if waste_rows else "Low",
@@ -4383,6 +4379,10 @@ def simple_remembered_vendor(profile, item_name):
     return profile.get("simple_item_memory", {}).get("vendors", {}).get(simple_memory_key(item_name), "")
 
 
+def simple_category_for_item(profile, item_name, fallback=""):
+    return simple_remembered_category(profile, item_name) or simple_clean_text(fallback)
+
+
 def simple_apply_memory(profile, row):
     updated = dict(row)
     item_name = updated.get("item", "")
@@ -4413,6 +4413,14 @@ def simple_refresh_item_memory(profile):
                 vendors[item_key] = simple_canonical_vendor(profile, vendor)
     memory["categories"] = categories
     memory["vendors"] = vendors
+
+
+def simple_sync_rows_from_memory(profile):
+    for key in ["purchase_log_rows", "kitchen_inventory_rows", "household_inventory_rows", "shopping_manual_rows"]:
+        synced_rows = []
+        for row in profile.get(key, []):
+            synced_rows.append(simple_apply_memory(profile, row))
+        profile[key] = synced_rows
 
 
 def simple_normalize_purchase_row(row):
@@ -4616,6 +4624,7 @@ def simple_render_editable_table(profile, rows_key, column_map, normalize_fn, ro
     if json.dumps(rows, sort_keys=True) != json.dumps(merged_rows, sort_keys=True):
         profile[rows_key] = merged_rows
         simple_refresh_item_memory(profile)
+        simple_sync_rows_from_memory(profile)
         persist_active_profile(profile)
         st.rerun()
     return merged_rows
@@ -5051,6 +5060,7 @@ def render_purchase_log_workspace(profile):
             if saved_rows:
                 profile["purchase_log_rows"] = saved_rows + profile.get("purchase_log_rows", [])
                 simple_refresh_item_memory(profile)
+                simple_sync_rows_from_memory(profile)
                 persist_active_profile(profile)
                 st.session_state.purchase_log_review_rows = []
                 st.session_state.purchase_log_flash = f"Saved {len(saved_rows)} purchase entr{'y' if len(saved_rows) == 1 else 'ies'}."
@@ -5133,6 +5143,7 @@ def render_shopping_workspace(profile):
         row for row in profile.get("shopping_manual_rows", []) if row["id"] not in (manual_filtered_ids - kept_manual_ids)
     ]
     simple_refresh_item_memory(profile)
+    simple_sync_rows_from_memory(profile)
     after_state = json.dumps(
         {
             "purchase_log_rows": profile.get("purchase_log_rows", []),
@@ -5168,18 +5179,8 @@ def render_insights_workspace(profile):
                 st.session_state.pending_workspace = "Shopping"
                 st.rerun()
 
-    weather_col, season_col = st.columns([1, 2])
-    weather_options = ["Hot / Humid", "Normal", "Cool"]
-    current_weather = profile.get("preferences", {}).get("weather_mode", "Normal")
-    weather_mode = weather_col.selectbox("Perishability condition", weather_options, index=weather_options.index(current_weather) if current_weather in weather_options else 1, key=f"weather_mode_{profile['id']}")
-    if weather_mode != current_weather:
-        profile["preferences"]["weather_mode"] = weather_mode
-        persist_active_profile(profile)
-        st.rerun()
-    season_col.caption(f"Current seasonal context: **{current_season_label()}**")
-
-    consumption_tab, price_tab, vendor_tab, waste_tab, storage_tab, seasonal_tab, predictions_tab = st.tabs(
-        ["Consumption", "Price Analysis", "Vendor Comparison", "Waste / Spoilage", "Storage", "Seasonal", "Predictions"]
+    consumption_tab, price_tab, vendor_tab, predictions_tab = st.tabs(
+        ["Consumption", "Price Analysis", "Vendor Comparison", "Predictions"]
     )
 
     with consumption_tab:
@@ -5192,7 +5193,7 @@ def render_insights_workspace(profile):
             rows.append(
                 {
                     "Item": item["name"],
-                    "Category": category_name(profile, item.get("category_id", "")),
+                    "Category": simple_category_for_item(profile, item["name"], category_name(profile, item.get("category_id", ""))),
                     "Avg / week": format_number(metrics["weekly"]),
                     "Avg / month": format_number(metrics["monthly"]),
                     "Avg purchase interval": interval,
@@ -5242,32 +5243,6 @@ def render_insights_workspace(profile):
             st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
         else:
             st.write("Vendor comparison will appear after more purchases.")
-
-    with waste_tab:
-        rows = waste_insight_rows(profile)
-        if rows:
-            st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
-        else:
-            st.write("No waste or spoilage patterns recorded yet.")
-
-    with storage_tab:
-        rows = storage_insight_rows(profile)
-        if rows:
-            overall_usage = sum(try_float(row["Usage"]) or 0.0 for row in rows)
-            over_capacity = sum(1 for row in rows if row["Status"] == "Over Capacity")
-            card1, card2 = st.columns(2)
-            card1.metric("Tracked location usage", format_number(overall_usage))
-            card2.metric("Over-capacity locations", over_capacity)
-            st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
-        else:
-            st.write("No storage data yet.")
-
-    with seasonal_tab:
-        rows = seasonal_insight_rows(profile)
-        if rows:
-            st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
-        else:
-            st.write("Seasonal suggestions will appear as relevant items and history accumulate.")
 
     with predictions_tab:
         rows = prediction_rows(profile)
