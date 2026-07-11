@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "active_profile_id": "99def9bc21a744c29dcf93970b92d305",
+  "profiles": [
+    {
+      "id": "99def9bc21a744c29dcf93970b92d305",
+      "name": "New Household",
+      "household_members": [],
+      "meal_templates": [],
+      "recipes": [],
+      "inventory": [],
+      "grocery_data": {
+        "missing_items": {}
+      },
+      "preferences": {
+        "favorites_only": false,
+        "activity_level": "Moderately active",
+        "meal_mode": "Normal eating",
+        "before_didi_arrives": "",
+        "morning_routine": "",
+        "setup_complete": false
+      },
+      "recent_meals": [],
+      "recent_recipes": [],
+      "meal_log": [],
+      "leftovers": [],
+      "planner_preferences": {}
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "version": 2,
+  "active_profile_id": "a54cbb62a97f4bb1a39421788d5af2c2",
+  "profiles": [
+    {
+      "id": "92afd983d22f474fa407a60f910a9ce1",
+      "name": "New Household",
+      "household_members": [],
+      "meal_templates": [],
+      "recipes": [],
+      "inventory": [],
+      "grocery_data": {
+        "missing_items": {}
+      },
+      "preferences": {
+        "favorites_only": false,
+        "activity_level": "Moderately active",
+        "meal_mode": "Normal eating",
+        "before_didi_arrives": "",
+        "morning_routine": "",
+        "setup_complete": false
+      },
+      "recent_meals": [],
+      "recent_recipes": [],
+      "meal_log": [],
+      "leftovers": [],
+      "planner_preferences": {}
+    },
+    {
+      "id": "7cf89c22cbbf471ca9a9e3f8dd2beeb8",
+      "name": "Garg's",
+      "household_members": [
+        {
+          "id": "18fadaaa6c784ed2adc328cde15081f2",
+          "name": "Vandana",
+          "portion_ratio": 1.0,
+          "goes_to_gym": "No",
+          "walks_regularly": "Yes",
+          "intake_items": "thyroid",
+          "routine_supplements": "",
+          "routine_medicines": "thyroid",
+          "juice_preference": "",
+          "protein_preference": "",
+          "dry_fruits_preference": "",
+          "other_add_ons": ""
+        }
+      ],
+      "meal_templates": [],
+      "recipes": [],
+      "inventory": [],
+      "grocery_data": {
+        "missing_items": {}
+      },
+      "preferences": {
+        "favorites_only": false,
+        "activity_level": "Moderately active",
+        "meal_mode": "Weight maintenance",
+        "before_didi_arrives": "",
+        "morning_routine": "",
+        "setup_complete": true
+      },
+      "recent_meals": [],
+      "recent_recipes": [],
+      "meal_log": [],
+      "leftovers": [],
+      "planner_preferences": {}
+    },
+    {
+      "id": "a54cbb62a97f4bb1a39421788d5af2c2",
+      "name": "d",
+      "household_members": [],
+      "meal_templates": [],
+      "recipes": [],
+      "inventory": [],
+      "grocery_data": {
+        "missing_items": {}
+      },
+      "preferences": {
+        "favorites_only": false,
+        "activity_level": "Moderately active",
+        "meal_mode": "Normal eating",
+        "before_didi_arrives": "",
+        "morning_routine": "",
+        "setup_complete": false
+      },
+      "recent_meals": [],
+      "recent_recipes": [
+        {
+          "label": "Rajma Chawal",
+          "used_at": "2026-06-23T11:48:39",
+          "linked_id": "builtin::Rajma Chawal"
+        }
+      ],
+      "meal_log": [],
+      "leftovers": [],
+      "planner_preferences": {}
+    }
+  ]
+}
