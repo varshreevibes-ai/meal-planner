@@ -1,0 +1,471 @@
+{
+  "version": 2,
+  "active_profile_id": "3046f2624da84a678e9e6ac8d2e0f3f4",
+  "profiles": [
+    {
+      "id": "3046f2624da84a678e9e6ac8d2e0f3f4",
+      "name": "New Household",
+      "household_members": [],
+      "meal_templates": [],
+      "recipes": [],
+      "inventory": [],
+      "inventory_categories": [
+        {
+          "id": "fruits",
+          "name": "Fruits",
+          "shelf_life_days": 5,
+          "default_unit": "kg",
+          "default_refill_level": 1.0,
+          "default_location_name": "Fridge",
+          "default_vendor_name": "BigBasket",
+          "approx_tracking_mode": "fresh",
+          "exact_tracking_mode": "small fresh purchase"
+        },
+        {
+          "id": "vegetables",
+          "name": "Vegetables",
+          "shelf_life_days": 6,
+          "default_unit": "kg",
+          "default_refill_level": 1.0,
+          "default_location_name": "Fridge",
+          "default_vendor_name": "Sabzi Vendor",
+          "approx_tracking_mode": "fresh",
+          "exact_tracking_mode": "small fresh purchase"
+        },
+        {
+          "id": "dal-pulses",
+          "name": "Dal / Pulses",
+          "shelf_life_days": 180,
+          "default_unit": "kg",
+          "default_refill_level": 0.5,
+          "default_location_name": "Kitchen shelf",
+          "default_vendor_name": "Kirana",
+          "approx_tracking_mode": "bulk",
+          "exact_tracking_mode": "sealed packs"
+        },
+        {
+          "id": "grains-rice-atta",
+          "name": "Grains / Rice / Atta",
+          "shelf_life_days": 150,
+          "default_unit": "kg",
+          "default_refill_level": 1.0,
+          "default_location_name": "Store room",
+          "default_vendor_name": "Kirana",
+          "approx_tracking_mode": "bulk",
+          "exact_tracking_mode": "sealed packs"
+        },
+        {
+          "id": "oil-ghee",
+          "name": "Oil / Ghee",
+          "shelf_life_days": 240,
+          "default_unit": "unit",
+          "default_refill_level": null,
+          "default_location_name": "",
+          "default_vendor_name": "",
+          "approx_tracking_mode": "general",
+          "exact_tracking_mode": "quantity"
+        },
+        {
+          "id": "masale-spices",
+          "name": "Masale / Spices",
+          "shelf_life_days": 210,
+          "default_unit": "unit",
+          "default_refill_level": null,
+          "default_location_name": "",
+          "default_vendor_name": "",
+          "approx_tracking_mode": "general",
+          "exact_tracking_mode": "quantity"
+        },
+        {
+          "id": "dry-fruits-seeds",
+          "name": "Dry Fruits / Seeds",
+          "shelf_life_days": 90,
+          "default_unit": "unit",
+          "default_refill_level": null,
+          "default_location_name": "",
+          "default_vendor_name": "",
+          "approx_tracking_mode": "general",
+          "exact_tracking_mode": "quantity"
+        },
+        {
+          "id": "snacks-makhana",
+          "name": "Snacks / Makhana",
+          "shelf_life_days": 60,
+          "default_unit": "unit",
+          "default_refill_level": null,
+          "default_location_name": "",
+          "default_vendor_name": "",
+          "approx_tracking_mode": "general",
+          "exact_tracking_mode": "quantity"
+        },
+        {
+          "id": "pickles-papad-chutney",
+          "name": "Pickles / Papad / Chutney",
+          "shelf_life_days": 120,
+          "default_unit": "unit",
+          "default_refill_level": null,
+          "default_location_name": "",
+          "default_vendor_name": "",
+          "approx_tracking_mode": "general",
+          "exact_tracking_mode": "quantity"
+        },
+        {
+          "id": "dairy-eggs",
+          "name": "Dairy / Eggs",
+          "shelf_life_days": 7,
+          "default_unit": "unit",
+          "default_refill_level": null,
+          "default_location_name": "",
+          "default_vendor_name": "",
+          "approx_tracking_mode": "general",
+          "exact_tracking_mode": "quantity"
+        },
+        {
+          "id": "protein-health",
+          "name": "Protein / Health",
+          "shelf_life_days": 120,
+          "default_unit": "unit",
+          "default_refill_level": null,
+          "default_location_name": "",
+          "default_vendor_name": "",
+          "approx_tracking_mode": "general",
+          "exact_tracking_mode": "quantity"
+        },
+        {
+          "id": "frozen-stored",
+          "name": "Frozen / Stored",
+          "shelf_life_days": 120,
+          "default_unit": "unit",
+          "default_refill_level": null,
+          "default_location_name": "",
+          "default_vendor_name": "",
+          "approx_tracking_mode": "general",
+          "exact_tracking_mode": "quantity"
+        },
+        {
+          "id": "beverages",
+          "name": "Beverages",
+          "shelf_life_days": 45,
+          "default_unit": "unit",
+          "default_refill_level": null,
+          "default_location_name": "",
+          "default_vendor_name": "",
+          "approx_tracking_mode": "general",
+          "exact_tracking_mode": "quantity"
+        },
+        {
+          "id": "cleaning",
+          "name": "Cleaning",
+          "shelf_life_days": 90,
+          "default_unit": "bottle",
+          "default_refill_level": 1.0,
+          "default_location_name": "Cleaning rack",
+          "default_vendor_name": "Amazon / DMart",
+          "approx_tracking_mode": "unit",
+          "exact_tracking_mode": "bottle/pack"
+        },
+        {
+          "id": "laundry",
+          "name": "Laundry",
+          "shelf_life_days": 120,
+          "default_unit": "pack",
+          "default_refill_level": 1.0,
+          "default_location_name": "Laundry shelf",
+          "default_vendor_name": "Amazon / DMart",
+          "approx_tracking_mode": "unit",
+          "exact_tracking_mode": "pack"
+        },
+        {
+          "id": "paper-disposables",
+          "name": "Paper / Disposables",
+          "shelf_life_days": 180,
+          "default_unit": "pack",
+          "default_refill_level": 1.0,
+          "default_location_name": "Store room",
+          "default_vendor_name": "Amazon / DMart",
+          "approx_tracking_mode": "unit",
+          "exact_tracking_mode": "pack"
+        },
+        {
+          "id": "personal-care",
+          "name": "Personal Care",
+          "shelf_life_days": 180,
+          "default_unit": "pc",
+          "default_refill_level": 1.0,
+          "default_location_name": "Bathroom cabinet",
+          "default_vendor_name": "Pharmacy",
+          "approx_tracking_mode": "unit",
+          "exact_tracking_mode": "tube/bottle"
+        },
+        {
+          "id": "utilities",
+          "name": "Utilities",
+          "shelf_life_days": 240,
+          "default_unit": "unit",
+          "default_refill_level": null,
+          "default_location_name": "",
+          "default_vendor_name": "",
+          "approx_tracking_mode": "general",
+          "exact_tracking_mode": "quantity"
+        },
+        {
+          "id": "maintenance",
+          "name": "Maintenance",
+          "shelf_life_days": 240,
+          "default_unit": "unit",
+          "default_refill_level": null,
+          "default_location_name": "",
+          "default_vendor_name": "",
+          "approx_tracking_mode": "general",
+          "exact_tracking_mode": "quantity"
+        },
+        {
+          "id": "bathroom",
+          "name": "Bathroom",
+          "shelf_life_days": 120,
+          "default_unit": "unit",
+          "default_refill_level": null,
+          "default_location_name": "",
+          "default_vendor_name": "",
+          "approx_tracking_mode": "general",
+          "exact_tracking_mode": "quantity"
+        },
+        {
+          "id": "kitchen-non-food",
+          "name": "Kitchen Non-Food",
+          "shelf_life_days": 120,
+          "default_unit": "unit",
+          "default_refill_level": null,
+          "default_location_name": "",
+          "default_vendor_name": "",
+          "approx_tracking_mode": "general",
+          "exact_tracking_mode": "quantity"
+        },
+        {
+          "id": "other-supplies",
+          "name": "Other Supplies",
+          "shelf_life_days": 120,
+          "default_unit": "unit",
+          "default_refill_level": null,
+          "default_location_name": "",
+          "default_vendor_name": "",
+          "approx_tracking_mode": "general",
+          "exact_tracking_mode": "quantity"
+        },
+        {
+          "id": "home-supplies",
+          "name": "Home Supplies",
+          "shelf_life_days": 90,
+          "default_unit": "unit",
+          "default_refill_level": null,
+          "default_location_name": "",
+          "default_vendor_name": "",
+          "approx_tracking_mode": "general",
+          "exact_tracking_mode": "quantity"
+        },
+        {
+          "id": "other-kitchen",
+          "name": "Other Kitchen",
+          "shelf_life_days": 60,
+          "default_unit": "unit",
+          "default_refill_level": null,
+          "default_location_name": "",
+          "default_vendor_name": "",
+          "approx_tracking_mode": "general",
+          "exact_tracking_mode": "quantity"
+        }
+      ],
+      "inventory_transactions": [],
+      "storage_locations": [
+        {
+          "id": "fridge",
+          "name": "Fridge",
+          "capacity_value": null,
+          "capacity_unit": "",
+          "notes": ""
+        },
+        {
+          "id": "freezer",
+          "name": "Freezer",
+          "capacity_value": null,
+          "capacity_unit": "",
+          "notes": ""
+        },
+        {
+          "id": "kitchen-shelf",
+          "name": "Kitchen shelf",
+          "capacity_value": null,
+          "capacity_unit": "",
+          "notes": ""
+        },
+        {
+          "id": "masala-box",
+          "name": "Masala box",
+          "capacity_value": null,
+          "capacity_unit": "",
+          "notes": ""
+        },
+        {
+          "id": "store-room",
+          "name": "Store room",
+          "capacity_value": null,
+          "capacity_unit": "",
+          "notes": ""
+        },
+        {
+          "id": "bathroom-cabinet",
+          "name": "Bathroom cabinet",
+          "capacity_value": null,
+          "capacity_unit": "",
+          "notes": ""
+        },
+        {
+          "id": "utility-shelf",
+          "name": "Utility shelf",
+          "capacity_value": null,
+          "capacity_unit": "",
+          "notes": ""
+        },
+        {
+          "id": "laundry-shelf",
+          "name": "Laundry shelf",
+          "capacity_value": null,
+          "capacity_unit": "",
+          "notes": ""
+        },
+        {
+          "id": "cleaning-rack",
+          "name": "Cleaning rack",
+          "capacity_value": null,
+          "capacity_unit": "",
+          "notes": ""
+        },
+        {
+          "id": "counter",
+          "name": "Counter",
+          "capacity_value": null,
+          "capacity_unit": "",
+          "notes": ""
+        },
+        {
+          "id": "other",
+          "name": "Other",
+          "capacity_value": null,
+          "capacity_unit": "",
+          "notes": ""
+        }
+      ],
+      "vendors": [
+        {
+          "id": "bigbasket",
+          "name": "BigBasket",
+          "vendor_type": "Grocery app",
+          "preferred_categories": [
+            "Fruits",
+            "Dairy / Eggs",
+            "Protein / Health"
+          ],
+          "notes": "",
+          "purchase_pattern": "",
+          "price_trend_summary": ""
+        },
+        {
+          "id": "sabzi-vendor",
+          "name": "Sabzi Vendor",
+          "vendor_type": "Local vegetable vendor",
+          "preferred_categories": [
+            "Vegetables"
+          ],
+          "notes": "",
+          "purchase_pattern": "",
+          "price_trend_summary": ""
+        },
+        {
+          "id": "kirana",
+          "name": "Kirana",
+          "vendor_type": "Kirana",
+          "preferred_categories": [
+            "Masale / Spices",
+            "Grains / Rice / Atta",
+            "Dal / Pulses",
+            "Dry Fruits / Seeds",
+            "Oil / Ghee",
+            "Pickles / Papad / Chutney"
+          ],
+          "notes": "",
+          "purchase_pattern": "",
+          "price_trend_summary": ""
+        },
+        {
+          "id": "pharmacy",
+          "name": "Pharmacy",
+          "vendor_type": "Pharmacy",
+          "preferred_categories": [
+            "Personal Care",
+            "Bathroom"
+          ],
+          "notes": "",
+          "purchase_pattern": "",
+          "price_trend_summary": ""
+        },
+        {
+          "id": "amazon-dmart",
+          "name": "Amazon / DMart",
+          "vendor_type": "Marketplace",
+          "preferred_categories": [
+            "Cleaning",
+            "Laundry",
+            "Paper / Disposables",
+            "Utilities",
+            "Maintenance",
+            "Kitchen Non-Food",
+            "Other Supplies"
+          ],
+          "notes": "",
+          "purchase_pattern": "",
+          "price_trend_summary": ""
+        },
+        {
+          "id": "other",
+          "name": "Other",
+          "vendor_type": "Other",
+          "preferred_categories": [],
+          "notes": "",
+          "purchase_pattern": "",
+          "price_trend_summary": ""
+        }
+      ],
+      "shopping_manual_items": [],
+      "purchase_log_rows": [],
+      "kitchen_inventory_rows": [],
+      "household_inventory_rows": [],
+      "shopping_manual_rows": [],
+      "simple_item_memory": {
+        "categories": {},
+        "vendors": {}
+      },
+      "simple_shopping_overrides": {},
+      "grocery_data": {
+        "missing_items": {}
+      },
+      "preferences": {
+        "favorites_only": false,
+        "activity_level": "Moderately active",
+        "meal_mode": "Normal eating",
+        "before_didi_arrives": "",
+        "morning_routine": "",
+        "weather_mode": "Normal",
+        "used_categories": [],
+        "setup_complete": false
+      },
+      "recent_meals": [],
+      "recent_recipes": [],
+      "meal_log": [],
+      "leftovers": [],
+      "planner_preferences": {},
+      "shopping_preferences": {
+        "suggestion_overrides": {}
+      }
+    }
+  ]
+}
