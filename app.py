@@ -733,6 +733,12 @@ def default_profile(name="New Household"):
         "storage_locations": default_storage_locations(),
         "vendors": default_vendor_records(),
         "shopping_manual_items": [],
+        "purchase_log_rows": [],
+        "kitchen_inventory_rows": [],
+        "household_inventory_rows": [],
+        "shopping_manual_rows": [],
+        "simple_item_memory": {"categories": {}, "vendors": {}},
+        "simple_shopping_overrides": {},
         "grocery_data": {"missing_items": {}},
         "preferences": {
             "favorites_only": False,
@@ -783,6 +789,16 @@ def normalize_profile(profile):
     normalized["inventory"] = [normalize_inventory_item(item) for item in profile.get("inventory", [])]
     normalized["inventory_transactions"] = [normalize_inventory_transaction(item) for item in profile.get("inventory_transactions", [])]
     normalized["shopping_manual_items"] = [normalize_manual_shopping_item(item) for item in profile.get("shopping_manual_items", [])]
+    normalized["purchase_log_rows"] = list(profile.get("purchase_log_rows", []))
+    normalized["kitchen_inventory_rows"] = list(profile.get("kitchen_inventory_rows", []))
+    normalized["household_inventory_rows"] = list(profile.get("household_inventory_rows", []))
+    normalized["shopping_manual_rows"] = list(profile.get("shopping_manual_rows", []))
+    memory = profile.get("simple_item_memory", {})
+    normalized["simple_item_memory"] = {
+        "categories": dict(memory.get("categories", {})),
+        "vendors": dict(memory.get("vendors", {})),
+    }
+    normalized["simple_shopping_overrides"] = dict(profile.get("simple_shopping_overrides", {}))
     normalized["grocery_data"] = {"missing_items": dict(profile.get("grocery_data", {}).get("missing_items", {}))}
     normalized["preferences"] = {
         "favorites_only": bool(profile.get("preferences", {}).get("favorites_only", False)),
@@ -800,6 +816,17 @@ def normalize_profile(profile):
     normalized["leftovers"] = list(profile.get("leftovers", []))
     normalized["planner_preferences"] = dict(profile.get("planner_preferences", {}))
     normalized["shopping_preferences"] = {"suggestion_overrides": dict(profile.get("shopping_preferences", {}).get("suggestion_overrides", {}))}
+    normalized["purchase_log_rows"] = [simple_normalize_purchase_row(item) for item in normalized.get("purchase_log_rows", [])]
+    normalized["kitchen_inventory_rows"] = [simple_normalize_inventory_row(item) for item in normalized.get("kitchen_inventory_rows", [])]
+    normalized["household_inventory_rows"] = [simple_normalize_inventory_row(item) for item in normalized.get("household_inventory_rows", [])]
+    normalized["shopping_manual_rows"] = [simple_normalize_shopping_manual_row(item) for item in normalized.get("shopping_manual_rows", [])]
+    if not normalized["purchase_log_rows"] and normalized["inventory"]:
+        normalized["purchase_log_rows"] = simple_seed_purchase_rows(normalized)
+    if not normalized["kitchen_inventory_rows"] and normalized["inventory"]:
+        normalized["kitchen_inventory_rows"] = simple_seed_inventory_rows(normalized, household=False)
+    if not normalized["household_inventory_rows"] and normalized["inventory"]:
+        normalized["household_inventory_rows"] = simple_seed_inventory_rows(normalized, household=True)
+    simple_refresh_item_memory(normalized)
     return apply_project_household_defaults(normalized)
 
 
@@ -1199,17 +1226,16 @@ def jump_to_anchor(anchor, force_setup_open=False):
         st.session_state.force_open_setup = True
 
 
-DESKTOP_WORKSPACE_TABS = ["Planner", "Recipes", "Shopping", "Inventory", "Home Supplies", "Insights", "Setup"]
+DESKTOP_WORKSPACE_TABS = ["Planner", "Recipes", "Purchase Log", "Inventory", "Shopping", "Insights"]
 WORKSPACE_LABELS = {
     "Planner": "Meal planner",
     "Recipes": "Recipes",
-    "Inventory": "Kitchen Inventory",
+    "Purchase Log": "Purchase Log",
+    "Inventory": "Inventory",
     "Shopping": "Shopping List",
-    "Home Supplies": "House Inventory",
     "Insights": "Insights",
-    "Setup": "Preferences",
 }
-PLANNER_NAV_WORKSPACES = ["Planner", "Recipes", "Shopping", "Inventory", "Home Supplies", "Insights"]
+PLANNER_NAV_WORKSPACES = ["Planner", "Recipes", "Purchase Log", "Inventory", "Shopping", "Insights"]
 MOBILE_SECTION_LABELS = {
     "Overview": "Overview",
     "Items": "Items",
@@ -1380,38 +1406,38 @@ def inject_ui_styles():
         """
         <style>
         :root {
-            color-scheme: light dark;
-            --color-bg: #F8F1E4;
-            --color-bg-soft: #FBF5EA;
-            --color-surface: #FFF9EF;
-            --color-panel: #EFE1CB;
-            --color-elevated: #FFFCF5;
-            --color-primary: #9E3F2F;
-            --color-primary-hover: #873326;
-            --color-secondary: #234E70;
-            --color-accent-brass: #B88A44;
-            --color-sandstone: #C98963;
-            --color-red-sandstone: #B7654B;
-            --color-banana-leaf: #6F7F4F;
-            --color-banana-leaf-strong: #4E6437;
-            --color-leaf-soft: #A6AD7D;
-            --color-pale-leaf-wash: #E7E8D4;
-            --color-lotus-muted: #B97A7A;
-            --color-peacock-teal: #2F6F73;
-            --color-diya-flame: #C7833B;
-            --color-text-primary: #2D2520;
-            --color-text-secondary: #6F6258;
-            --color-border: #D8C7AD;
-            --soft-shadow: 0 8px 22px rgba(77, 54, 37, 0.05);
-            --page-overlay: rgba(248, 241, 228, 0.84);
-            --sidebar-overlay: rgba(239, 225, 203, 0.8);
-            --header-overlay: rgba(248, 241, 228, 0.78);
+            color-scheme: dark;
+            --color-bg: #121821;
+            --color-bg-soft: #171F2B;
+            --color-surface: #202837;
+            --color-panel: #182130;
+            --color-elevated: #273142;
+            --color-primary: #C0644F;
+            --color-primary-hover: #D17660;
+            --color-secondary: #7F9CC4;
+            --color-accent-brass: #C49A5A;
+            --color-sandstone: #A96F56;
+            --color-red-sandstone: #C0644F;
+            --color-banana-leaf: #9DAF7A;
+            --color-banana-leaf-strong: #6F8756;
+            --color-leaf-soft: #7F8F68;
+            --color-deep-leaf-shadow: #2E3F34;
+            --color-lotus-muted: #D09A9A;
+            --color-peacock-teal: #5FA4A5;
+            --color-diya-flame: #D49A59;
+            --color-text-primary: #F3EBDD;
+            --color-text-secondary: #B9AB99;
+            --color-border: #3A332B;
+            --soft-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+            --page-overlay: rgba(18, 24, 33, 0.76);
+            --sidebar-overlay: rgba(24, 33, 48, 0.76);
+            --header-overlay: rgba(18, 24, 33, 0.72);
             --motif-page: none;
             --motif-sidebar: none;
             --motif-card: none;
-            --motif-empty: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3Cg fill='none' stroke='%232F6F73' stroke-opacity='.12' stroke-width='1.2'%3E%3Cpath d='M140 38c18 28 28 56 28 82 0 34-18 68-28 86-10-18-28-52-28-86 0-26 10-54 28-82Z'/%3E%3Cpath d='M140 58c26 8 48 26 64 54'/%3E%3C/g%3E%3Cg fill='none' stroke='%23C7833B' stroke-opacity='.12' stroke-width='1'%3E%3Cpath d='M76 210c18-14 38-22 64-22s46 8 64 22'/%3E%3C/g%3E%3C/svg%3E");
+            --motif-empty: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3Cg fill='none' stroke='%235FA4A5' stroke-opacity='.12' stroke-width='1.2'%3E%3Cpath d='M140 38c18 28 28 56 28 82 0 34-18 68-28 86-10-18-28-52-28-86 0-26 10-54 28-82Z'/%3E%3Cpath d='M140 58c26 8 48 26 64 54'/%3E%3C/g%3E%3Cg fill='none' stroke='%23D49A59' stroke-opacity='.12' stroke-width='1'%3E%3Cpath d='M76 210c18-14 38-22 64-22s46 8 64 22'/%3E%3C/g%3E%3C/svg%3E");
             --button-mandala: none;
-            --button-inset: inset 0 1px 0 rgba(255,255,255,0.12), inset 0 -1px 0 rgba(0,0,0,0.03);
+            --button-inset: inset 0 1px 0 rgba(255,255,255,0.05), inset 0 -1px 0 rgba(0,0,0,0.08);
         }
         @media (prefers-color-scheme: dark) {
             :root {
@@ -1504,6 +1530,10 @@ def inject_ui_styles():
         .recipe-anchor {
             display: block;
             scroll-margin-top: 5rem;
+        }
+        .inventory-anchor {
+            display: block;
+            scroll-margin-top: 5.2rem;
         }
         [data-testid="stSidebar"] {
             background-color: var(--color-panel);
@@ -1624,23 +1654,23 @@ def inject_ui_styles():
             font-weight: 600;
             color: var(--color-surface) !important;
             background-color: var(--color-primary) !important;
-            background-image: linear-gradient(rgba(158, 63, 47, 0.96), rgba(158, 63, 47, 0.96)), var(--button-mandala) !important;
+            background-image: linear-gradient(rgba(192, 100, 79, 0.96), rgba(192, 100, 79, 0.96)), var(--button-mandala) !important;
             background-repeat: no-repeat !important;
             background-position: center center !important;
             background-size: cover !important;
             border: 1px solid var(--color-primary) !important;
             border-radius: 15px;
-            box-shadow: var(--button-inset), 0 4px 10px rgba(158, 63, 47, 0.09);
+            box-shadow: var(--button-inset), 0 4px 10px rgba(192, 100, 79, 0.14);
             transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
             clip-path: polygon(0 7%, 6% 0, 94% 0, 100% 7%, 100% 100%, 0 100%);
         }
         .stApp .stButton button:hover {
             background-color: var(--color-primary-hover) !important;
-            background-image: linear-gradient(rgba(135, 51, 38, 0.97), rgba(135, 51, 38, 0.97)), var(--button-mandala) !important;
+            background-image: linear-gradient(rgba(209, 118, 96, 0.97), rgba(209, 118, 96, 0.97)), var(--button-mandala) !important;
             border-color: var(--color-primary-hover) !important;
             color: var(--color-surface) !important;
             transform: translateY(-1px);
-            box-shadow: var(--button-inset), 0 6px 12px rgba(158, 63, 47, 0.11);
+            box-shadow: var(--button-inset), 0 6px 12px rgba(192, 100, 79, 0.18);
         }
         .stApp .stButton button[kind="secondary"] {
             background-color: var(--color-banana-leaf-strong) !important;
@@ -1659,16 +1689,59 @@ def inject_ui_styles():
             color: var(--color-surface) !important;
         }
         .stApp [data-baseweb="select"] > div,
+        .stApp [data-baseweb="base-input"] > div,
         .stApp .stTextInput input,
         .stApp .stNumberInput input,
-        .stApp textarea {
+        .stApp .stDateInput input,
+        .stApp textarea,
+        .stApp [data-testid="stTextArea"] textarea {
             color: var(--color-text-primary);
-            background: var(--color-elevated);
-            border-color: var(--color-border);
+            background: var(--color-elevated) !important;
+            border-color: var(--color-border) !important;
+            box-shadow: none !important;
+        }
+        .stApp [data-baseweb="base-input"] > div,
+        .stApp [data-baseweb="select"] > div {
+            background-color: var(--color-elevated) !important;
+            border-color: var(--color-border) !important;
         }
         .stApp [data-baseweb="select"] svg,
         .stApp .stExpander svg {
             fill: var(--color-text-secondary);
+        }
+        .stApp [data-testid="stForm"] {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 18px;
+            padding: 0.5rem 0.65rem 0.2rem;
+        }
+        .stApp [data-testid="stDataEditor"],
+        .stApp [data-testid="stDataFrame"] {
+            background: var(--color-surface) !important;
+            border: 1px solid var(--color-border) !important;
+            border-radius: 18px !important;
+            box-shadow: var(--soft-shadow);
+        }
+        .stApp [data-testid="stDataEditor"] [role="grid"],
+        .stApp [data-testid="stDataFrame"] [role="grid"] {
+            background: var(--color-surface) !important;
+            color: var(--color-text-primary) !important;
+        }
+        .stApp [data-testid="stDataEditor"] input,
+        .stApp [data-testid="stDataEditor"] textarea,
+        .stApp [data-testid="stDataEditor"] select,
+        .stApp [data-testid="stDataEditor"] [contenteditable="true"] {
+            background: var(--color-elevated) !important;
+            color: var(--color-text-primary) !important;
+            border-color: var(--color-border) !important;
+        }
+        .stApp [data-testid="stDataEditor"] button,
+        .stApp [data-testid="stDataFrame"] button {
+            color: var(--color-text-primary) !important;
+        }
+        .stApp [data-testid="stDataEditor"] div,
+        .stApp [data-testid="stDataFrame"] div {
+            border-color: color-mix(in srgb, var(--color-border) 78%, transparent 22%) !important;
         }
         .stApp .stExpander {
             border: 1px solid var(--color-border);
@@ -4210,6 +4283,547 @@ def render_vendor_detail(profile, vendor_name):
             st.write("No items recorded for this vendor yet.")
 
 
+SIMPLE_PURCHASE_COLUMNS = OrderedDict(
+    [
+        ("in_stock", "In Stock"),
+        ("date_time", "Date/Time"),
+        ("vendor", "Vendor"),
+        ("item", "Item"),
+        ("quantity", "Quantity"),
+        ("price", "Price"),
+        ("note", "Note"),
+        ("category", "Category"),
+    ]
+)
+SIMPLE_PURCHASE_REVIEW_COLUMNS = OrderedDict(
+    [
+        ("item", "Item"),
+        ("vendor", "Vendor"),
+        ("quantity", "Quantity"),
+        ("price", "Price"),
+        ("note", "Note"),
+        ("category", "Category"),
+    ]
+)
+SIMPLE_INVENTORY_COLUMNS = OrderedDict(
+    [
+        ("in_stock", "In Stock"),
+        ("item", "Item"),
+        ("quantity", "Quantity"),
+        ("vendor", "Vendor"),
+        ("note", "Note"),
+        ("category", "Category"),
+    ]
+)
+SIMPLE_SHOPPING_COLUMNS = OrderedDict(
+    [
+        ("purchased", "Purchased"),
+        ("vendor", "Vendor"),
+        ("item", "Item"),
+        ("quantity", "Quantity & Unit"),
+        ("category", "Category"),
+        ("note", "Note"),
+        ("source", "Source"),
+    ]
+)
+
+
+def simple_memory_key(value):
+    return re.sub(r"[^a-z0-9]+", " ", str(value or "").strip().lower()).strip()
+
+
+def simple_clean_text(value):
+    return str(value or "").strip()
+
+
+def simple_clean_bool(value, default=False):
+    if isinstance(value, bool):
+        return value
+    if value in {1, "1", "true", "True", "yes", "Yes"}:
+        return True
+    if value in {0, "0", "false", "False", "no", "No"}:
+        return False
+    return default
+
+
+def simple_vendor_pool(profile):
+    values = []
+    for key in ["purchase_log_rows", "kitchen_inventory_rows", "household_inventory_rows", "shopping_manual_rows"]:
+        for row in profile.get(key, []):
+            values.append(row.get("vendor", ""))
+    values.extend(profile.get("simple_item_memory", {}).get("vendors", {}).values())
+    dedup = []
+    seen = set()
+    for value in values:
+        canonical = simple_memory_key(value).replace(" ", "")
+        cleaned = simple_clean_text(value)
+        if not cleaned or not canonical or canonical in seen:
+            continue
+        seen.add(canonical)
+        dedup.append(cleaned)
+    return dedup
+
+
+def simple_canonical_vendor(profile, vendor_name):
+    cleaned = simple_clean_text(vendor_name)
+    if not cleaned:
+        return ""
+    vendor_key = simple_memory_key(cleaned).replace(" ", "")
+    for existing in simple_vendor_pool(profile):
+        if simple_memory_key(existing).replace(" ", "") == vendor_key:
+            return existing
+    return cleaned
+
+
+def simple_remembered_category(profile, item_name):
+    return profile.get("simple_item_memory", {}).get("categories", {}).get(simple_memory_key(item_name), "")
+
+
+def simple_remembered_vendor(profile, item_name):
+    return profile.get("simple_item_memory", {}).get("vendors", {}).get(simple_memory_key(item_name), "")
+
+
+def simple_apply_memory(profile, row):
+    updated = dict(row)
+    item_name = updated.get("item", "")
+    if item_name and not updated.get("category"):
+        updated["category"] = simple_remembered_category(profile, item_name)
+    if item_name and not updated.get("vendor"):
+        updated["vendor"] = simple_remembered_vendor(profile, item_name)
+    if updated.get("vendor"):
+        updated["vendor"] = simple_canonical_vendor(profile, updated["vendor"])
+    return updated
+
+
+def simple_refresh_item_memory(profile):
+    memory = profile.setdefault("simple_item_memory", {"categories": {}, "vendors": {}})
+    categories = {}
+    vendors = {}
+    for key in ["purchase_log_rows", "kitchen_inventory_rows", "household_inventory_rows", "shopping_manual_rows"]:
+        for row in profile.get(key, []):
+            item_name = simple_clean_text(row.get("item", ""))
+            if not item_name:
+                continue
+            item_key = simple_memory_key(item_name)
+            category = simple_clean_text(row.get("category", ""))
+            vendor = simple_clean_text(row.get("vendor", ""))
+            if category:
+                categories[item_key] = category
+            if vendor:
+                vendors[item_key] = simple_canonical_vendor(profile, vendor)
+    memory["categories"] = categories
+    memory["vendors"] = vendors
+
+
+def simple_normalize_purchase_row(row):
+    row = dict(row) if isinstance(row, dict) else {}
+    return {
+        "id": row.get("id", uuid4().hex),
+        "in_stock": simple_clean_bool(row.get("in_stock"), True),
+        "date_time": simple_clean_text(row.get("date_time")) or datetime.now().isoformat(timespec="minutes").replace("T", " "),
+        "vendor": simple_clean_text(row.get("vendor")),
+        "item": simple_clean_text(row.get("item")),
+        "quantity": simple_clean_text(row.get("quantity")),
+        "price": simple_clean_text(row.get("price")),
+        "note": simple_clean_text(row.get("note")),
+        "category": simple_clean_text(row.get("category")),
+    }
+
+
+def simple_normalize_inventory_row(row):
+    row = dict(row) if isinstance(row, dict) else {}
+    return {
+        "id": row.get("id", uuid4().hex),
+        "in_stock": simple_clean_bool(row.get("in_stock"), True),
+        "item": simple_clean_text(row.get("item")),
+        "quantity": simple_clean_text(row.get("quantity")),
+        "vendor": simple_clean_text(row.get("vendor")),
+        "note": simple_clean_text(row.get("note")),
+        "category": simple_clean_text(row.get("category")),
+    }
+
+
+def simple_normalize_shopping_manual_row(row):
+    row = dict(row) if isinstance(row, dict) else {}
+    return {
+        "id": row.get("id", uuid4().hex),
+        "vendor": simple_clean_text(row.get("vendor")),
+        "item": simple_clean_text(row.get("item")),
+        "quantity": simple_clean_text(row.get("quantity")),
+        "category": simple_clean_text(row.get("category")),
+        "note": simple_clean_text(row.get("note")),
+    }
+
+
+def simple_seed_inventory_rows(profile, household=False):
+    rows = []
+    for item in profile.get("inventory", []):
+        if is_home_supply_item(profile, item) != household:
+            continue
+        quantity_text = " ".join(part for part in [format_number(inventory_total_quantity(item)), item.get("unit", "")] if part).strip()
+        rows.append(
+            simple_normalize_inventory_row(
+                {
+                    "item": item.get("name", ""),
+                    "quantity": quantity_text,
+                    "vendor": item.get("preferred_vendor", ""),
+                    "note": item.get("notes", ""),
+                    "category": category_name(profile, item.get("category_id", "")),
+                    "in_stock": inventory_total_quantity(item) > 0,
+                }
+            )
+        )
+    return rows
+
+
+def simple_seed_purchase_rows(profile):
+    rows = []
+    for item in profile.get("inventory", []):
+        category = category_name(profile, item.get("category_id", ""))
+        for lot in item.get("lots", []):
+            purchase_date = simple_clean_text(lot.get("purchase_date", "")) or simple_clean_text(item.get("purchase_date", ""))
+            if not purchase_date and lot.get("price") in {None, ""}:
+                continue
+            rows.append(
+                simple_normalize_purchase_row(
+                    {
+                        "date_time": purchase_date,
+                        "vendor": lot.get("vendor", "") or item.get("preferred_vendor", ""),
+                        "item": item.get("name", ""),
+                        "quantity": " ".join(part for part in [format_number(lot.get("quantity")), lot.get("unit", "")] if part).strip(),
+                        "price": format_number(lot.get("price")),
+                        "note": lot.get("notes", ""),
+                        "category": category,
+                        "in_stock": lot.get("status", "sealed") not in {"finished", "expired"},
+                    }
+                )
+            )
+    rows.sort(key=lambda row: row.get("date_time", ""), reverse=True)
+    return rows
+
+
+def simple_blank_row(columns):
+    row = {"id": uuid4().hex}
+    for key in columns:
+        row[key] = False if key in {"in_stock", "purchased"} else ""
+    return row
+
+
+def simple_is_meaningful_row(row, kind):
+    groups = {
+        "purchase": ["item", "vendor", "quantity", "price", "note", "category"],
+        "inventory": ["item", "quantity", "vendor", "note", "category"],
+        "shopping": ["item", "vendor", "quantity", "category", "note"],
+    }
+    return any(simple_clean_text(row.get(key, "")) for key in groups[kind])
+
+
+def simple_sort_value(value):
+    text = simple_clean_text(value)
+    try:
+        return float(text)
+    except ValueError:
+        return text.lower()
+
+
+def simple_filter_and_sort_rows(rows, search, vendor_filter, category_filter, sort_key, descending, visible_keys):
+    filtered = []
+    search_text = simple_clean_text(search).lower()
+    for row in rows:
+        vendor = simple_clean_text(row.get("vendor", ""))
+        category = simple_clean_text(row.get("category", ""))
+        if vendor_filter and vendor not in vendor_filter:
+            continue
+        if category_filter and category not in category_filter:
+            continue
+        if search_text:
+            haystack = " ".join(simple_clean_text(row.get(key, "")) for key in visible_keys).lower()
+            if search_text not in haystack:
+                continue
+        filtered.append(row)
+    filtered.sort(key=lambda row: simple_sort_value(row.get(sort_key, "")), reverse=descending)
+    return filtered
+
+
+def simple_table_controls(rows, prefix, visible_keys, default_sort_key):
+    vendors = sorted({simple_clean_text(row.get("vendor", "")) for row in rows if simple_clean_text(row.get("vendor", ""))})
+    categories = sorted({simple_clean_text(row.get("category", "")) for row in rows if simple_clean_text(row.get("category", ""))})
+    ctrl1, ctrl2, ctrl3, ctrl4, ctrl5 = st.columns([2.2, 1.2, 1.2, 1, 1])
+    search = ctrl1.text_input("Search", key=f"{prefix}_search")
+    vendor_filter = ctrl2.multiselect("Vendor", vendors, key=f"{prefix}_vendors")
+    category_filter = ctrl3.multiselect("Category", categories, key=f"{prefix}_categories")
+    sort_key = ctrl4.selectbox(
+        "Sort by",
+        visible_keys,
+        index=visible_keys.index(default_sort_key) if default_sort_key in visible_keys else 0,
+        format_func=lambda value: value.replace("_", " ").title(),
+        key=f"{prefix}_sort",
+    )
+    descending = ctrl5.selectbox("Order", ["A-Z", "Z-A"], key=f"{prefix}_order") == "Z-A"
+    return search, vendor_filter, category_filter, sort_key, descending
+
+
+def simple_editor_frame(rows, column_map):
+    records = []
+    for row in rows:
+        record = {"_id": row.get("id", "")}
+        for key, label in column_map.items():
+            record[label] = row.get(key, False if key in {"in_stock", "purchased"} else "")
+        records.append(record)
+    return pd.DataFrame(records)
+
+
+def simple_column_config(column_map):
+    config = {"_id": None}
+    for key, label in column_map.items():
+        if key in {"in_stock", "purchased"}:
+            config[label] = st.column_config.CheckboxColumn(label)
+        else:
+            config[label] = st.column_config.TextColumn(label)
+    return config
+
+
+def simple_merge_editor_rows(profile, all_rows, filtered_ids, edited_df, column_map, normalize_fn, row_kind):
+    edited_rows = []
+    for record in edited_df.to_dict("records"):
+        raw = {"id": record.get("_id") or uuid4().hex}
+        for key, label in column_map.items():
+            raw[key] = record.get(label)
+        normalized = simple_apply_memory(profile, normalize_fn(raw))
+        if simple_is_meaningful_row(normalized, row_kind):
+            edited_rows.append(normalized)
+    untouched = [normalize_fn(row) for row in all_rows if row.get("id") not in filtered_ids]
+    return untouched + edited_rows
+
+
+def simple_render_editable_table(profile, rows_key, column_map, normalize_fn, row_kind, prefix, default_sort_key="item"):
+    rows = [simple_apply_memory(profile, normalize_fn(row)) for row in profile.get(rows_key, [])]
+    visible_keys = [key for key in column_map if key not in {"in_stock", "purchased"}]
+    search, vendor_filter, category_filter, sort_key, descending = simple_table_controls(rows, prefix, visible_keys, default_sort_key)
+    filtered_rows = simple_filter_and_sort_rows(rows, search, vendor_filter, category_filter, sort_key, descending, visible_keys)
+    if not filtered_rows:
+        filtered_rows = [simple_blank_row(column_map.keys())]
+    editor_df = simple_editor_frame(filtered_rows, column_map)
+    edited_df = st.data_editor(
+        editor_df,
+        hide_index=True,
+        num_rows="dynamic",
+        use_container_width=True,
+        column_config=simple_column_config(column_map),
+        key=f"{prefix}_editor",
+    )
+    merged_rows = simple_merge_editor_rows(profile, rows, {row.get("id") for row in filtered_rows if row.get("id")}, edited_df, column_map, normalize_fn, row_kind)
+    if json.dumps(rows, sort_keys=True) != json.dumps(merged_rows, sort_keys=True):
+        profile[rows_key] = merged_rows
+        simple_refresh_item_memory(profile)
+        persist_active_profile(profile)
+        st.rerun()
+    return merged_rows
+
+
+def simple_parse_purchase_line(profile, raw_text):
+    text = simple_clean_text(raw_text)
+    if not text:
+        return []
+    vendor = ""
+    body = text
+    if ":" in text:
+        vendor, body = [part.strip() for part in text.split(":", 1)]
+    else:
+        match = re.match(r"(.+?)\s+se\s+(.+)", text, flags=re.IGNORECASE)
+        if match:
+            vendor = match.group(1).strip()
+            body = match.group(2).strip()
+    vendor = simple_canonical_vendor(profile, vendor)
+    rows = []
+    for part in [chunk.strip(" .") for chunk in re.split(r",|\n", body) if chunk.strip()]:
+        item = simple_clean_text(part)
+        quantity = ""
+        price = ""
+        match = re.match(
+            r"(?P<item>.+?)\s+(?P<qty>\d+(?:\.\d+)?(?:\s*x\s*\d+(?:\.\d+)?)?\s*(?:kg|g|gm|gram|grams|litre|liter|l|ml|pack|packs|packet|packets|pc|pcs|piece|pieces|bottle|bottles|box|boxes)?)\s+(?P<price>\d+(?:\.\d+)?)$",
+            part,
+            flags=re.IGNORECASE,
+        )
+        if match:
+            item = simple_clean_text(match.group("item"))
+            quantity = simple_clean_text(match.group("qty"))
+            price = simple_clean_text(match.group("price"))
+        else:
+            price_match = re.search(r"(\d+(?:\.\d+)?)$", part)
+            if price_match:
+                price = simple_clean_text(price_match.group(1))
+                item = simple_clean_text(part[: price_match.start()])
+            qty_match = re.search(
+                r"(\d+(?:\.\d+)?(?:\s*x\s*\d+(?:\.\d+)?)?\s*(?:kg|g|gm|gram|grams|litre|liter|l|ml|pack|packs|packet|packets|pc|pcs|piece|pieces|bottle|bottles|box|boxes)?)",
+                item,
+                flags=re.IGNORECASE,
+            )
+            if qty_match:
+                quantity = simple_clean_text(qty_match.group(1))
+                item = simple_clean_text(item.replace(qty_match.group(1), "", 1))
+        rows.append(
+            {
+                "item": item,
+                "vendor": vendor,
+                "quantity": quantity,
+                "price": price,
+                "note": "",
+                "category": simple_remembered_category(profile, item),
+            }
+        )
+    return [row for row in rows if row.get("item")]
+
+
+def simple_meal_planner_rows(profile):
+    rows = []
+    for item_name, quantity in profile.get("grocery_data", {}).get("missing_items", {}).items():
+        source_id = f"meal::{item_name}"
+        state = profile.get("simple_shopping_overrides", {}).get(source_id, {})
+        rows.append(
+            {
+                "id": source_id,
+                "purchased": False,
+                "vendor": state.get("vendor", ""),
+                "item": item_name,
+                "quantity": state.get("quantity", simple_clean_text(quantity)),
+                "category": state.get("category", simple_remembered_category(profile, item_name)),
+                "note": state.get("note", ""),
+                "source": "Meal Planner",
+            }
+        )
+    return rows
+
+
+def simple_build_shopping_rows(profile):
+    rows = []
+    for bucket, label in [
+        ("kitchen_inventory_rows", "Kitchen Inventory"),
+        ("household_inventory_rows", "Household Items"),
+        ("purchase_log_rows", "Purchase Log"),
+    ]:
+        for row in profile.get(bucket, []):
+            if row.get("in_stock", True):
+                continue
+            rows.append(
+                {
+                    "id": f"{bucket}::{row['id']}",
+                    "purchased": False,
+                    "vendor": row.get("vendor", ""),
+                    "item": row.get("item", ""),
+                    "quantity": row.get("quantity", ""),
+                    "category": row.get("category", ""),
+                    "note": row.get("note", ""),
+                    "source": label,
+                }
+            )
+    for row in profile.get("shopping_manual_rows", []):
+        rows.append({"id": f"manual::{row['id']}", "purchased": False, "vendor": row.get("vendor", ""), "item": row.get("item", ""), "quantity": row.get("quantity", ""), "category": row.get("category", ""), "note": row.get("note", ""), "source": "Manual"})
+    rows.extend(simple_meal_planner_rows(profile))
+    return [simple_apply_memory(profile, row) for row in rows if row.get("item")]
+
+
+def simple_apply_shopping_row_change(profile, row):
+    source_id = row.get("id", "")
+    if source_id.startswith("kitchen_inventory_rows::"):
+        target_id = source_id.split("::", 1)[1]
+        for entry in profile.get("kitchen_inventory_rows", []):
+            if entry["id"] == target_id:
+                entry.update(simple_normalize_inventory_row({**entry, "item": row["item"], "quantity": row["quantity"], "vendor": row["vendor"], "note": row["note"], "category": row["category"], "in_stock": not row.get("purchased", False)}))
+                return
+    if source_id.startswith("household_inventory_rows::"):
+        target_id = source_id.split("::", 1)[1]
+        for entry in profile.get("household_inventory_rows", []):
+            if entry["id"] == target_id:
+                entry.update(simple_normalize_inventory_row({**entry, "item": row["item"], "quantity": row["quantity"], "vendor": row["vendor"], "note": row["note"], "category": row["category"], "in_stock": not row.get("purchased", False)}))
+                return
+    if source_id.startswith("purchase_log_rows::"):
+        target_id = source_id.split("::", 1)[1]
+        for entry in profile.get("purchase_log_rows", []):
+            if entry["id"] == target_id:
+                entry.update(simple_normalize_purchase_row({**entry, "item": row["item"], "quantity": row["quantity"], "vendor": row["vendor"], "note": row["note"], "category": row["category"], "in_stock": not row.get("purchased", False)}))
+                return
+    if source_id.startswith("manual::"):
+        target_id = source_id.split("::", 1)[1]
+        if row.get("purchased", False):
+            profile["shopping_manual_rows"] = [entry for entry in profile.get("shopping_manual_rows", []) if entry["id"] != target_id]
+        else:
+            for entry in profile.get("shopping_manual_rows", []):
+                if entry["id"] == target_id:
+                    entry.update(simple_normalize_shopping_manual_row({**entry, "item": row["item"], "quantity": row["quantity"], "vendor": row["vendor"], "note": row["note"], "category": row["category"]}))
+                    return
+        return
+    if source_id.startswith("meal::"):
+        item_name = source_id.split("::", 1)[1]
+        if row.get("purchased", False):
+            profile.get("grocery_data", {}).get("missing_items", {}).pop(item_name, None)
+            st.session_state.get("grocery_list", OrderedDict()).pop(item_name, None)
+        else:
+            profile.setdefault("simple_shopping_overrides", {})[source_id] = {
+                "vendor": row.get("vendor", ""),
+                "quantity": row.get("quantity", ""),
+                "category": row.get("category", ""),
+                "note": row.get("note", ""),
+            }
+
+
+def simple_table_header(title, jump_label="", jump_anchor=""):
+    col1, col2 = st.columns([3.5, 1.9])
+    col1.markdown(f"### {title}")
+    if jump_label and jump_anchor:
+        button_id = f"jump-{jump_anchor}-{recipe_slug(title)}"
+        mandala_background = asset_data_uri("assets/mandala-button.jpg")
+        with col2:
+            components.html(
+                f"""
+                <div style="padding-top:0.15rem;">
+                  <button
+                    id="{button_id}"
+                    style="
+                      width:100%;
+                      min-height:48px;
+                      padding:0.62rem 0.9rem;
+                      border-radius:15px;
+                      border:1px solid rgba(59, 78, 39, 0.92);
+                      background-image:linear-gradient(rgba(78, 100, 55, 0.95), rgba(78, 100, 55, 0.95)), url('{mandala_background}');
+                      background-repeat:no-repeat;
+                      background-position:center center;
+                      background-size:cover;
+                      color:#FFF9EF;
+                      font-weight:600;
+                      font-size:0.9rem;
+                      line-height:1.2;
+                      white-space:normal;
+                      text-wrap:balance;
+                      cursor:pointer;
+                      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.08), 0 4px 10px rgba(78, 100, 55, 0.12);
+                      clip-path:polygon(0 7%, 6% 0, 94% 0, 100% 7%, 100% 100%, 0 100%);
+                    "
+                    onmouseover="this.style.transform='translateY(-1px)'; this.style.backgroundImage='linear-gradient(rgba(63, 84, 44, 0.97), rgba(63, 84, 44, 0.97)), url({json.dumps(mandala_background)})'; this.style.borderColor='rgba(47, 62, 33, 0.96)'; this.style.boxShadow='inset 0 0 0 1px rgba(255,255,255,0.08), 0 6px 12px rgba(78, 100, 55, 0.15)';"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.backgroundImage='linear-gradient(rgba(78, 100, 55, 0.95), rgba(78, 100, 55, 0.95)), url({json.dumps(mandala_background)})'; this.style.borderColor='rgba(59, 78, 39, 0.92)'; this.style.boxShadow='inset 0 0 0 1px rgba(255,255,255,0.08), 0 4px 10px rgba(78, 100, 55, 0.12)';"
+                  >
+                    {jump_label}
+                  </button>
+                </div>
+                <script>
+                  const btn = document.getElementById({json.dumps(button_id)});
+                  if (btn) {{
+                    btn.addEventListener("click", () => {{
+                      const doc = window.parent.document;
+                      const target = doc.getElementById({json.dumps(jump_anchor)});
+                      if (!target) return;
+                      target.scrollIntoView({{ behavior: "smooth", block: "start" }});
+                      try {{
+                        window.parent.history.replaceState(null, "", "#" + {json.dumps(jump_anchor)});
+                      }} catch (e) {{}}
+                    }});
+                  }}
+                </script>
+                """,
+                height=62,
+            )
+
+
 def render_inventory_adjustment_form(profile):
     items = profile.get("inventory", [])
     if not items:
@@ -4333,501 +4947,33 @@ def render_adjustment_form_for_items(profile, items, key_prefix="inventory_adjus
 
 
 def render_inventory_workspace(profile):
-    st.markdown("## Kitchen Inventory")
-    current_section = st.session_state.get("inventory_section", "Overview")
-    inventory_items = food_inventory_items(profile)
-    if hasattr(st, "segmented_control"):
-        selected_section = st.segmented_control("Kitchen inventory section", INVENTORY_SECTIONS, default=current_section, selection_mode="single")
-    else:
-        selected_section = st.selectbox("Kitchen inventory section", INVENTORY_SECTIONS, index=INVENTORY_SECTIONS.index(current_section))
-    if selected_section != current_section:
-        set_inventory_section(selected_section)
-        current_section = selected_section
-    category_choices = [item["name"] for item in profile.get("inventory_categories", []) if not is_home_supply_category_name(item["name"])]
-    selected_categories = st.multiselect("Categories", category_choices, default=st.session_state.get("inventory_category_filters", []))
-    st.session_state.inventory_category_filters = selected_categories
-
-    filtered_items = []
-    allowed_categories = set(st.session_state.get("inventory_category_filters", []))
-    for item in inventory_items:
-        if allowed_categories and category_name(profile, item.get("category_id", "")) not in allowed_categories:
-            continue
-        filtered_items.append(item)
-
-    if inventory_empty(profile, inventory_items):
-        render_inventory_empty_state(profile)
-
-    if current_section == "Overview":
-            overview = inventory_overview(profile)
-            card1, card2, card3, card4, card5 = st.columns(5)
-            card1.metric("Low Stock", len(overview["low_stock"]))
-            card2.metric("Expiring Soon", len(overview["expiring"]))
-            card3.metric("Over Capacity", overview["over_capacity"])
-            card4.metric("Open Items", overview["open_items"])
-            card5.metric("Meal Plan Impact", "Soon")
-            quick_cols = st.columns(6)
-            if quick_cols[0].button("Add Item", use_container_width=True):
-                st.session_state.inventory_section = "Items"
-                st.session_state.inventory_quick_action = "add_item"
-                st.rerun()
-            if quick_cols[1].button("Add Purchase", use_container_width=True):
-                st.session_state.inventory_section = "Items"
-                st.session_state.inventory_quick_action = "add_purchase"
-                st.rerun()
-            if quick_cols[2].button("Adjust Stock", use_container_width=True):
-                st.session_state.inventory_section = "Adjustments"
-                st.rerun()
-            if quick_cols[3].button("Scan Invoice", use_container_width=True):
-                st.session_state.inventory_section = "Items"
-                st.session_state.inventory_quick_action = "add_purchase"
-                st.session_state.purchase_mode_hint = "Invoice Image"
-                st.rerun()
-            if quick_cols[4].button("Voice Update", use_container_width=True):
-                st.session_state.inventory_section = "Items"
-                st.session_state.inventory_quick_action = "add_purchase"
-                st.session_state.purchase_mode_hint = "Voice"
-                st.rerun()
-            if quick_cols[5].button("Search", use_container_width=True):
-                st.session_state.inventory_section = "Items"
-                st.rerun()
-
-            preview_col, low_col = st.columns(2)
-            with preview_col:
-                st.markdown("**Expiring soon preview**")
-                if overview["expiring"]:
-                    st.dataframe(
-                        pd.DataFrame(
-                            [
-                                {
-                                    "Item": item["name"],
-                                    "Expiry": expiry_value,
-                                    "Days left": days,
-                                }
-                                for days, item, _lot, expiry_value in overview["expiring"][:5]
-                            ]
-                        ),
-                        use_container_width=True,
-                        hide_index=True,
-                    )
-                else:
-                    st.write("Nothing urgent right now.")
-            with low_col:
-                st.markdown("**Top items running low**")
-                if overview["low_stock"]:
-                    st.dataframe(
-                        pd.DataFrame(
-                            [
-                                {
-                                    "Item": item["name"],
-                                    "Quantity": format_number(inventory_total_quantity(item)),
-                                    "Refill level": format_number(item.get("refill_level")),
-                                }
-                                for item in overview["low_stock"][:5]
-                            ]
-                        ),
-                        use_container_width=True,
-                        hide_index=True,
-                    )
-                else:
-                    st.write("No low stock items yet.")
-            with st.container(border=True):
-                st.markdown("**Seasonal picks**")
-                st.write("Seasonal suggestions and planner links will connect here in a later phase.")
-
-    elif current_section == "Items":
-            quick_action = st.session_state.pop("inventory_quick_action", "")
-            add_item_expanded = quick_action == "add_item"
-            add_purchase_expanded = quick_action == "add_purchase"
-            with st.expander("Add Item", expanded=add_item_expanded):
-                render_inventory_quick_add(profile, f"inventory_add_item_{profile['id']}", add_purchase=False)
-            with st.expander("Add Purchase", expanded=add_purchase_expanded):
-                render_purchase_intake(profile, f"inventory_add_purchase_{profile['id']}")
-            with st.expander("Bulk Purchase Import", expanded=quick_action == "bulk_import"):
-                st.caption("Paste a bill CSV with columns like Date, Location, Bill No, Item, Quantity, Unit, Rate (Rs), Amount (Rs), or upload a .csv file.")
-                uploaded_purchase_file = st.file_uploader("Upload purchase CSV", type=["csv"], key=f"purchase_import_file_{profile['id']}")
-                purchase_import_text = st.text_area(
-                    "Or paste purchase CSV",
-                    value=st.session_state.get("purchase_import_text", ""),
-                    height=220,
-                    key="purchase_import_text",
-                )
-                import_source_text = purchase_import_text
-                if uploaded_purchase_file is not None:
-                    import_source_text = uploaded_purchase_file.getvalue().decode("utf-8")
-                parsed_rows = parse_purchase_import_rows(import_source_text)
-                if parsed_rows:
-                    preview_rows = [
-                        {
-                            "Date": row["date"],
-                            "Store": row["location"],
-                            "Bill": row["bill_no"],
-                            "Item": row["item"],
-                            "Qty": format_number(row["quantity"]),
-                            "Unit": row["unit"],
-                            "Amount": format_number(row["amount"]),
-                        }
-                        for row in parsed_rows[:12]
-                    ]
-                    st.dataframe(pd.DataFrame(preview_rows), use_container_width=True, hide_index=True)
-                    st.caption(
-                        f"{len(parsed_rows)} rows ready to import | Total Rs {format_number(sum(row.get('amount') or 0.0 for row in parsed_rows))}"
-                    )
-                    if st.button("Send CSV To Review", use_container_width=True, key=f"purchase_import_apply_{profile['id']}"):
-                        set_purchase_review_items(
-                            review_items_from_import_rows(profile, parsed_rows, parse_source="csv"),
-                            source="csv",
-                        )
-                        st.session_state.inventory_section = "Items"
-                        st.rerun()
-                elif import_source_text.strip():
-                    st.warning("Could not parse any purchase rows. Check that the CSV header matches the bill columns.")
-            with st.expander("Add category", expanded=False):
-                with st.form(f"inventory_category_form_{profile['id']}"):
-                    category_title = st.text_input("Category name")
-                    category_shelf_life = st.number_input("Default shelf life (days)", min_value=1, step=1, value=30)
-                    save_category = st.form_submit_button("Save category")
-                if save_category and category_title.strip():
-                    category = normalize_inventory_category({"name": category_title.strip(), "shelf_life_days": category_shelf_life})
-                    profile["inventory_categories"] = [entry for entry in profile.get("inventory_categories", []) if entry["id"] != category["id"]] + [category]
-                    persist_active_profile(profile)
-                    st.rerun()
-            search = st.text_input("Search items", key="inventory_search")
-            if st.session_state.get("inventory_flash"):
-                st.success(st.session_state.pop("inventory_flash"))
-            rows = [
-                row
-                for row in inventory_rows_for_items(profile, filtered_items)
-                if row["id"] in {item["id"] for item in filtered_items}
-                and search.lower() in row["Item name"].lower()
-            ]
-            if rows:
-                st.dataframe(pd.DataFrame([{key: value for key, value in row.items() if key != "id"} for row in rows]), use_container_width=True, hide_index=True)
-            item_options = {"Select an item": ""}
-            for item in filtered_items:
-                item_options[f"{item['name']} | {category_name(profile, item.get('category_id', ''))}"] = item["id"]
-            selected_item_id = st.selectbox("Item detail", list(item_options.values()), format_func=lambda value: next(label for label, item_id in item_options.items() if item_id == value), key=f"inventory_item_select_{profile['id']}")
-            selected_item = inventory_item_lookup(profile).get(selected_item_id)
-            if selected_item:
-                render_item_detail(profile, selected_item, "Inventory")
-
-    elif current_section == "Expiry":
-            urgency_groups = {"Use today": [], "Use in next 3 days": [], "Use in next 7 days": [], "Watch list": []}
-            for item in filtered_items:
-                nearest = None
-                for lot in active_lots(item):
-                    expiry_value = item_expiry_date(profile, item, lot)
-                    days = days_to_expiry(expiry_value)
-                    if days is None:
-                        continue
-                    nearest = (days, expiry_value) if nearest is None or days < nearest[0] else nearest
-                if not nearest:
-                    continue
-                days, expiry_value = nearest
-                row = {"Item": item["name"], "Category": category_name(profile, item.get("category_id", "")), "Expiry": expiry_value, "Days left": days}
-                if days <= 0:
-                    urgency_groups["Use today"].append(row)
-                elif days <= 3:
-                    urgency_groups["Use in next 3 days"].append(row)
-                elif days <= 7:
-                    urgency_groups["Use in next 7 days"].append(row)
-                else:
-                    urgency_groups["Watch list"].append(row)
-            for group_name, rows in urgency_groups.items():
-                with st.expander(group_name, expanded=group_name != "Watch list"):
-                    if rows:
-                        st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
-                    else:
-                        st.write("No items in this group.")
-
-    elif current_section == "Adjustments":
-            with st.container(border=True):
-                st.markdown("**Adjust Stock**")
-                render_adjustment_form_for_items(profile, filtered_items, key_prefix=f"inventory_adjust_food_{profile['id']}", allow_expired=True)
-            st.markdown("**Adjustment history**")
-            transactions = [
-                item
-                for item in profile.get("inventory_transactions", [])
-                if inventory_item_lookup(profile).get(item.get("item_id", "")) and not is_home_supply_item(profile, inventory_item_lookup(profile).get(item.get("item_id", "")))
-            ]
-            if transactions:
-                st.dataframe(
-                    pd.DataFrame(
-                        [
-                            {
-                                "Date/time": item.get("created_at", "").replace("T", " "),
-                                "Item": item.get("item_name", ""),
-                                "Change": quantity_delta_text(item.get("change_value", 0.0), item.get("unit", "")),
-                                "Reason": item.get("reason", ""),
-                                "Notes": item.get("notes", ""),
-                                "Source": item.get("source", "manual"),
-                            }
-                            for item in transactions
-                        ]
-                    ),
-                    use_container_width=True,
-                    hide_index=True,
-                )
-            else:
-                st.write("No adjustments yet.")
-
-    elif current_section == "Storage":
-            st.markdown("**Storage locations**")
-            location_rows = []
-            for location in profile.get("storage_locations", []):
-                usage = 0.0
-                unit = location.get("capacity_unit", "")
-                for item in filtered_items:
-                    for lot in active_lots(item):
-                        if lot.get("location_id") == location["id"] and (not unit or lot.get("unit", "") == unit):
-                            usage += lot.get("quantity", 0.0)
-                capacity_value = location.get("capacity_value")
-                location_rows.append(
-                    {
-                        "Location": location["name"],
-                        "Capacity": f"{format_number(capacity_value)} {unit}".strip() if capacity_value else "",
-                        "Usage": f"{format_number(usage)} {unit}".strip() if usage else "0",
-                        "Status": "Over Capacity" if capacity_value and usage > capacity_value else "OK",
-                    }
-                )
-            st.dataframe(pd.DataFrame(location_rows), use_container_width=True, hide_index=True)
-            location_options = {"Add location": ""}
-            for location in profile.get("storage_locations", []):
-                location_options[f"Edit {location['name']}"] = location["id"]
-            selected_location_id = st.selectbox("Location detail", list(location_options.values()), format_func=lambda value: next(label for label, location_id in location_options.items() if location_id == value), key=f"storage_location_select_{profile['id']}")
-            selected_location = next((entry for entry in profile.get("storage_locations", []) if entry["id"] == selected_location_id), None)
-            with st.form(f"storage_form_{profile['id']}"):
-                location_name = st.text_input("Location name", value=selected_location.get("name", "") if selected_location else "")
-                capacity_value = st.number_input("Optional capacity", min_value=0.0, step=0.25, value=float(selected_location.get("capacity_value", 0.0) if selected_location and selected_location.get("capacity_value") is not None else 0.0))
-                capacity_unit = st.text_input("Capacity unit", value=selected_location.get("capacity_unit", "") if selected_location else "")
-                location_notes = st.text_input("Notes", value=selected_location.get("notes", "") if selected_location else "")
-                save_location = st.form_submit_button("Save location")
-            if save_location and location_name.strip():
-                location = normalize_storage_location(
-                    {
-                        "id": selected_location["id"] if selected_location else uuid4().hex,
-                        "name": location_name.strip(),
-                        "capacity_value": capacity_value or None,
-                        "capacity_unit": capacity_unit.strip(),
-                        "notes": location_notes.strip(),
-                    }
-                )
-                profile["storage_locations"] = [entry for entry in profile.get("storage_locations", []) if entry["id"] != location["id"]] + [location]
-                persist_active_profile(profile)
-                st.rerun()
-
-    elif current_section == "Analytics":
-            rows = inventory_rows_for_items(profile, filtered_items)
-            if rows:
-                by_category = {}
-                by_status = {}
-                for row in rows:
-                    by_category[row["Category"]] = by_category.get(row["Category"], 0) + 1
-                    by_status[row["Status"]] = by_status.get(row["Status"], 0) + 1
-                col1, col2 = st.columns(2)
-                col1.dataframe(pd.DataFrame([{"Category": key, "Items": value} for key, value in by_category.items()]), use_container_width=True, hide_index=True)
-                col2.dataframe(pd.DataFrame([{"Status": key, "Items": value} for key, value in by_status.items()]), use_container_width=True, hide_index=True)
-            else:
-                st.write("Add inventory items to unlock analytics.")
+    st.markdown("## Inventory")
+    st.markdown("<div id='kitchen-inventory' class='inventory-anchor'></div>", unsafe_allow_html=True)
+    simple_table_header("Kitchen Inventory", "Go to Household Items", "household-items")
+    simple_render_editable_table(
+        profile,
+        "kitchen_inventory_rows",
+        SIMPLE_INVENTORY_COLUMNS,
+        simple_normalize_inventory_row,
+        "inventory",
+        "kitchen_inventory",
+    )
+    st.divider()
+    st.markdown("<div id='household-items' class='inventory-anchor'></div>", unsafe_allow_html=True)
+    simple_table_header("Household Items", "Go to Kitchen Inventory", "kitchen-inventory")
+    simple_render_editable_table(
+        profile,
+        "household_inventory_rows",
+        SIMPLE_INVENTORY_COLUMNS,
+        simple_normalize_inventory_row,
+        "inventory",
+        "household_inventory",
+    )
+    st.markdown("<div style='height: 45vh;'></div>", unsafe_allow_html=True)
 
 
 def render_home_supplies_workspace(profile):
-    st.markdown("## House Inventory")
-    current_section = st.session_state.get("home_supply_section", "Overview")
-    items = home_supply_items(profile)
-    left_col, main_col = st.columns([1, 3], gap="large")
-    with left_col:
-        st.caption("Home supplies sections")
-        desktop_section = st.radio("Section", INVENTORY_SECTIONS, index=INVENTORY_SECTIONS.index(current_section), label_visibility="collapsed", key=f"home_supply_radio_{profile['id']}")
-        if desktop_section != current_section:
-            set_home_supply_section(desktop_section)
-            current_section = desktop_section
-        category_choices = [item["name"] for item in profile.get("inventory_categories", []) if is_home_supply_category_name(item["name"])]
-        selected_categories = st.multiselect("Categories", category_choices, default=st.session_state.get("home_supply_category_filters", []), key=f"home_supply_categories_{profile['id']}")
-        st.session_state.home_supply_category_filters = selected_categories
-    with main_col:
-        if hasattr(st, "segmented_control"):
-            mobile_section = st.segmented_control("Home supplies section", INVENTORY_SECTIONS, default=current_section, selection_mode="single", key=f"home_supply_segment_{profile['id']}")
-        else:
-            mobile_section = st.selectbox("Home supplies section", INVENTORY_SECTIONS, index=INVENTORY_SECTIONS.index(current_section), key=f"home_supply_select_{profile['id']}")
-        if mobile_section != current_section:
-            set_home_supply_section(mobile_section)
-            current_section = mobile_section
-
-        allowed_categories = set(st.session_state.get("home_supply_category_filters", []))
-        filtered_items = []
-        for item in items:
-            if allowed_categories and category_name(profile, item.get("category_id", "")) not in allowed_categories:
-                continue
-            filtered_items.append(item)
-
-        if inventory_empty(profile, items):
-            render_inventory_empty_state(
-                profile,
-                heading="Track cleaners, toiletries, laundry, and household supplies here.",
-                add_item_label="Add Supply",
-                add_purchase_label="Add Purchase",
-                setup_label="Set Up Categories",
-                key_prefix="home_supplies_empty",
-                section_name="Items",
-                quick_item_action="home_add_item",
-                quick_purchase_action="home_add_purchase",
-            )
-
-        if current_section == "Overview":
-            overview = inventory_overview(profile, filtered_items)
-            recent_purchases = sum(
-                1
-                for item in filtered_items
-                for lot in item.get("lots", [])
-                if lot.get("purchase_date", "") >= (date.today() - timedelta(days=30)).isoformat()
-            )
-            monthly_spend = sum(
-                (try_float(lot.get("price")) or 0.0)
-                for item in filtered_items
-                for lot in item.get("lots", [])
-                if lot.get("purchase_date", "") >= (date.today() - timedelta(days=30)).isoformat()
-            )
-            card1, card2, card3, card4, card5 = st.columns(5)
-            card1.metric("Low Stock", len(overview["low_stock"]))
-            card2.metric("Refill Due", len(overview["low_stock"]))
-            card3.metric("Over Capacity", overview["over_capacity"])
-            card4.metric("Recently Purchased", recent_purchases)
-            card5.metric("Monthly Spend", f"Rs {format_number(monthly_spend)}" if monthly_spend else "")
-            quick_cols = st.columns(4)
-            if quick_cols[0].button("Add Supply", use_container_width=True, key=f"home_supply_add_{profile['id']}"):
-                st.session_state.home_supply_section = "Items"
-                st.session_state.inventory_quick_action = "home_add_item"
-                st.rerun()
-            if quick_cols[1].button("Add Purchase", use_container_width=True, key=f"home_supply_purchase_{profile['id']}"):
-                st.session_state.home_supply_section = "Items"
-                st.session_state.inventory_quick_action = "home_add_purchase"
-                st.rerun()
-            if quick_cols[2].button("Adjust Supply", use_container_width=True, key=f"home_supply_adjust_{profile['id']}"):
-                st.session_state.home_supply_section = "Adjustments"
-                st.rerun()
-            if quick_cols[3].button("Search", use_container_width=True, key=f"home_supply_search_btn_{profile['id']}"):
-                st.session_state.home_supply_section = "Items"
-                st.rerun()
-
-        elif current_section == "Items":
-            quick_action = st.session_state.pop("inventory_quick_action", "")
-            add_item_expanded = quick_action == "home_add_item"
-            add_purchase_expanded = quick_action == "home_add_purchase"
-            allowed_category_ids = home_supply_category_ids(profile)
-            with st.expander("Add Supply", expanded=add_item_expanded):
-                render_inventory_quick_add(profile, f"home_supply_add_item_{profile['id']}", add_purchase=False, category_ids=allowed_category_ids)
-            with st.expander("Add Purchase", expanded=add_purchase_expanded):
-                render_purchase_intake(profile, f"home_supply_add_purchase_{profile['id']}")
-            search = st.text_input("Search supplies", key=f"home_supply_search_{profile['id']}")
-            if st.session_state.get("inventory_flash"):
-                st.success(st.session_state.pop("inventory_flash"))
-            rows = [
-                row
-                for row in inventory_rows_for_items(profile, filtered_items)
-                if search.lower() in row["Item name"].lower()
-            ]
-            if rows:
-                st.dataframe(pd.DataFrame([{key: value for key, value in row.items() if key != "id"} for row in rows]), use_container_width=True, hide_index=True)
-            item_options = {"Select a supply": ""}
-            for item in filtered_items:
-                item_options[f"{item['name']} | {category_name(profile, item.get('category_id', ''))}"] = item["id"]
-            selected_item_id = st.selectbox("Supply detail", list(item_options.values()), format_func=lambda value: next(label for label, item_id in item_options.items() if item_id == value), key=f"home_supply_item_select_{profile['id']}")
-            selected_item = inventory_item_lookup(profile).get(selected_item_id)
-            if selected_item:
-                render_item_detail(profile, selected_item, "Home Supplies")
-
-        elif current_section == "Expiry":
-            urgency_groups = {"Use today": [], "Use in next 7 days": [], "Watch list": []}
-            for item in filtered_items:
-                nearest = None
-                for lot in active_lots(item):
-                    expiry_value = item_expiry_date(profile, item, lot)
-                    days = days_to_expiry(expiry_value)
-                    if days is None:
-                        continue
-                    nearest = (days, expiry_value) if nearest is None or days < nearest[0] else nearest
-                if not nearest:
-                    continue
-                days, expiry_value = nearest
-                row = {"Item": item["name"], "Category": category_name(profile, item.get("category_id", "")), "Expiry": expiry_value, "Days left": days}
-                if days <= 0:
-                    urgency_groups["Use today"].append(row)
-                elif days <= 7:
-                    urgency_groups["Use in next 7 days"].append(row)
-                else:
-                    urgency_groups["Watch list"].append(row)
-            for group_name, rows in urgency_groups.items():
-                with st.expander(group_name, expanded=group_name != "Watch list"):
-                    if rows:
-                        st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
-                    else:
-                        st.write("No items in this group.")
-
-        elif current_section == "Adjustments":
-            with st.container(border=True):
-                st.markdown("**Adjust Home Supplies**")
-                render_adjustment_form_for_items(profile, filtered_items, key_prefix=f"home_supply_adjust_{profile['id']}", allow_expired=False)
-            st.markdown("**Adjustment history**")
-            transactions = [
-                item
-                for item in profile.get("inventory_transactions", [])
-                if inventory_item_lookup(profile).get(item.get("item_id", "")) and is_home_supply_item(profile, inventory_item_lookup(profile).get(item.get("item_id", "")))
-            ]
-            if transactions:
-                st.dataframe(
-                    pd.DataFrame(
-                        [
-                            {
-                                "Date/time": item.get("created_at", "").replace("T", " "),
-                                "Item": item.get("item_name", ""),
-                                "Change": quantity_delta_text(item.get("change_value", 0.0), item.get("unit", "")),
-                                "Reason": item.get("reason", ""),
-                                "Notes": item.get("notes", ""),
-                                "Source": item.get("source", "manual"),
-                            }
-                            for item in transactions
-                        ]
-                    ),
-                    use_container_width=True,
-                    hide_index=True,
-                )
-            else:
-                st.write("No adjustments yet.")
-
-        elif current_section == "Storage":
-            st.markdown("**Storage locations**")
-            location_rows = []
-            for location in profile.get("storage_locations", []):
-                usage = 0.0
-                unit = location.get("capacity_unit", "")
-                for item in filtered_items:
-                    for lot in active_lots(item):
-                        if lot.get("location_id") == location["id"] and (not unit or lot.get("unit", "") == unit):
-                            usage += lot.get("quantity", 0.0)
-                capacity_value = location.get("capacity_value")
-                location_rows.append(
-                    {
-                        "Location": location["name"],
-                        "Capacity": f"{format_number(capacity_value)} {unit}".strip() if capacity_value else "",
-                        "Usage": f"{format_number(usage)} {unit}".strip() if usage else "0",
-                        "Status": "Over Capacity" if capacity_value and usage > capacity_value else "OK",
-                    }
-                )
-            st.dataframe(pd.DataFrame(location_rows), use_container_width=True, hide_index=True)
-
-        elif current_section == "Analytics":
-            rows = inventory_rows_for_items(profile, filtered_items)
-            if rows:
-                by_category = {}
-                by_status = {}
-                for row in rows:
-                    by_category[row["Category"]] = by_category.get(row["Category"], 0) + 1
-                    by_status[row["Status"]] = by_status.get(row["Status"], 0) + 1
-                col1, col2 = st.columns(2)
-                col1.dataframe(pd.DataFrame([{"Category": key, "Items": value} for key, value in by_category.items()]), use_container_width=True, hide_index=True)
-                col2.dataframe(pd.DataFrame([{"Status": key, "Items": value} for key, value in by_status.items()]), use_container_width=True, hide_index=True)
-            else:
-                st.write("Add home supplies to unlock analytics.")
+    render_inventory_workspace(profile)
 
 
 def build_recipe_dishes(profile):
@@ -4860,210 +5006,149 @@ def build_recipe_dishes(profile):
     return recipe_dishes
 
 
-def render_shopping_workspace(profile):
-    st.markdown("## Shopping List")
-    suggestions = build_shopping_suggestions(profile)
-    show_manual_item = st.session_state.pop("shopping_manual_quick_add", False)
-    with st.expander("Manual shopping item", expanded=show_manual_item):
-        st.markdown("**Manual shopping item**")
-        with st.form(f"shopping_manual_item_{profile['id']}"):
-            item_name = st.text_input("Item name")
-            quantity = st.number_input("Quantity", min_value=0.0, step=0.25, value=1.0)
-            unit = st.text_input("Unit", value="unit")
-            vendor_names = [item["name"] for item in profile.get("vendors", [])]
-            vendor_name = st.selectbox("Vendor", vendor_names, index=vendor_names.index("Other") if "Other" in vendor_names else 0)
-            brand = st.text_input("Brand")
-            notes = st.text_area("Notes", height=80)
-            save_manual = st.form_submit_button("Add Manual Item")
-        if save_manual:
-            if not item_name.strip():
-                st.error("Item name is required.")
-            else:
-                profile["shopping_manual_items"] = [
-                    *profile.get("shopping_manual_items", []),
-                    normalize_manual_shopping_item(
-                        {
-                            "item_name": item_name.strip(),
-                            "quantity": quantity or 1.0,
-                            "unit": unit.strip() or "unit",
-                            "vendor_name": vendor_name,
-                            "brand": brand.strip(),
-                            "notes": notes.strip(),
-                        }
-                    ),
-                ]
+def render_purchase_log_workspace(profile):
+    st.markdown("## Purchase Log")
+    st.markdown("**Log what I just bought**")
+    st.text_area(
+        "Log what I just bought",
+        value=st.session_state.get("purchase_log_input_text", ""),
+        height=120,
+        label_visibility="collapsed",
+        placeholder="Blinkit se doodh 2 litre 120, chawal 5kg 450, harpic 1 litre 180",
+        key="purchase_log_input_text",
+    )
+    if st.button("Parse and review", type="primary", use_container_width=True):
+        parsed_rows = []
+        for line in [chunk for chunk in re.split(r"\n+", st.session_state.get("purchase_log_input_text", "")) if chunk.strip()]:
+            parsed_rows.extend(simple_parse_purchase_line(profile, line))
+        st.session_state.purchase_log_review_rows = parsed_rows or [simple_blank_row(SIMPLE_PURCHASE_REVIEW_COLUMNS.keys())]
+        st.rerun()
+
+    review_rows = st.session_state.get("purchase_log_review_rows", [])
+    if review_rows:
+        st.markdown("**Review before saving**")
+        review_df = simple_editor_frame([{"id": row.get("id", uuid4().hex), **row} for row in review_rows], SIMPLE_PURCHASE_REVIEW_COLUMNS)
+        edited_review = st.data_editor(
+            review_df,
+            hide_index=True,
+            num_rows="dynamic",
+            use_container_width=True,
+            column_config=simple_column_config(SIMPLE_PURCHASE_REVIEW_COLUMNS),
+            key="purchase_log_review_editor",
+        )
+        updated_review = []
+        for record in edited_review.to_dict("records"):
+            raw = {"id": record.get("_id") or uuid4().hex}
+            for key, label in SIMPLE_PURCHASE_REVIEW_COLUMNS.items():
+                raw[key] = record.get(label)
+            normalized = simple_apply_memory(profile, simple_normalize_purchase_row(raw))
+            if simple_is_meaningful_row(normalized, "purchase"):
+                updated_review.append(normalized)
+        st.session_state.purchase_log_review_rows = updated_review
+        if st.button("Save to purchase history", use_container_width=True):
+            timestamp = datetime.now().isoformat(timespec="minutes").replace("T", " ")
+            saved_rows = [simple_normalize_purchase_row({**row, "date_time": timestamp, "in_stock": True}) for row in updated_review]
+            if saved_rows:
+                profile["purchase_log_rows"] = saved_rows + profile.get("purchase_log_rows", [])
+                simple_refresh_item_memory(profile)
                 persist_active_profile(profile)
-                st.session_state.pending_workspace = "Shopping"
+                st.session_state.purchase_log_review_rows = []
+                st.session_state.purchase_log_flash = f"Saved {len(saved_rows)} purchase entr{'y' if len(saved_rows) == 1 else 'ies'}."
                 st.rerun()
 
-    if not suggestions:
-        with st.container(border=True):
-            st.info("You are stocked for now. Add a manual shopping item or review inventory.")
-            col1, col2, col3 = st.columns(3)
-            if col1.button("Add Manual Item", use_container_width=True):
-                st.session_state.shopping_manual_quick_add = True
-                st.rerun()
-            if col2.button("Review Inventory", use_container_width=True):
-                st.session_state.pending_workspace = "Inventory"
-                st.rerun()
-            if col3.button("Add Purchase", use_container_width=True):
-                st.session_state.pending_workspace = "Inventory"
-                st.session_state.inventory_section = "Items"
-                st.session_state.inventory_quick_action = "add_purchase"
-                st.rerun()
-    else:
-        grouped = suggestion_groups_by_vendor(profile)
-        summary_cols = st.columns(4)
-        summary_cols[0].metric("Suggestions", len(suggestions))
-        summary_cols[1].metric("Vendors", len(grouped))
-        summary_cols[2].metric("High confidence", sum(1 for item in suggestions if item["confidence"] == "High"))
-        total_estimated = sum(item.get("estimated_price") or 0.0 for item in suggestions)
-        summary_cols[3].metric("Estimated total", f"Rs {format_number(total_estimated)}" if total_estimated else "")
-        for vendor_name, items in grouped.items():
-            with st.expander(f"{vendor_name} ({len(items)})", expanded=True):
-                for suggestion in items:
-                    state = shopping_overrides(profile).get(suggestion["id"], {})
-                    st.markdown(f"**{suggestion['item_name']}**")
-                    info_cols = st.columns([2, 2, 2, 2])
-                    info_cols[0].write(f"Qty: {format_number(suggestion['quantity'])} {suggestion['unit']}".strip())
-                    info_cols[1].write(f"Brand: {suggestion.get('brand', '') or 'Any'}")
-                    info_cols[2].write(f"Last price: {'Rs ' + format_number(suggestion['last_price']) if suggestion.get('last_price') is not None else 'NA'}")
-                    info_cols[3].write(f"Confidence: {suggestion['confidence']}")
-                    st.caption(f"Reason: {suggestion['reason_summary']}")
-                    if suggestion.get("capacity_warning"):
-                        st.warning(suggestion["capacity_warning"])
-                    with st.expander("Why?"):
-                        for reason in suggestion["reason_details"]:
-                            st.write(f"- {reason['label']}: {reason['detail']}")
-                        why = suggestion.get("why", {})
-                        if why.get("current_quantity") is not None:
-                            st.caption(
-                                f"Current {format_number(why.get('current_quantity'))} {suggestion.get('base_unit', '')} | Refill {format_number(why.get('refill_level'))} | Capacity {format_number(why.get('storage_capacity'))}"
-                            )
-                        if why.get("predicted_refill_days") is not None:
-                            st.caption(f"Likely refill in about {why['predicted_refill_days']} days.")
-                        if why.get("prediction_why"):
-                            st.write(why["prediction_why"])
-                        if why.get("waste_note"):
-                            st.warning(why["waste_note"])
-                        if why.get("seasonal_note"):
-                            st.info(why["seasonal_note"])
-                    with st.form(f"shopping_edit_{suggestion['id']}"):
-                        edit_cols = st.columns(3)
-                        qty_value = edit_cols[0].number_input("Suggested quantity", min_value=0.0, step=0.25, value=float(suggestion["quantity"]))
-                        unit_value = edit_cols[1].text_input("Unit / packet format", value=suggestion["unit"])
-                        vendor_options = [item["name"] for item in profile.get("vendors", [])]
-                        vendor_index = vendor_options.index(suggestion["vendor_name"]) if suggestion["vendor_name"] in vendor_options else 0
-                        vendor_value = edit_cols[2].selectbox("Vendor", vendor_options, index=vendor_index)
-                        save_edit = st.form_submit_button("Save suggestion")
-                    if save_edit:
-                        update_shopping_override(profile, suggestion["id"], quantity_override=qty_value, unit_override=unit_value.strip(), vendor_name=vendor_value)
-                        persist_active_profile(profile)
-                        st.rerun()
-                    action_cols = st.columns(4)
-                    if action_cols[0].button("Skip this time", key=f"skip_{suggestion['id']}", use_container_width=True):
-                        update_shopping_override(profile, suggestion["id"], skipped_on=today_iso())
-                        persist_active_profile(profile)
-                        st.rerun()
-                    if action_cols[1].button("Snooze 3 days", key=f"snooze_{suggestion['id']}", use_container_width=True):
-                        update_shopping_override(profile, suggestion["id"], snooze_until=(date.today() + timedelta(days=3)).isoformat())
-                        persist_active_profile(profile)
-                        st.rerun()
-                    if action_cols[2].button("Remove suggestion", key=f"remove_{suggestion['id']}", use_container_width=True):
-                        if suggestion["source"] == "manual":
-                            for manual_item in profile.get("shopping_manual_items", []):
-                                if manual_item["id"] == suggestion["manual_id"]:
-                                    manual_item["status"] = "removed"
-                        else:
-                            update_shopping_override(profile, suggestion["id"], removed=True)
-                        persist_active_profile(profile)
-                        st.rerun()
-                    if action_cols[3].button("Reset", key=f"reset_{suggestion['id']}", use_container_width=True):
-                        clear_shopping_override(profile, suggestion["id"], "quantity_override", "unit_override", "vendor_name", "skipped_on", "snooze_until", "removed")
-                        persist_active_profile(profile)
-                        st.rerun()
-                    with st.form(f"shopping_buy_{suggestion['id']}"):
-                        st.markdown("**Mark purchased**")
-                        buy_cols = st.columns(3)
-                        actual_quantity = buy_cols[0].number_input("Actual quantity bought", min_value=0.0, step=0.25, value=float(suggestion["quantity"]))
-                        packet_format = buy_cols[1].text_input("Packet format / unit", value=suggestion["unit"])
-                        lot_status = buy_cols[2].selectbox("Lot status", ["sealed", "opened"], index=0)
-                        buy_cols2 = st.columns(4)
-                        vendor_choice = buy_cols2[0].selectbox("Vendor", [item["name"] for item in profile.get("vendors", [])], index=vendor_options.index(suggestion["vendor_name"]) if suggestion["vendor_name"] in vendor_options else 0, key=f"buy_vendor_{suggestion['id']}")
-                        brand_choice = buy_cols2[1].text_input("Brand", value=suggestion.get("brand", ""), key=f"buy_brand_{suggestion['id']}")
-                        price_value = buy_cols2[2].number_input("Price", min_value=0.0, step=1.0, value=float(suggestion.get("estimated_price") or suggestion.get("last_price") or 0.0), key=f"buy_price_{suggestion['id']}")
-                        purchase_date = buy_cols2[3].text_input("Purchase date", value=today_iso(), key=f"buy_date_{suggestion['id']}")
-                        notes_value = st.text_area("Notes", value=state.get("notes", ""), height=70, key=f"buy_notes_{suggestion['id']}")
-                        buy_submit = st.form_submit_button("Buy / mark purchased")
-                    if buy_submit:
-                        mark_suggestion_purchased(
-                            profile,
-                            suggestion,
-                            actual_quantity,
-                            packet_format.strip() or suggestion["unit"],
-                            vendor_choice,
-                            brand_choice.strip(),
-                            price_value or None,
-                            purchase_date.strip() or today_iso(),
-                            lot_status,
-                            notes_value.strip(),
-                        )
-                        persist_active_profile(profile)
-                        st.session_state.pending_workspace = "Inventory"
-                        st.session_state.inventory_section = "Items"
-                        st.session_state.inventory_flash = f"Purchased {suggestion['item_name']}."
-                        st.rerun()
-                    st.divider()
+    if st.session_state.get("purchase_log_flash"):
+        st.success(st.session_state.pop("purchase_log_flash"))
 
     st.divider()
-    vendor_col, detail_col = st.columns([1, 2], gap="large")
-    with vendor_col:
-        st.markdown("**Vendor records**")
-        vendor_rows = [
-            {
-                "Name": vendor["name"],
-                "Type": vendor.get("vendor_type", ""),
-                "Categories": ", ".join(vendor.get("preferred_categories", [])),
-            }
-            for vendor in profile.get("vendors", [])
-        ]
-        st.dataframe(pd.DataFrame(vendor_rows), use_container_width=True, hide_index=True)
-        vendor_options = {"Add vendor": ""}
-        for vendor in profile.get("vendors", []):
-            vendor_options[vendor["name"]] = vendor["id"]
-        selected_vendor_id = st.selectbox(
-            "Vendor detail",
-            list(vendor_options.values()),
-            format_func=lambda value: next(label for label, vendor_id in vendor_options.items() if vendor_id == value),
-            key=f"vendor_select_{profile['id']}",
-        )
-        selected_vendor = next((item for item in profile.get("vendors", []) if item["id"] == selected_vendor_id), None)
-        with st.form(f"vendor_form_{profile['id']}"):
-            vendor_name = st.text_input("Vendor name", value=selected_vendor.get("name", "") if selected_vendor else "")
-            vendor_type = st.selectbox("Vendor type", ["Grocery app", "Local vegetable vendor", "Kirana", "Pharmacy", "Marketplace", "Dairy", "Other"], index=["Grocery app", "Local vegetable vendor", "Kirana", "Pharmacy", "Marketplace", "Dairy", "Other"].index(selected_vendor.get("vendor_type", "Other") if selected_vendor else "Other"))
-            preferred_categories = st.multiselect("Preferred categories", [item["name"] for item in profile.get("inventory_categories", [])], default=selected_vendor.get("preferred_categories", []) if selected_vendor else [])
-            notes = st.text_area("Notes", value=selected_vendor.get("notes", "") if selected_vendor else "", height=80)
-            purchase_pattern = st.text_input("Average delivery / purchase pattern", value=selected_vendor.get("purchase_pattern", "") if selected_vendor else "")
-            trend_summary = st.text_input("Price trend summary", value=selected_vendor.get("price_trend_summary", "") if selected_vendor else "")
-            save_vendor = st.form_submit_button("Save vendor")
-        if save_vendor and vendor_name.strip():
-            vendor = normalize_vendor_record(
-                {
-                    "id": selected_vendor["id"] if selected_vendor else uuid4().hex,
-                    "name": vendor_name.strip(),
-                    "vendor_type": vendor_type,
-                    "preferred_categories": preferred_categories,
-                    "notes": notes.strip(),
-                    "purchase_pattern": purchase_pattern.strip(),
-                    "price_trend_summary": trend_summary.strip(),
-                }
-            )
-            profile["vendors"] = [item for item in profile.get("vendors", []) if item["id"] != vendor["id"]] + [vendor]
-            persist_active_profile(profile)
-            st.rerun()
-    with detail_col:
-        active_vendor_name = selected_vendor.get("name") if selected_vendor else "BigBasket"
-        render_vendor_detail(profile, active_vendor_name)
+    simple_table_header("Purchase History")
+    simple_render_editable_table(
+        profile,
+        "purchase_log_rows",
+        SIMPLE_PURCHASE_COLUMNS,
+        simple_normalize_purchase_row,
+        "purchase",
+        "purchase_history",
+        default_sort_key="date_time",
+    )
+
+
+def render_shopping_workspace(profile):
+    st.markdown("## Shopping List")
+    before_state = json.dumps(
+        {
+            "purchase_log_rows": profile.get("purchase_log_rows", []),
+            "kitchen_inventory_rows": profile.get("kitchen_inventory_rows", []),
+            "household_inventory_rows": profile.get("household_inventory_rows", []),
+            "shopping_manual_rows": profile.get("shopping_manual_rows", []),
+            "simple_shopping_overrides": profile.get("simple_shopping_overrides", {}),
+            "grocery_data": profile.get("grocery_data", {}),
+        },
+        sort_keys=True,
+    )
+    rows = simple_build_shopping_rows(profile)
+    search, vendor_filter, category_filter, sort_key, descending = simple_table_controls(rows, "shopping_list", ["vendor", "item", "quantity", "category", "note", "source"], "vendor")
+    filtered_rows = simple_filter_and_sort_rows(rows, search, vendor_filter, category_filter, sort_key, descending, ["vendor", "item", "quantity", "category", "note", "source"])
+    if not filtered_rows:
+        filtered_rows = [simple_blank_row(SIMPLE_SHOPPING_COLUMNS.keys())]
+    editor_df = simple_editor_frame(filtered_rows, SIMPLE_SHOPPING_COLUMNS)
+    edited_df = st.data_editor(
+        editor_df,
+        hide_index=True,
+        num_rows="dynamic",
+        use_container_width=True,
+        column_config=simple_column_config(SIMPLE_SHOPPING_COLUMNS),
+        disabled=["Source"],
+        key="shopping_list_editor",
+    )
+    manual_filtered_ids = {row["id"].split("::", 1)[1] for row in filtered_rows if str(row.get("id", "")).startswith("manual::")}
+    kept_manual_ids = set()
+    purchased_count = 0
+    for record in edited_df.to_dict("records"):
+        row = {"id": record.get("_id") or f"manual::{uuid4().hex}"}
+        for key, label in SIMPLE_SHOPPING_COLUMNS.items():
+            row[key] = record.get(label)
+        if not simple_is_meaningful_row(row, "shopping"):
+            continue
+        row["vendor"] = simple_canonical_vendor(profile, row.get("vendor", ""))
+        row["category"] = row.get("category", "") or simple_remembered_category(profile, row.get("item", ""))
+        if row["id"].startswith("manual::"):
+            kept_manual_ids.add(row["id"].split("::", 1)[1])
+            if not any(item["id"] == row["id"].split("::", 1)[1] for item in profile.get("shopping_manual_rows", [])):
+                profile.setdefault("shopping_manual_rows", []).append(
+                    simple_normalize_shopping_manual_row(
+                        {
+                            "id": row["id"].split("::", 1)[1],
+                            "vendor": row.get("vendor", ""),
+                            "item": row.get("item", ""),
+                            "quantity": row.get("quantity", ""),
+                            "category": row.get("category", ""),
+                            "note": row.get("note", ""),
+                        }
+                    )
+                )
+        simple_apply_shopping_row_change(profile, row)
+        if row.get("purchased", False):
+            purchased_count += 1
+    profile["shopping_manual_rows"] = [
+        row for row in profile.get("shopping_manual_rows", []) if row["id"] not in (manual_filtered_ids - kept_manual_ids)
+    ]
+    simple_refresh_item_memory(profile)
+    after_state = json.dumps(
+        {
+            "purchase_log_rows": profile.get("purchase_log_rows", []),
+            "kitchen_inventory_rows": profile.get("kitchen_inventory_rows", []),
+            "household_inventory_rows": profile.get("household_inventory_rows", []),
+            "shopping_manual_rows": profile.get("shopping_manual_rows", []),
+            "simple_shopping_overrides": profile.get("simple_shopping_overrides", {}),
+            "grocery_data": profile.get("grocery_data", {}),
+        },
+        sort_keys=True,
+    )
+    if before_state != after_state:
+        persist_active_profile(profile)
+    if purchased_count:
+        st.success(f"Marked {purchased_count} item(s) purchased.")
+        st.rerun()
 
 
 def render_insights_workspace(profile):
@@ -5074,9 +5159,7 @@ def render_insights_workspace(profile):
             st.info("Insights will improve as you add purchases, deductions, and adjustments.")
             col1, col2, col3 = st.columns(3)
             if col1.button("Add Purchase", use_container_width=True, key=f"insights_add_purchase_{profile['id']}"):
-                st.session_state.pending_workspace = "Inventory"
-                st.session_state.inventory_section = "Items"
-                st.session_state.inventory_quick_action = "add_purchase"
+                st.session_state.pending_workspace = "Purchase Log"
                 st.rerun()
             if col2.button("Review Inventory", use_container_width=True, key=f"insights_inventory_{profile['id']}"):
                 st.session_state.pending_workspace = "Inventory"
@@ -5558,12 +5641,20 @@ if st.session_state.get("active_profile_loaded") != active_profile["id"]:
         st.session_state[key] = ""
 
 pending_workspace = st.session_state.pop("pending_workspace", "")
+if pending_workspace == "Home Supplies":
+    pending_workspace = "Inventory"
+if pending_workspace == "Setup":
+    pending_workspace = "Planner"
 if pending_workspace in DESKTOP_WORKSPACE_TABS:
     set_active_workspace(pending_workspace)
+if st.session_state.get("active_workspace") == "Home Supplies":
+    set_active_workspace("Inventory")
+if st.session_state.get("active_workspace") == "Setup":
+    set_active_workspace("Planner")
 if st.session_state.get("active_workspace") not in DESKTOP_WORKSPACE_TABS:
     set_active_workspace("Planner")
 with st.sidebar:
-    nav_workspaces = [*PLANNER_NAV_WORKSPACES, "Setup"]
+    nav_workspaces = list(PLANNER_NAV_WORKSPACES)
     for workspace in nav_workspaces:
         if render_sidebar_nav_button(workspace):
             set_active_workspace(workspace)
@@ -5592,16 +5683,16 @@ if current_workspace == "Planner":
     render_planner_workspace(active_profile)
 elif current_workspace == "Recipes":
     render_recipes_workspace(active_profile)
+elif current_workspace == "Purchase Log":
+    render_purchase_log_workspace(active_profile)
 elif current_workspace == "Inventory":
     render_inventory_workspace(active_profile)
-elif current_workspace == "Home Supplies":
-    render_home_supplies_workspace(active_profile)
 elif current_workspace == "Shopping":
     render_shopping_workspace(active_profile)
 elif current_workspace == "Insights":
     render_insights_workspace(active_profile)
 else:
-    render_setup_workspace(active_profile)
+    render_planner_workspace(active_profile)
 
 components.html(
     f"""
@@ -5655,14 +5746,22 @@ if pending_anchor:
         f"""
         <script>
         const anchorId = {json.dumps(pending_anchor)};
+        let attempts = 0;
         const scrollToSection = () => {{
           const doc = window.parent.document;
           const target = doc.getElementById(anchorId);
-          if (!target) return;
+          if (!target) {{
+            attempts += 1;
+            if (attempts < 20) {{
+              window.parent.setTimeout(scrollToSection, 120);
+            }}
+            return;
+          }}
           const top = target.getBoundingClientRect().top + window.parent.scrollY - 72;
+          window.parent.history.replaceState(null, "", `#${{anchorId}}`);
           window.parent.scrollTo({{ top, behavior: "smooth" }});
         }};
-        requestAnimationFrame(() => setTimeout(scrollToSection, 60));
+        requestAnimationFrame(() => window.parent.setTimeout(scrollToSection, 120));
         </script>
         """,
         height=0,
