@@ -2821,6 +2821,37 @@ def average_purchase_interval_days(item):
     return round(sum(intervals) / len(intervals))
 
 
+def purchase_consumption_summary(item):
+    history = purchase_history_for_item(item)
+    dated_rows = []
+    for row in history:
+        purchased_on = parse_iso_date(row.get("date", ""))
+        quantity = try_float(row.get("quantity"))
+        price = try_float(row.get("price"))
+        if purchased_on is None or quantity is None:
+            continue
+        dated_rows.append((purchased_on, quantity, price or 0.0))
+    if not dated_rows:
+        return {
+            "weekly_quantity": None,
+            "weekly_cost": None,
+            "monthly_quantity": None,
+            "monthly_cost": None,
+        }
+    dated_rows.sort(key=lambda item: item[0])
+    span_days = max((dated_rows[-1][0] - dated_rows[0][0]).days + 1, 1)
+    total_quantity = sum(quantity for _day, quantity, _price in dated_rows)
+    total_cost = sum(price for _day, _quantity, price in dated_rows)
+    daily_quantity = total_quantity / span_days
+    daily_cost = total_cost / span_days
+    return {
+        "weekly_quantity": round(daily_quantity * 7, 2),
+        "weekly_cost": round(daily_cost * 7, 2),
+        "monthly_quantity": round(daily_quantity * 30, 2),
+        "monthly_cost": round(daily_cost * 30, 2),
+    }
+
+
 def latest_purchase_date(item):
     history = purchase_history_for_item(item)
     return history[0]["date"] if history else ""
@@ -5334,24 +5365,23 @@ def render_insights_workspace(profile):
     with consumption_tab:
         rows = []
         for item in profile.get("inventory", []):
-            metrics = average_usage_metrics(profile, item)
-            interval = average_purchase_interval_days(item)
-            if metrics["weekly"] is None and interval is None:
+            metrics = purchase_consumption_summary(item)
+            if metrics["weekly_quantity"] is None:
                 continue
             rows.append(
                 {
-                    "Item": item["name"],
                     "Category": simple_category_for_item(profile, item["name"], category_name(profile, item.get("category_id", ""))),
-                    "Avg / week": format_number(metrics["weekly"]),
-                    "Avg / month": format_number(metrics["monthly"]),
-                    "Avg purchase interval": interval,
-                    "Avg consumed / event": format_number(metrics["avg_event_quantity"]),
-                    "Trend": metrics["trend"],
-                    "Confidence": metrics["confidence"],
+                    "Item": item["name"],
+                    "Avg qty/week": format_number(metrics["weekly_quantity"]),
+                    "Avg cost/week": format_number(metrics["weekly_cost"]),
+                    "Avg qty/month": format_number(metrics["monthly_quantity"]),
+                    "Avg price/month": format_number(metrics["monthly_cost"]),
                 }
             )
         if rows:
-            st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+            consumption_df = pd.DataFrame(rows)
+            consumption_df = consumption_df.sort_values(["Category", "Item"], kind="stable")
+            st.dataframe(consumption_df, use_container_width=True, hide_index=True)
         else:
             st.write("Not enough usage data yet.")
 
