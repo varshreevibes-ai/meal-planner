@@ -4438,6 +4438,8 @@ def simple_normalize_purchase_row(row):
         "price": simple_clean_text(row.get("price")),
         "note": simple_clean_text(row.get("note")),
         "category": simple_clean_text(row.get("category")),
+        "inventory_synced": simple_clean_bool(row.get("inventory_synced"), False),
+        "inventory_sync_source": simple_clean_text(row.get("inventory_sync_source")),
     }
 
 
@@ -4600,9 +4602,12 @@ def simple_column_config(column_map):
 
 
 def simple_merge_editor_rows(profile, all_rows, filtered_ids, edited_df, column_map, normalize_fn, row_kind):
+    existing_by_id = {row.get("id"): row for row in all_rows if row.get("id")}
     edited_rows = []
     for record in edited_df.to_dict("records"):
-        raw = {"id": record.get("_id") or uuid4().hex}
+        row_id = record.get("_id") or uuid4().hex
+        raw = dict(existing_by_id.get(row_id, {}))
+        raw["id"] = row_id
         for key, label in column_map.items():
             raw[key] = record.get(label)
         normalized = simple_apply_memory(profile, normalize_fn(raw))
@@ -4690,6 +4695,138 @@ def simple_parse_purchase_line(profile, raw_text):
             }
         )
     return [row for row in rows if row.get("item")]
+
+
+def simple_parse_quantity_unit(value):
+    text = simple_clean_text(value)
+    if not text:
+        return None, ""
+    match = re.match(r"^\s*(\d+(?:\.\d+)?)\s*([A-Za-z].*)?$", text)
+    if not match:
+        return None, ""
+    return try_float(match.group(1)), simple_clean_text(match.group(2)) or "unit"
+
+
+def purchase_row_category_id(profile, row):
+    category_text = simple_clean_text(row.get("category", ""))
+    alias_map = {"Dairy": "Dairy / Eggs", "Dry Fruits": "Dry Fruits / Seeds"}
+    category_text = alias_map.get(category_text, category_text)
+    if category_text:
+        for category in profile.get("inventory_categories", []):
+            if category["name"].strip().lower() == category_text.strip().lower():
+                return category["id"]
+    quantity_value, unit_value = simple_parse_quantity_unit(row.get("quantity", ""))
+    return purchase_import_category_id(profile, row.get("item", ""), unit_value or "")
+
+
+def purchase_row_matches_existing_lot(row, item, lot):
+    quantity_value, unit_value = simple_parse_quantity_unit(row.get("quantity", ""))
+    row_price = try_float(row.get("price"))
+    lot_price = try_float(lot.get("price"))
+    row_date = simple_clean_text(row.get("date_time", "")).split(" ", 1)[0]
+    lot_date = simple_clean_text(lot.get("purchase_date", ""))
+    return (
+        simple_clean_text(row.get("item", "")).lower() == simple_clean_text(item.get("name", "")).lower()
+        and simple_clean_text(row.get("vendor", "")).lower() == simple_clean_text(lot.get("vendor", "") or item.get("preferred_vendor", "")).lower()
+        and quantity_value is not None
+        and try_float(lot.get("quantity")) == quantity_value
+        and (not unit_value or simple_clean_text(lot.get("unit", item.get("unit", ""))).lower() == unit_value.lower())
+        and row_price == lot_price
+        and row_date == lot_date
+    )
+
+
+def sync_simple_inventory_rows_for_items(profile, items):
+    kitchen_rows = profile.get("kitchen_inventory_rows", [])
+    household_rows = profile.get("household_inventory_rows", [])
+    for item in items:
+        row = simple_normalize_inventory_row(
+            {
+                "item": item.get("name", ""),
+                "quantity": " ".join(part for part in [format_number(inventory_total_quantity(item)), item.get("unit", "")] if part).strip(),
+                "vendor": item.get("preferred_vendor", ""),
+                "note": item.get("notes", ""),
+                "category": category_name(profile, item.get("category_id", "")),
+                "in_stock": inventory_total_quantity(item) > 0,
+            }
+        )
+        target_rows = household_rows if is_home_supply_item(profile, item) else kitchen_rows
+        replaced = False
+        for idx, existing in enumerate(target_rows):
+            if simple_clean_text(existing.get("item", "")).lower() == row["item"].lower():
+                row["id"] = existing.get("id", row["id"])
+                target_rows[idx] = row
+                replaced = True
+                break
+        if not replaced:
+            target_rows.insert(0, row)
+    profile["kitchen_inventory_rows"] = kitchen_rows
+    profile["household_inventory_rows"] = household_rows
+
+
+def sync_purchase_history_rows(profile):
+    changed = False
+    touched_items = []
+    for row in profile.get("purchase_log_rows", []):
+        if row.get("inventory_synced"):
+            continue
+        quantity_value, unit_value = simple_parse_quantity_unit(row.get("quantity", ""))
+        if quantity_value is None:
+            continue
+        row_date = simple_clean_text(row.get("date_time", "")).split(" ", 1)[0] or today_iso()
+        existing_item = next(
+            (item for item in profile.get("inventory", []) if item.get("name", "").strip().lower() == simple_clean_text(row.get("item", "")).lower()),
+            None,
+        )
+        if existing_item and any(purchase_row_matches_existing_lot(row, existing_item, lot) for lot in existing_item.get("lots", [])):
+            row["inventory_synced"] = True
+            row["inventory_sync_source"] = "existing_inventory"
+            changed = True
+            continue
+        category_id = purchase_row_category_id(profile, row)
+        item = existing_item
+        if not item:
+            item = build_new_item(row.get("item", ""), quantity_value, category_id, unit_value or "unit")
+            item["lots"] = []
+        lot = normalize_inventory_lot(
+            {
+                "quantity": quantity_value,
+                "unit": unit_value or item.get("unit", "unit"),
+                "status": "sealed" if row.get("in_stock", True) else "finished",
+                "purchase_date": row_date,
+                "vendor": row.get("vendor", ""),
+                "price": try_float(row.get("price")),
+                "notes": f"purchase_log_row_id={row['id']}",
+            },
+            item,
+        )
+        item["name"] = row.get("item", "")
+        item["category_id"] = category_id
+        item["preferred_vendor"] = row.get("vendor", "")
+        item["preferred_purchase_quantity"] = quantity_value
+        item["preferred_purchase_unit"] = unit_value or item.get("unit", "unit")
+        item["purchase_date"] = row_date
+        item["unit"] = item.get("unit") or unit_value or "unit"
+        item["lots"] = [lot, *item.get("lots", [])]
+        save_inventory_item(profile, item)
+        add_inventory_transaction_with_source(
+            profile,
+            item,
+            quantity_value,
+            "Add",
+            "purchase",
+            f"purchase_log_row_id={row['id']}",
+            source="purchase_log_live",
+        )
+        row["inventory_synced"] = True
+        row["inventory_sync_source"] = "purchase_log_live"
+        touched_items.append(item)
+        changed = True
+    if touched_items:
+        sync_simple_inventory_rows_for_items(profile, touched_items)
+        simple_refresh_item_memory(profile)
+        simple_sync_rows_from_memory(profile)
+    return changed
 
 
 def simple_meal_planner_rows(profile):
@@ -5068,6 +5205,7 @@ def render_purchase_log_workspace(profile):
             saved_rows = [simple_normalize_purchase_row({**row, "date_time": timestamp, "in_stock": True}) for row in updated_review]
             if saved_rows:
                 profile["purchase_log_rows"] = saved_rows + profile.get("purchase_log_rows", [])
+                sync_purchase_history_rows(profile)
                 simple_refresh_item_memory(profile)
                 simple_sync_rows_from_memory(profile)
                 persist_active_profile(profile)
@@ -5652,6 +5790,8 @@ if st.session_state.get("active_workspace") == "Setup":
     set_active_workspace("Planner")
 if st.session_state.get("active_workspace") not in DESKTOP_WORKSPACE_TABS:
     set_active_workspace("Planner")
+if sync_purchase_history_rows(active_profile):
+    persist_active_profile(active_profile)
 with st.sidebar:
     nav_workspaces = list(PLANNER_NAV_WORKSPACES)
     for workspace in nav_workspaces:

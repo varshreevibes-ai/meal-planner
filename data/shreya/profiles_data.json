@@ -8146,6 +8146,487 @@
               "notes": "purchase_log_sync; batch=purchase-log-sync-20260713-shreya-001; purchase_log_row_id=c68a701772ce44038c2e17b61ff93202"
             }
           ]
+        },
+        {
+          "id": "725d1e06db1242af92e4e7ce9ce03a9f",
+          "name": "Hybrid Cucumber |  | \u20b9",
+          "archived": false,
+          "category_id": "vegetables",
+          "unit": "kg",
+          "approx_status": "",
+          "refill_level": 1.0,
+          "storage_capacity": null,
+          "shelf_life_days": 0,
+          "purchase_date": "2026-07-11",
+          "opened_date": "",
+          "expiry_date": "",
+          "location_id": "fridge",
+          "preferred_vendor": "Sodhi's Sector 46",
+          "preferred_brand": "",
+          "preferred_purchase_quantity": 1.34,
+          "preferred_purchase_unit": "kg",
+          "aliases": [],
+          "notes": "",
+          "lots": [
+            {
+              "id": "e0fdd1b8c9eb4cc394ddbc3a55c65754",
+              "quantity": 1.34,
+              "unit": "kg",
+              "status": "sealed",
+              "purchase_date": "2026-07-11",
+              "opened_date": "",
+              "expiry_date": "",
+              "location_id": "fridge",
+              "vendor": "Sodhi's Sector 46",
+              "brand": "",
+              "price": 65.66,
+              "notes": "purchase_log_row_id=bf9bdc81ffc94fde948744e58866371a"
+            }
+          ]
+        },
+        {
+          "id": "1e2befb78cf64fd8972214d1f5208708",
+          "name": "Sweet Potato |  | \u20b9",
+          "archived": false,
+          "category_id": "vegetables",
+          "unit": "kg",
+          "approx_status": "",
+          "refill_level": 1.0,
+          "storage_capacity": null,
+          "shelf_life_days": 0,
+          "purchase_date": "2026-07-11",
+          "opened_date": "",
+          "expiry_date": "",
+          "location_id": "fridge",
+          "preferred_vendor": "Sodhi's Sector 46",
+          "preferred_brand": "",
+          "preferred_purchase_quantity": 0.61,
+          "preferred_purchase_unit": "kg",
+          "aliases": [],
+          "notes": "",
+          "lots": [
+            {
+              "id": "932bb5e2f2b8498ba083f9effd4a2d1c",
+              "quantity": 0.61,
+              "unit": "kg",
+              "status": "sealed",
+              "purchase_date": "2026-07-11",
+              "opened_date": "",
+              "expiry_date": "",
+              "location_id": "fridge",
+              "vendor": "Sodhi's Sector 46",
+              "brand": "",
+              "price": 53.84,
+              "notes": "purchase_log_row_id=659cedfcb65f49ed8d3347b35c57e86b"
+            }
+          ]
+        },
+        {
+          "id": "ed71ce5b1a884190ab981b51d6a79782",
+          "name": "Safeda Mango (Premium) |  | \u20b9",
+          "archived": false,
+          "category_id": "fruits",
+          "unit": "kg",
+          "approx_status": "",
+          "refill_level": 1.0,
+          "storage_capacity": null,
+          "shelf_life_days": 0,
+          "purchase_date": "2026-07-11",
+          "opened_date": "",
+          "expiry_date": "",
+          "location_id": "fridge",
+          "preferred_vendor": "Sodhi's Sector 46",
+          "preferred_brand": "",
+          "preferred_purchase_quantity": 1.63,
+          "preferred_purchase_unit": "kg",
+          "aliases": [],
+          "notes": "",
+          "lots": [
+            {
+              "id": "8023c18d413342f0a2212e62b30fef5c",
+              "quantity": 1.63,
+              "unit": "kg",
+              "status": "sealed",
+              "purchase_date": "2026-07-11",
+              "opened_date": "",
+              "expiry_date": "",
+              "location_id": "fridge",
+              "vendor": "Sodhi's Sector 46",
+              "brand": "",
+              "price": 242.87,
+              "notes": "purchase_log_row_id=84f069deff3f443088d39a94c55a2910"
+            }
+          ]
+        },
+        {
+          "id": "5c3d1e3d1e324814b984d4215b65918b",
+          "name": "Sodhi's Pumpkin Seeds  | 1 pack | \u20b9",
+          "archived": false,
+          "category_id": "dry-fruits-seeds",
+          "unit": "g",
+          "approx_status": "",
+          "refill_level": null,
+          "storage_capacity": null,
+          "shelf_life_days": 0,
+          "purchase_date": "2026-07-11",
+          "opened_date": "",
+          "expiry_date": "",
+          "location_id": "",
+          "preferred_vendor": "Sodhi's Sector 46",
+          "preferred_brand": "",
+          "preferred_purchase_quantity": 100.0,
+          "preferred_purchase_unit": "g",
+          "aliases": [],
+          "notes": "",
+          "lots": [
+            {
+              "id": "a3a810ae397c4aad908ce07e49c17fa1",
+              "quantity": 100.0,
+              "unit": "g",
+              "status": "sealed",
+              "purchase_date": "2026-07-11",
+              "opened_date": "",
+              "expiry_date": "",
+              "location_id": "",
+              "vendor": "Sodhi's Sector 46",
+              "brand": "",
+              "price": 75.0,
+              "notes": "purchase_log_row_id=31fa284dc164418b902813fa84153855"
+            }
+          ]
+        },
+        {
+          "id": "e43b6d3a809a45848a7a533d35f12b78",
+          "name": "Afghan Cherry |  | \u20b9",
+          "archived": false,
+          "category_id": "fruits",
+          "unit": "pack",
+          "approx_status": "",
+          "refill_level": 1.0,
+          "storage_capacity": null,
+          "shelf_life_days": 0,
+          "purchase_date": "2026-07-11",
+          "opened_date": "",
+          "expiry_date": "",
+          "location_id": "fridge",
+          "preferred_vendor": "Sodhi's Sector 46",
+          "preferred_brand": "",
+          "preferred_purchase_quantity": 1.0,
+          "preferred_purchase_unit": "pack",
+          "aliases": [],
+          "notes": "",
+          "lots": [
+            {
+              "id": "f77e0d7eeb9a45e0b5a139a34d9665fe",
+              "quantity": 1.0,
+              "unit": "pack",
+              "status": "sealed",
+              "purchase_date": "2026-07-11",
+              "opened_date": "",
+              "expiry_date": "",
+              "location_id": "fridge",
+              "vendor": "Sodhi's Sector 46",
+              "brand": "",
+              "price": 619.0,
+              "notes": "purchase_log_row_id=16dbf14fab1240dba62c6f0802d21eae"
+            }
+          ]
+        },
+        {
+          "id": "2a963d1780de4266b64cba5560e96419",
+          "name": "Jamun  Box | 2 boxes * 1kg | \u20b9",
+          "archived": false,
+          "category_id": "fruits",
+          "unit": "kg",
+          "approx_status": "",
+          "refill_level": 1.0,
+          "storage_capacity": null,
+          "shelf_life_days": 0,
+          "purchase_date": "2026-07-11",
+          "opened_date": "",
+          "expiry_date": "",
+          "location_id": "fridge",
+          "preferred_vendor": "Sodhi's Sector 46",
+          "preferred_brand": "",
+          "preferred_purchase_quantity": 2.0,
+          "preferred_purchase_unit": "kg",
+          "aliases": [],
+          "notes": "",
+          "lots": [
+            {
+              "id": "d0c4935c71b4431cb2bf2a327edcd6b1",
+              "quantity": 2.0,
+              "unit": "kg",
+              "status": "sealed",
+              "purchase_date": "2026-07-11",
+              "opened_date": "",
+              "expiry_date": "",
+              "location_id": "fridge",
+              "vendor": "Sodhi's Sector 46",
+              "brand": "",
+              "price": 578.0,
+              "notes": "purchase_log_row_id=f6894b1ca147419a907fdb6396fa579e"
+            }
+          ]
+        },
+        {
+          "id": "e04725707d954f1b820694165010c543",
+          "name": "Litchi |  | \u20b9",
+          "archived": false,
+          "category_id": "fruits",
+          "unit": "kg",
+          "approx_status": "",
+          "refill_level": 1.0,
+          "storage_capacity": null,
+          "shelf_life_days": 0,
+          "purchase_date": "2026-07-11",
+          "opened_date": "",
+          "expiry_date": "",
+          "location_id": "fridge",
+          "preferred_vendor": "Sodhi's Sector 46",
+          "preferred_brand": "",
+          "preferred_purchase_quantity": 0.52,
+          "preferred_purchase_unit": "kg",
+          "aliases": [],
+          "notes": "",
+          "lots": [
+            {
+              "id": "48b3230462834dfb92cb95f8cd0d80a8",
+              "quantity": 0.52,
+              "unit": "kg",
+              "status": "sealed",
+              "purchase_date": "2026-07-11",
+              "opened_date": "",
+              "expiry_date": "",
+              "location_id": "fridge",
+              "vendor": "Sodhi's Sector 46",
+              "brand": "",
+              "price": 228.28,
+              "notes": "purchase_log_row_id=ac9118d2eca24d168ae2783e510233d1"
+            }
+          ]
+        },
+        {
+          "id": "b3c1b89d1bee4bd6a499f24901637951",
+          "name": "Organic Vedic Gir Cow Bilona Ghee  | 1 |",
+          "archived": false,
+          "category_id": "other-kitchen",
+          "unit": "ml",
+          "approx_status": "",
+          "refill_level": null,
+          "storage_capacity": null,
+          "shelf_life_days": 0,
+          "purchase_date": "2026-07-13",
+          "opened_date": "",
+          "expiry_date": "",
+          "location_id": "",
+          "preferred_vendor": "SATJEEVAN ORGANIC",
+          "preferred_brand": "",
+          "preferred_purchase_quantity": 1000.0,
+          "preferred_purchase_unit": "ml",
+          "aliases": [],
+          "notes": "",
+          "lots": [
+            {
+              "id": "1c43c7052e104801b2d5c6d41d10685d",
+              "quantity": 1000.0,
+              "unit": "ml",
+              "status": "sealed",
+              "purchase_date": "2026-07-13",
+              "opened_date": "",
+              "expiry_date": "",
+              "location_id": "",
+              "vendor": "SATJEEVAN ORGANIC",
+              "brand": "",
+              "price": 2400.0,
+              "notes": "purchase_log_row_id=61678f0653134e21923216268995d11d"
+            }
+          ]
+        },
+        {
+          "id": "4e415224f4a64494a44ca2e215c5bb1a",
+          "name": "Organic Pasta Fusilli Yellow Moong (GF)  | 1 |",
+          "archived": false,
+          "category_id": "other-kitchen",
+          "unit": "g",
+          "approx_status": "",
+          "refill_level": null,
+          "storage_capacity": null,
+          "shelf_life_days": 0,
+          "purchase_date": "2026-07-13",
+          "opened_date": "",
+          "expiry_date": "",
+          "location_id": "",
+          "preferred_vendor": "SATJEEVAN ORGANIC",
+          "preferred_brand": "",
+          "preferred_purchase_quantity": 500.0,
+          "preferred_purchase_unit": "g",
+          "aliases": [],
+          "notes": "",
+          "lots": [
+            {
+              "id": "d08d3932d8b84d52a2d21d0af93a1f06",
+              "quantity": 500.0,
+              "unit": "g",
+              "status": "sealed",
+              "purchase_date": "2026-07-13",
+              "opened_date": "",
+              "expiry_date": "",
+              "location_id": "",
+              "vendor": "SATJEEVAN ORGANIC",
+              "brand": "",
+              "price": 290.0,
+              "notes": "purchase_log_row_id=0e2bfdebdfef41e7947bfe48d5ce80ad"
+            }
+          ]
+        },
+        {
+          "id": "4a905d3dee3f491eb112452413d65ece",
+          "name": "Organic Basil Pesto Sauce  | 1 |",
+          "archived": false,
+          "category_id": "other-kitchen",
+          "unit": "g",
+          "approx_status": "",
+          "refill_level": null,
+          "storage_capacity": null,
+          "shelf_life_days": 0,
+          "purchase_date": "2026-07-13",
+          "opened_date": "",
+          "expiry_date": "",
+          "location_id": "",
+          "preferred_vendor": "SATJEEVAN ORGANIC",
+          "preferred_brand": "",
+          "preferred_purchase_quantity": 200.0,
+          "preferred_purchase_unit": "g",
+          "aliases": [],
+          "notes": "",
+          "lots": [
+            {
+              "id": "ab31563a3c284cf0ba8b4f5b5a27c715",
+              "quantity": 200.0,
+              "unit": "g",
+              "status": "sealed",
+              "purchase_date": "2026-07-13",
+              "opened_date": "",
+              "expiry_date": "",
+              "location_id": "",
+              "vendor": "SATJEEVAN ORGANIC",
+              "brand": "",
+              "price": 390.0,
+              "notes": "purchase_log_row_id=91e0c77d85a04fddbca9068b4a637a1b"
+            }
+          ]
+        },
+        {
+          "id": "9c3b5a9e7168475a874d599a5577b819",
+          "name": "Organic Moong Sesame Crunchies  | 1 |",
+          "archived": false,
+          "category_id": "other-kitchen",
+          "unit": "g",
+          "approx_status": "",
+          "refill_level": null,
+          "storage_capacity": null,
+          "shelf_life_days": 0,
+          "purchase_date": "2026-07-13",
+          "opened_date": "",
+          "expiry_date": "",
+          "location_id": "",
+          "preferred_vendor": "SATJEEVAN ORGANIC",
+          "preferred_brand": "",
+          "preferred_purchase_quantity": 100.0,
+          "preferred_purchase_unit": "g",
+          "aliases": [],
+          "notes": "",
+          "lots": [
+            {
+              "id": "fe1f26b24c284250b0c186428daeea8a",
+              "quantity": 100.0,
+              "unit": "g",
+              "status": "sealed",
+              "purchase_date": "2026-07-13",
+              "opened_date": "",
+              "expiry_date": "",
+              "location_id": "",
+              "vendor": "SATJEEVAN ORGANIC",
+              "brand": "",
+              "price": 200.0,
+              "notes": "purchase_log_row_id=97f8144a69eb4167968fa29a14c123e5"
+            }
+          ]
+        },
+        {
+          "id": "5a00b95bf0254458b8bc14e3fc81b249",
+          "name": "Organic Matar White Peas  | 1 |",
+          "archived": false,
+          "category_id": "grains-rice-atta",
+          "unit": "g",
+          "approx_status": "",
+          "refill_level": 1.0,
+          "storage_capacity": null,
+          "shelf_life_days": 0,
+          "purchase_date": "2026-07-13",
+          "opened_date": "",
+          "expiry_date": "",
+          "location_id": "store-room",
+          "preferred_vendor": "SATJEEVAN ORGANIC",
+          "preferred_brand": "",
+          "preferred_purchase_quantity": 500.0,
+          "preferred_purchase_unit": "g",
+          "aliases": [],
+          "notes": "",
+          "lots": [
+            {
+              "id": "8ebeda8fa45c4078a4071d9521ff21bf",
+              "quantity": 500.0,
+              "unit": "g",
+              "status": "sealed",
+              "purchase_date": "2026-07-13",
+              "opened_date": "",
+              "expiry_date": "",
+              "location_id": "store-room",
+              "vendor": "SATJEEVAN ORGANIC",
+              "brand": "",
+              "price": 120.0,
+              "notes": "purchase_log_row_id=f50f435984074a06a20dabd1835a1a7f"
+            }
+          ]
+        },
+        {
+          "id": "629063e1490c49ed8e2ca6dbafeef9dc",
+          "name": "Courier | |",
+          "archived": false,
+          "category_id": "other-kitchen",
+          "unit": "unit",
+          "approx_status": "",
+          "refill_level": null,
+          "storage_capacity": null,
+          "shelf_life_days": 0,
+          "purchase_date": "2026-07-13",
+          "opened_date": "",
+          "expiry_date": "",
+          "location_id": "",
+          "preferred_vendor": "SATJEEVAN ORGANIC",
+          "preferred_brand": "",
+          "preferred_purchase_quantity": 1.0,
+          "preferred_purchase_unit": "unit",
+          "aliases": [],
+          "notes": "",
+          "lots": [
+            {
+              "id": "e39627c5442f40c9a5118f330131ee28",
+              "quantity": 1.0,
+              "unit": "unit",
+              "status": "sealed",
+              "purchase_date": "2026-07-13",
+              "opened_date": "",
+              "expiry_date": "",
+              "location_id": "",
+              "vendor": "SATJEEVAN ORGANIC",
+              "brand": "",
+              "price": 100.0,
+              "notes": "purchase_log_row_id=8d549f40153a46888c3c5125002721fb"
+            }
+          ]
         }
       ],
       "inventory_categories": [
@@ -8415,6 +8896,162 @@
         }
       ],
       "inventory_transactions": [
+        {
+          "id": "499265cd8554461fa4c7aa90e975d3e9",
+          "created_at": "2026-07-13T14:48:32",
+          "item_id": "629063e1490c49ed8e2ca6dbafeef9dc",
+          "item_name": "Courier | |",
+          "change_value": 1.0,
+          "unit": "unit",
+          "action": "Add",
+          "reason": "purchase",
+          "notes": "purchase_log_row_id=8d549f40153a46888c3c5125002721fb",
+          "source": "purchase_log_live"
+        },
+        {
+          "id": "9b0256bd48b24e7491c98ae32caf638c",
+          "created_at": "2026-07-13T14:48:32",
+          "item_id": "5a00b95bf0254458b8bc14e3fc81b249",
+          "item_name": "Organic Matar White Peas  | 1 |",
+          "change_value": 500.0,
+          "unit": "g",
+          "action": "Add",
+          "reason": "purchase",
+          "notes": "purchase_log_row_id=f50f435984074a06a20dabd1835a1a7f",
+          "source": "purchase_log_live"
+        },
+        {
+          "id": "da818985104b4e9ca23785651f922b8f",
+          "created_at": "2026-07-13T14:48:32",
+          "item_id": "9c3b5a9e7168475a874d599a5577b819",
+          "item_name": "Organic Moong Sesame Crunchies  | 1 |",
+          "change_value": 100.0,
+          "unit": "g",
+          "action": "Add",
+          "reason": "purchase",
+          "notes": "purchase_log_row_id=97f8144a69eb4167968fa29a14c123e5",
+          "source": "purchase_log_live"
+        },
+        {
+          "id": "ca737d29e4a64a109564d9e655aadb01",
+          "created_at": "2026-07-13T14:48:32",
+          "item_id": "4a905d3dee3f491eb112452413d65ece",
+          "item_name": "Organic Basil Pesto Sauce  | 1 |",
+          "change_value": 200.0,
+          "unit": "g",
+          "action": "Add",
+          "reason": "purchase",
+          "notes": "purchase_log_row_id=91e0c77d85a04fddbca9068b4a637a1b",
+          "source": "purchase_log_live"
+        },
+        {
+          "id": "36085a2b36c0434d86f97d6ae1bcc481",
+          "created_at": "2026-07-13T14:48:32",
+          "item_id": "4e415224f4a64494a44ca2e215c5bb1a",
+          "item_name": "Organic Pasta Fusilli Yellow Moong (GF)  | 1 |",
+          "change_value": 500.0,
+          "unit": "g",
+          "action": "Add",
+          "reason": "purchase",
+          "notes": "purchase_log_row_id=0e2bfdebdfef41e7947bfe48d5ce80ad",
+          "source": "purchase_log_live"
+        },
+        {
+          "id": "68a567bd6e364d54b8b1daac7257ce2b",
+          "created_at": "2026-07-13T14:48:32",
+          "item_id": "b3c1b89d1bee4bd6a499f24901637951",
+          "item_name": "Organic Vedic Gir Cow Bilona Ghee  | 1 |",
+          "change_value": 1000.0,
+          "unit": "ml",
+          "action": "Add",
+          "reason": "purchase",
+          "notes": "purchase_log_row_id=61678f0653134e21923216268995d11d",
+          "source": "purchase_log_live"
+        },
+        {
+          "id": "e3b3b3c560d5456b955bf3be51ce48cc",
+          "created_at": "2026-07-13T14:45:27",
+          "item_id": "e04725707d954f1b820694165010c543",
+          "item_name": "Litchi |  | \u20b9",
+          "change_value": 0.52,
+          "unit": "kg",
+          "action": "Add",
+          "reason": "purchase",
+          "notes": "purchase_log_row_id=ac9118d2eca24d168ae2783e510233d1",
+          "source": "purchase_log_live"
+        },
+        {
+          "id": "b69fe3a2587a4935bd30344494b339eb",
+          "created_at": "2026-07-13T14:45:27",
+          "item_id": "2a963d1780de4266b64cba5560e96419",
+          "item_name": "Jamun  Box | 2 boxes * 1kg | \u20b9",
+          "change_value": 2.0,
+          "unit": "kg",
+          "action": "Add",
+          "reason": "purchase",
+          "notes": "purchase_log_row_id=f6894b1ca147419a907fdb6396fa579e",
+          "source": "purchase_log_live"
+        },
+        {
+          "id": "7467860f6ee0447bb37d3bbb7e512ec5",
+          "created_at": "2026-07-13T14:45:27",
+          "item_id": "e43b6d3a809a45848a7a533d35f12b78",
+          "item_name": "Afghan Cherry |  | \u20b9",
+          "change_value": 1.0,
+          "unit": "pack",
+          "action": "Add",
+          "reason": "purchase",
+          "notes": "purchase_log_row_id=16dbf14fab1240dba62c6f0802d21eae",
+          "source": "purchase_log_live"
+        },
+        {
+          "id": "185fb6b4ebf54724a8648ef4cf544fde",
+          "created_at": "2026-07-13T14:45:27",
+          "item_id": "5c3d1e3d1e324814b984d4215b65918b",
+          "item_name": "Sodhi's Pumpkin Seeds  | 1 pack | \u20b9",
+          "change_value": 100.0,
+          "unit": "g",
+          "action": "Add",
+          "reason": "purchase",
+          "notes": "purchase_log_row_id=31fa284dc164418b902813fa84153855",
+          "source": "purchase_log_live"
+        },
+        {
+          "id": "115e4de451c34420b37aaebacfad21c1",
+          "created_at": "2026-07-13T14:45:27",
+          "item_id": "ed71ce5b1a884190ab981b51d6a79782",
+          "item_name": "Safeda Mango (Premium) |  | \u20b9",
+          "change_value": 1.63,
+          "unit": "kg",
+          "action": "Add",
+          "reason": "purchase",
+          "notes": "purchase_log_row_id=84f069deff3f443088d39a94c55a2910",
+          "source": "purchase_log_live"
+        },
+        {
+          "id": "3d17ab8bc3214a1c8ad9a8bc7dc974e0",
+          "created_at": "2026-07-13T14:45:27",
+          "item_id": "1e2befb78cf64fd8972214d1f5208708",
+          "item_name": "Sweet Potato |  | \u20b9",
+          "change_value": 0.61,
+          "unit": "kg",
+          "action": "Add",
+          "reason": "purchase",
+          "notes": "purchase_log_row_id=659cedfcb65f49ed8d3347b35c57e86b",
+          "source": "purchase_log_live"
+        },
+        {
+          "id": "da68b26089344b63b2560850367e0b5f",
+          "created_at": "2026-07-13T14:45:27",
+          "item_id": "725d1e06db1242af92e4e7ce9ce03a9f",
+          "item_name": "Hybrid Cucumber |  | \u20b9",
+          "change_value": 1.34,
+          "unit": "kg",
+          "action": "Add",
+          "reason": "purchase",
+          "notes": "purchase_log_row_id=bf9bdc81ffc94fde948744e58866371a",
+          "source": "purchase_log_live"
+        },
         {
           "id": "ed8da07c41974fbd912012dca71bd00a",
           "created_at": "2026-01-05T12:00:00",
@@ -12038,15 +12675,69 @@
       "shopping_manual_items": [],
       "purchase_log_rows": [
         {
-          "id": "aa6697aaaf664a2581ce9bc097b31c9b",
+          "id": "0e2bfdebdfef41e7947bfe48d5ce80ad",
           "in_stock": true,
-          "date_time": "2026-07-12 12:00",
-          "vendor": "Amazon",
-          "item": "Soy Milk 1L",
-          "quantity": "2",
-          "price": "254.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=6",
-          "category": "Dairy"
+          "date_time": "2026-07-13 14:48",
+          "vendor": "SATJEEVAN ORGANIC",
+          "item": "Organic Pasta Fusilli Yellow Moong (GF)  | 1 |",
+          "quantity": "500g",
+          "price": "290.00",
+          "note": "",
+          "category": "Other Kitchen",
+          "inventory_synced": true,
+          "inventory_sync_source": "purchase_log_live"
+        },
+        {
+          "id": "91e0c77d85a04fddbca9068b4a637a1b",
+          "in_stock": true,
+          "date_time": "2026-07-13 14:48",
+          "vendor": "SATJEEVAN ORGANIC",
+          "item": "Organic Basil Pesto Sauce  | 1 |",
+          "quantity": "200g",
+          "price": "390.00",
+          "note": "",
+          "category": "Other Kitchen",
+          "inventory_synced": true,
+          "inventory_sync_source": "purchase_log_live"
+        },
+        {
+          "id": "97f8144a69eb4167968fa29a14c123e5",
+          "in_stock": true,
+          "date_time": "2026-07-13 14:48",
+          "vendor": "SATJEEVAN ORGANIC",
+          "item": "Organic Moong Sesame Crunchies  | 1 |",
+          "quantity": "100g",
+          "price": "200.00",
+          "note": "",
+          "category": "Other Kitchen",
+          "inventory_synced": true,
+          "inventory_sync_source": "purchase_log_live"
+        },
+        {
+          "id": "f50f435984074a06a20dabd1835a1a7f",
+          "in_stock": true,
+          "date_time": "2026-07-13 14:48",
+          "vendor": "SATJEEVAN ORGANIC",
+          "item": "Organic Matar White Peas  | 1 |",
+          "quantity": "500g",
+          "price": "120.00",
+          "note": "",
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "purchase_log_live"
+        },
+        {
+          "id": "8d549f40153a46888c3c5125002721fb",
+          "in_stock": true,
+          "date_time": "2026-07-13 14:48",
+          "vendor": "SATJEEVAN ORGANIC",
+          "item": "Courier | |",
+          "quantity": "1",
+          "price": "100.00",
+          "note": "",
+          "category": "Other Kitchen",
+          "inventory_synced": true,
+          "inventory_sync_source": "purchase_log_live"
         },
         {
           "id": "34a9d8c9dbc042b5a53ec26a9153ae36",
@@ -12057,7 +12748,9 @@
           "quantity": "1",
           "price": "59.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=5",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "79ac2f6328be46bf802db275fbafb315",
@@ -12068,7 +12761,9 @@
           "quantity": "1",
           "price": "10.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=4",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "f103322d4ef849d9b90ed803ee30cde1",
@@ -12079,7 +12774,9 @@
           "quantity": "1",
           "price": "31.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=3",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "a397b669d4874d798cbbe39c9289f295",
@@ -12090,7 +12787,9 @@
           "quantity": "1",
           "price": "195.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=2",
-          "category": "Other Kitchen"
+          "category": "Other Kitchen",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "bf9bdc81ffc94fde948744e58866371a",
@@ -12101,7 +12800,9 @@
           "quantity": "1.34 kg",
           "price": "65.66",
           "note": "",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "purchase_log_live"
         },
         {
           "id": "659cedfcb65f49ed8d3347b35c57e86b",
@@ -12112,7 +12813,9 @@
           "quantity": "0.61 kg",
           "price": "53.84",
           "note": "",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "purchase_log_live"
         },
         {
           "id": "84f069deff3f443088d39a94c55a2910",
@@ -12123,7 +12826,9 @@
           "quantity": "1.63 kg",
           "price": "242.87",
           "note": "",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "purchase_log_live"
         },
         {
           "id": "31fa284dc164418b902813fa84153855",
@@ -12134,7 +12839,9 @@
           "quantity": "100g",
           "price": "75.00",
           "note": "",
-          "category": "dry fruits"
+          "category": "dry fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "purchase_log_live"
         },
         {
           "id": "16dbf14fab1240dba62c6f0802d21eae",
@@ -12145,7 +12852,9 @@
           "quantity": "1 pack",
           "price": "619.00",
           "note": "",
-          "category": "fruits"
+          "category": "fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "purchase_log_live"
         },
         {
           "id": "f6894b1ca147419a907fdb6396fa579e",
@@ -12156,7 +12865,9 @@
           "quantity": "2kg",
           "price": "578.00",
           "note": "",
-          "category": "fruits"
+          "category": "fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "purchase_log_live"
         },
         {
           "id": "ac9118d2eca24d168ae2783e510233d1",
@@ -12167,7 +12878,9 @@
           "quantity": "0.52 kg",
           "price": "228.28",
           "note": "",
-          "category": "fruits"
+          "category": "fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "purchase_log_live"
         },
         {
           "id": "b804f59a57b24353819a2968c7a6ea4d",
@@ -12178,7 +12891,9 @@
           "quantity": "1.39 kg",
           "price": "67.86",
           "note": "Bill 026191 | Rate Rs 49 | Amount Rs 67.86",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "d7d93350801849988391f3bae2cf2de2",
@@ -12189,7 +12904,9 @@
           "quantity": "0.26 kg",
           "price": "38.74",
           "note": "Bill 026191 | Rate Rs 149 | Amount Rs 38.74",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "6e3f7d75c3404feaa4a1544aeaaaac5c",
@@ -12200,7 +12917,9 @@
           "quantity": "0.63 kg",
           "price": "30.87",
           "note": "Bill 026191 | Rate Rs 49 | Amount Rs 30.87",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "e0dc2d91a9044878b340d070661827af",
@@ -12211,7 +12930,9 @@
           "quantity": "1.82 kg",
           "price": "70.98",
           "note": "Bill 026191 | Rate Rs 39 | Amount Rs 70.98",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "1584e84984344d9f93beb8c4cf2235f5",
@@ -12222,7 +12943,9 @@
           "quantity": "0.64 kg",
           "price": "50.16",
           "note": "Bill 026191 | Rate Rs 79 | Amount Rs 50.16",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "442a53ecf53f41c1a2da6c73adcb1c0f",
@@ -12233,7 +12956,9 @@
           "quantity": "1.18 kg",
           "price": "45.82",
           "note": "Bill 026191 | Rate Rs 39 | Amount Rs 45.82",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "62733933a7674ac3a1c9508c6e6bd0f5",
@@ -12244,7 +12969,9 @@
           "quantity": "1.28 kg",
           "price": "75.22",
           "note": "Bill 026191 | Rate Rs 59 | Amount Rs 75.22",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "0608f5670b524fc0aa7042702534645f",
@@ -12255,7 +12982,9 @@
           "quantity": "1 pack",
           "price": "95",
           "note": "Bill 026191 | Rate Rs 95 | Amount Rs 95",
-          "category": "Protein / Health"
+          "category": "Protein / Health",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "e7da20eec16546c9962e1f41a2ee87b0",
@@ -12266,7 +12995,9 @@
           "quantity": "2 pack",
           "price": "153",
           "note": "Bill 026191 | Rate Rs 76.5 | Amount Rs 153",
-          "category": "Pickles / Papad / Chutney"
+          "category": "Pickles / Papad / Chutney",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "a912026f5dbd46d6ac9a913373d83130",
@@ -12277,7 +13008,9 @@
           "quantity": "1 pack",
           "price": "173",
           "note": "Bill 026191 | Rate Rs 173 | Amount Rs 173",
-          "category": "Snacks / Makhana"
+          "category": "Snacks / Makhana",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "bf7a7faa93194b78ac14adc6c9a1d5e6",
@@ -12288,7 +13021,9 @@
           "quantity": "1 pack",
           "price": "107",
           "note": "Bill 026191 | Rate Rs 107 | Amount Rs 107",
-          "category": "Masale / Spices"
+          "category": "Masale / Spices",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "6a65184e41a74c8980d8de54b83490f2",
@@ -12299,7 +13034,9 @@
           "quantity": "1 pack",
           "price": "18",
           "note": "Bill 026191 | Rate Rs 18 | Amount Rs 18",
-          "category": "Masale / Spices"
+          "category": "Masale / Spices",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "40ec2dac79ab46c2bbb71ac15f8f155d",
@@ -12310,7 +13047,9 @@
           "quantity": "1 pack",
           "price": "68",
           "note": "Bill 026191 | Rate Rs 68 | Amount Rs 68",
-          "category": "Other Kitchen"
+          "category": "Other Kitchen",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "fec26ee7ba4b4a179a23d2dc365df31b",
@@ -12321,7 +13060,9 @@
           "quantity": "1 adjustment",
           "price": "190",
           "note": "Bill 026191 | Rate Rs 190 | Amount Rs 190",
-          "category": "Other Kitchen"
+          "category": "Other Kitchen",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "2d6fd58f1ee94c75a77967f72a295a4e",
@@ -12332,7 +13073,9 @@
           "quantity": "0.56 kg",
           "price": "182.6",
           "note": "Bill 026191 | Rate Rs 329 | Amount Rs 182.6",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "834a6fea51034364aa31de21c81193ec",
@@ -12343,7 +13086,9 @@
           "quantity": "1 box",
           "price": "349",
           "note": "Bill 026191 | Rate Rs 349 | Amount Rs 349",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "ff3eb9bb707d4d9c9815ada55da65706",
@@ -12354,7 +13099,9 @@
           "quantity": "1 pack",
           "price": "219",
           "note": "Bill 026191 | Rate Rs 219 | Amount Rs 219",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "db4b4195fff04f98b971c9cd3df3cfdf",
@@ -12365,7 +13112,9 @@
           "quantity": "0.33 kg",
           "price": "62.37",
           "note": "Bill 026191 | Rate Rs 189 | Amount Rs 62.37",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "6e773330b0d04cdea0dde14f40ea95d2",
@@ -12376,7 +13125,9 @@
           "quantity": "2 pc",
           "price": "138",
           "note": "Bill 026191 | Rate Rs 69 | Amount Rs 138",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "eb5cb108c4514edd9ba6a2c4c39b869b",
@@ -12387,7 +13138,9 @@
           "quantity": "1.67 kg",
           "price": "714.28",
           "note": "Bill 026191 | Rate Rs 429 | Amount Rs 714.28",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "58ad8e15e90b4856bde9ec5e7c29af0a",
@@ -12398,7 +13151,9 @@
           "quantity": "0.55 kg",
           "price": "141.16",
           "note": "Bill 026191 | Rate Rs 259 | Amount Rs 141.16",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "2f21d4406075429db2c240b2f58028f6",
@@ -12409,18 +13164,9 @@
           "quantity": "1 pack",
           "price": "260",
           "note": "Bill 026191 | Rate Rs 260 | Amount Rs 260",
-          "category": "Dry Fruits / Seeds"
-        },
-        {
-          "id": "6a85253a7db24f1a9220d9253a776ff3",
-          "in_stock": true,
-          "date_time": "2026-07-01 12:00",
-          "vendor": "Amazon",
-          "item": "Soy Milk 1L",
-          "quantity": "2",
-          "price": "254.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=12",
-          "category": "Dairy"
+          "category": "Dry Fruits / Seeds",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "5d43dc013c5646fb8cfecbfc818119d1",
@@ -12431,7 +13177,9 @@
           "quantity": "1",
           "price": "69.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=11",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "06e2bf7d78804f34ab097271d05bf925",
@@ -12442,7 +13190,9 @@
           "quantity": "1",
           "price": "107.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=10",
-          "category": "Masale / Spices"
+          "category": "Masale / Spices",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "dc0afba6a4e94b598ad5dbfcc3e33616",
@@ -12453,7 +13203,9 @@
           "quantity": "1",
           "price": "55.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=9",
-          "category": "Masale / Spices"
+          "category": "Masale / Spices",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "97db4ef0b30e49908add7d089b3a08a5",
@@ -12464,7 +13216,9 @@
           "quantity": "1",
           "price": "34.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=8",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "de20215b8bc6469b9d66723a14ae539e",
@@ -12475,7 +13229,9 @@
           "quantity": "1",
           "price": "29.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=7",
-          "category": "Other Kitchen"
+          "category": "Other Kitchen",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "13407dd2356444adbddde44d13d258e3",
@@ -12486,7 +13242,9 @@
           "quantity": "1",
           "price": "70.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=45",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "d6f3ef6b1278494a9998860670bdcbc1",
@@ -12497,7 +13255,9 @@
           "quantity": "1",
           "price": "78.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=44",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "3b2d41b4f83442818681d8a767a8a7f9",
@@ -12508,7 +13268,9 @@
           "quantity": "1",
           "price": "95.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=43",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "3b9ce31a133548759b51034f75804d54",
@@ -12519,7 +13281,9 @@
           "quantity": "1",
           "price": "75.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=42",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "d7fb5bbc5c7545babbb3313d9b680253",
@@ -12530,7 +13294,9 @@
           "quantity": "1 pack",
           "price": "55",
           "note": "Bill 054174 | Rate Rs 55 | Amount Rs 55",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "bc6ce7abc8974839a34f23e399a457d7",
@@ -12541,7 +13307,9 @@
           "quantity": "0 kg",
           "price": "46.26",
           "note": "Bill 054174 | Rate Rs 319 | Amount Rs 46.26 | Marked finished because bought before 2026-07-07.",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "42703557021945ffaa5dcd6fd41ea713",
@@ -12552,7 +13320,9 @@
           "quantity": "0 pack",
           "price": "49",
           "note": "Bill 054174 | Rate Rs 49 | Amount Rs 49 | Marked finished because bought before 2026-07-07.",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "3ce6350f9c7a40aaa85eeb7a3e664cbb",
@@ -12563,7 +13333,9 @@
           "quantity": "0 kg",
           "price": "21.89",
           "note": "Bill 054174 | Rate Rs 35 | Amount Rs 21.89 | Marked finished because bought before 2026-07-07.",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "19d4be506c91470bbc7b1327fa1999f0",
@@ -12574,7 +13346,9 @@
           "quantity": "0 kg",
           "price": "40.46",
           "note": "Bill 054174 | Rate Rs 119 | Amount Rs 40.46 | Marked finished because bought before 2026-07-07.",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "644b599209aa4ad796b7c7b237674a46",
@@ -12585,7 +13359,9 @@
           "quantity": "1 pack",
           "price": "54.9",
           "note": "Bill 054174 | Rate Rs 54.9 | Amount Rs 54.9",
-          "category": "Masale / Spices"
+          "category": "Masale / Spices",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "e242f1d778934941b2b8a5d500de74f6",
@@ -12596,7 +13372,9 @@
           "quantity": "1 pack",
           "price": "49",
           "note": "Bill 054174 | Rate Rs 49 | Amount Rs 49",
-          "category": "Pickles / Papad / Chutney"
+          "category": "Pickles / Papad / Chutney",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "6276e90ddbd44bf98345c6bd6f3ba0d7",
@@ -12607,7 +13385,9 @@
           "quantity": "1 pack",
           "price": "33",
           "note": "Bill 054174 | Rate Rs 33 | Amount Rs 33",
-          "category": "Masale / Spices"
+          "category": "Masale / Spices",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "f8b040564ad64e6bbaeba4ab77b1e403",
@@ -12618,7 +13398,9 @@
           "quantity": "1 pack",
           "price": "74",
           "note": "Bill 054174 | Rate Rs 74 | Amount Rs 74",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "31e1be33dfbd410eb40dacd376478aaf",
@@ -12629,7 +13411,9 @@
           "quantity": "1 bottle",
           "price": "63",
           "note": "Bill 054174 | Rate Rs 63 | Amount Rs 63",
-          "category": "Pickles / Papad / Chutney"
+          "category": "Pickles / Papad / Chutney",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "c93e3aac491a49a2b19b033e87217c9a",
@@ -12640,7 +13424,9 @@
           "quantity": "0 kg",
           "price": "202.27",
           "note": "Bill 054174 | Rate Rs 179 | Amount Rs 202.27 | Marked finished because bought before 2026-07-07.",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "bb81fc6461044f1ba8363c63da83efdc",
@@ -12651,7 +13437,9 @@
           "quantity": "0 pack",
           "price": "389",
           "note": "Bill 054174 | Rate Rs 389 | Amount Rs 389 | Marked finished because bought before 2026-07-07.",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "3d427709ad624584969c39c2e924619e",
@@ -12662,7 +13450,9 @@
           "quantity": "0 kg",
           "price": "276.04",
           "note": "Bill 054174 | Rate Rs 239 | Amount Rs 276.04 | Marked finished because bought before 2026-07-07.",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "4759b3c157bf4bbdbc4cb1044e0c560d",
@@ -12673,7 +13463,9 @@
           "quantity": "1 pack",
           "price": "154",
           "note": "Bill 054174 | Rate Rs 154 | Amount Rs 154",
-          "category": "Dry Fruits / Seeds"
+          "category": "Dry Fruits / Seeds",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "4cadeee92b9f4bde9ec221961f38f893",
@@ -12684,7 +13476,9 @@
           "quantity": "1 pack",
           "price": "224",
           "note": "Bill 054174 | Rate Rs 224 | Amount Rs 224",
-          "category": "Dry Fruits / Seeds"
+          "category": "Dry Fruits / Seeds",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "f9c9ee60377448a69b5b10cecaeb62d7",
@@ -12695,7 +13489,9 @@
           "quantity": "1 pack",
           "price": "75",
           "note": "Bill 054174 | Rate Rs 75 | Amount Rs 75",
-          "category": "Dry Fruits / Seeds"
+          "category": "Dry Fruits / Seeds",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "bfec4c6cf8234bab8df3351166f31581",
@@ -12706,7 +13502,9 @@
           "quantity": "1",
           "price": "123.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=120",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "9e12f6304c76451cbc160a97dc141444",
@@ -12717,7 +13515,9 @@
           "quantity": "1",
           "price": "69.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=119",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "383579921d5f4d4eb52e99fc64f9cb07",
@@ -12728,7 +13528,9 @@
           "quantity": "2",
           "price": "198.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=118",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "de1be582905141aaa833b77cae21415a",
@@ -12739,7 +13541,9 @@
           "quantity": "1",
           "price": "148.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=117",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "b5c7f2850bf1474f9c9299f7e7a02a20",
@@ -12750,7 +13554,9 @@
           "quantity": "1",
           "price": "98.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=116",
-          "category": "Other Kitchen"
+          "category": "Other Kitchen",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "7e04b2e0e4724804a98fc66dc7d953c5",
@@ -12761,7 +13567,9 @@
           "quantity": "1",
           "price": "46.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=115",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "c25bc8dc93ab45688f08c508e0e8b101",
@@ -12772,7 +13580,9 @@
           "quantity": "1",
           "price": "352.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=13",
-          "category": "Other Kitchen"
+          "category": "Other Kitchen",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "336c9f40e3dc4e6f86bfe45b9000810d",
@@ -12783,7 +13593,9 @@
           "quantity": "1",
           "price": "47.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=41",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "43451a512291428a990ac20da82e5ba6",
@@ -12794,7 +13606,9 @@
           "quantity": "1",
           "price": "98.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=40",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "2cbbaceb57534840914f5bedc58391a7",
@@ -12805,7 +13619,9 @@
           "quantity": "2",
           "price": "249.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=39",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "b3472cffb58c41adb0ef0e6f62cf0ff5",
@@ -12816,7 +13632,9 @@
           "quantity": "1",
           "price": "72.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=39",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "0a93fb2fdf0146f5969b2e93837b1617",
@@ -12827,7 +13645,9 @@
           "quantity": "1",
           "price": "47.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=38",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "d54294da7a2f4e4989121d818ea846ac",
@@ -12838,7 +13658,9 @@
           "quantity": "1",
           "price": "20.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=37",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "05e6f734e9fb48d38a59b98ab9d68ea0",
@@ -12849,7 +13671,9 @@
           "quantity": "2 pack",
           "price": "32",
           "note": "Bill 048638 | Rate Rs 16 | Amount Rs 32",
-          "category": "Masale / Spices"
+          "category": "Masale / Spices",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "7fcee23fd9894981a668dbee30a78d87",
@@ -12860,7 +13684,9 @@
           "quantity": "2 pack",
           "price": "136",
           "note": "Bill 048638 | Rate Rs 68 | Amount Rs 136",
-          "category": "Snacks / Makhana"
+          "category": "Snacks / Makhana",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "bed5e95b38a145d38f2c3d8b3f3b9744",
@@ -12871,29 +13697,9 @@
           "quantity": "1 pack",
           "price": "174",
           "note": "Bill 048638 | Rate Rs 174 | Amount Rs 174",
-          "category": "Masale / Spices"
-        },
-        {
-          "id": "b161e8348627406dab270b4a4a802054",
-          "in_stock": true,
-          "date_time": "2026-06-20",
-          "vendor": "Sodhi's Super Market Sector 46 Gurgaon",
-          "item": "Amma Idli Dosa Batter 500g",
-          "quantity": "0 pc",
-          "price": "10",
-          "note": "Bill 048638 | Rate Rs 10 | Amount Rs 10 | Marked finished because bought before 2026-07-07.",
-          "category": "Dairy"
-        },
-        {
-          "id": "50c747be70e8476ab47954f644472776",
-          "in_stock": true,
-          "date_time": "2026-06-20",
-          "vendor": "Sodhi's Super Market Sector 46 Gurgaon",
-          "item": "Britannia Processed Cream Cheese 180g",
-          "quantity": "0 pc",
-          "price": "190",
-          "note": "Bill 048638 | Rate Rs 190 | Amount Rs 190 | Marked finished because bought before 2026-07-07.",
-          "category": "Dairy"
+          "category": "Masale / Spices",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "8e4a761db5ec430ab7db22983c9200b0",
@@ -12904,7 +13710,9 @@
           "quantity": "0 kg",
           "price": "57.67",
           "note": "Bill 048638 | Rate Rs 79 | Amount Rs 57.67 | Marked finished because bought before 2026-07-07.",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "60ef7bcd9d9b46eda25878e427538ca5",
@@ -12915,7 +13723,9 @@
           "quantity": "0 kg",
           "price": "493.5",
           "note": "Bill 048638 | Rate Rs 329 | Amount Rs 493.5 | Marked finished because bought before 2026-07-07.",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "97cd4254fc944cac9271c0f5baeb8567",
@@ -12926,7 +13736,9 @@
           "quantity": "0 pack",
           "price": "399",
           "note": "Bill 048638 | Rate Rs 399 | Amount Rs 399 | Marked finished because bought before 2026-07-07.",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "6e4b39aa4c2e4b7286cd26754688022a",
@@ -12937,7 +13749,9 @@
           "quantity": "0 box",
           "price": "638",
           "note": "Bill 048638 | Rate Rs 319 | Amount Rs 638 | Marked finished because bought before 2026-07-07.",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "28c61dfc915d424f9d63cfe76f9469b3",
@@ -12948,18 +13762,9 @@
           "quantity": "0 box",
           "price": "319",
           "note": "Bill 048638 | Rate Rs 319 | Amount Rs 319 | Marked finished because bought before 2026-07-07.",
-          "category": "Fruits"
-        },
-        {
-          "id": "1ed8edd0e6934956a6c2602074f3dfd8",
-          "in_stock": true,
-          "date_time": "2026-06-18 12:00",
-          "vendor": "Amazon",
-          "item": "Soy Milk 1L",
-          "quantity": "2",
-          "price": "257.75",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=14",
-          "category": "Dairy"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "61c51e64975b44e29abf9d0419c6da82",
@@ -12970,7 +13775,9 @@
           "quantity": "1",
           "price": "171.50",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=15",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "035c09b27f194c4d8ad2bfacc2f715a1",
@@ -12981,7 +13788,9 @@
           "quantity": "1",
           "price": "36.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=38",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "8b53846db1eb48869185c16d8f58f6e2",
@@ -12992,7 +13801,9 @@
           "quantity": "1",
           "price": "24.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=37",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "2477ab66b1e54b93b38efdd0182ad18a",
@@ -13003,7 +13814,9 @@
           "quantity": "1",
           "price": "55.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=36",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "44cb1be90dff44f0948c3cd1199e4791",
@@ -13014,7 +13827,9 @@
           "quantity": "1",
           "price": "70.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=35",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "9c6eca8617d344559950098cc0ff65db",
@@ -13025,7 +13840,9 @@
           "quantity": "1",
           "price": "70.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=34",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "29db8f143224483a878ba00c4a44f44d",
@@ -13036,7 +13853,9 @@
           "quantity": "1",
           "price": "20.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=33",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "5ebf7d285a3445af8505ea4e035d1b5f",
@@ -13047,7 +13866,9 @@
           "quantity": "1",
           "price": "130.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=32",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "e43e1302805f4662a6da8c26c196af0f",
@@ -13058,7 +13879,9 @@
           "quantity": "1",
           "price": "59.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=31",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "762e4ee97fc6407f93a438ddec03e450",
@@ -13069,7 +13892,9 @@
           "quantity": "1",
           "price": "53.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=30",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "d7333e53112a41a599be5e09674afe53",
@@ -13080,7 +13905,9 @@
           "quantity": "1",
           "price": "77.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=29",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "e355c3d4ff9d41d4a7fa14b21879c294",
@@ -13091,7 +13918,9 @@
           "quantity": "1",
           "price": "18.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=114",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "15365e42585b41ff81c122b5b6e20702",
@@ -13102,7 +13931,9 @@
           "quantity": "1",
           "price": "34.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=113",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "f341fbaebc5744aeb699fe9d5d480938",
@@ -13113,7 +13944,9 @@
           "quantity": "1",
           "price": "27.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=112",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "8d9e9126c36e4b689c46a9bc4bb93d84",
@@ -13124,18 +13957,9 @@
           "quantity": "1",
           "price": "229.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=111",
-          "category": "Fruits"
-        },
-        {
-          "id": "a72e37ef2c864fcab48bc19a5d08a8bf",
-          "in_stock": true,
-          "date_time": "2026-06-05 12:00",
-          "vendor": "Amazon",
-          "item": "Soy Milk 1L",
-          "quantity": "2",
-          "price": "248.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=110",
-          "category": "Dairy"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "8861df3770e84b60863ce82e47ef4d1c",
@@ -13146,18 +13970,9 @@
           "quantity": "1",
           "price": "85.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=109",
-          "category": "Vegetables"
-        },
-        {
-          "id": "5efe7b8e941e485aadbd34ddc3a9633b",
-          "in_stock": true,
-          "date_time": "2026-06-02 12:00",
-          "vendor": "Amazon",
-          "item": "Idli Dosa Batter",
-          "quantity": "1",
-          "price": "41.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=19",
-          "category": "Dairy"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "46cc5160fef3437fb278d0e6af7601b6",
@@ -13168,7 +13983,9 @@
           "quantity": "1",
           "price": "64.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=18",
-          "category": "Protein / Health"
+          "category": "Protein / Health",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "cf97437c85d04653bb1f9d2ebef388f8",
@@ -13179,7 +13996,9 @@
           "quantity": "1",
           "price": "259.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=17",
-          "category": "Dry Fruits"
+          "category": "Dry Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "4453e1e9e01343618f79a552cc45a3c6",
@@ -13190,7 +14009,9 @@
           "quantity": "1",
           "price": "40.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=16",
-          "category": "Other Kitchen"
+          "category": "Other Kitchen",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "2670b08e75e14a119e758f2933a943a8",
@@ -13201,18 +14022,9 @@
           "quantity": "2",
           "price": "186.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=108",
-          "category": "Grains / Rice / Atta"
-        },
-        {
-          "id": "7c40bafab9df497788585443054473a1",
-          "in_stock": true,
-          "date_time": "2026-05-30 12:00",
-          "vendor": "Amazon",
-          "item": "Soy Milk 1L",
-          "quantity": "1",
-          "price": "128.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=107",
-          "category": "Dairy"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "b952f01caf8440feb7952ee7b8664096",
@@ -13223,7 +14035,9 @@
           "quantity": "1",
           "price": "35.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=106",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "7c73ee8552ec456fb0a0ab8498505ae6",
@@ -13234,7 +14048,9 @@
           "quantity": "3",
           "price": "456.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=105",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "94c91d773d2541119b62c5773839298d",
@@ -13245,7 +14061,9 @@
           "quantity": "1",
           "price": "27.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=104",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "e6444cadf69b4344a9a7ac9484462cd8",
@@ -13256,18 +14074,9 @@
           "quantity": "1",
           "price": "25.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=103",
-          "category": "Vegetables"
-        },
-        {
-          "id": "f9d263c246724c76b5af748b7eaf1e8a",
-          "in_stock": true,
-          "date_time": "2026-05-29 12:00",
-          "vendor": "Amazon",
-          "item": "Amul Dahi 380g",
-          "quantity": "1",
-          "price": "35.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=102",
-          "category": "Dairy"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "4658171db57c49509bd0f319f7466162",
@@ -13278,7 +14087,9 @@
           "quantity": "1",
           "price": "22.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=101",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "61066355237445218cc57d5d039dffac",
@@ -13289,7 +14100,9 @@
           "quantity": "2",
           "price": "294.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=36",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "16ebff2c2a8f42b9a0dba5a2942cac3e",
@@ -13300,7 +14113,9 @@
           "quantity": "1",
           "price": "49.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=35",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "2bd5cb4a842e43b8957ddf083f5ea123",
@@ -13311,7 +14126,9 @@
           "quantity": "1",
           "price": "129.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=34",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "80cf1c54cd8e472ca6e393cb87ba480f",
@@ -13322,7 +14139,9 @@
           "quantity": "1",
           "price": "0.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=33",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "5ca8aaf5bac4409982e86429ef3c956d",
@@ -13333,7 +14152,9 @@
           "quantity": "1",
           "price": "34.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=28",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "bac86b08138a4dc683b8182b33aaef70",
@@ -13344,7 +14165,9 @@
           "quantity": "2",
           "price": "90.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=27",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "56bef24401fd45c8866bdb2ba9437f56",
@@ -13355,7 +14178,9 @@
           "quantity": "1",
           "price": "130.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=26",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "ca22c5ea554a421b9ae37a0d51534f74",
@@ -13366,7 +14191,9 @@
           "quantity": "1",
           "price": "315.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=25",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "b69419fefa194ed8bc59706ac8a665f1",
@@ -13377,18 +14204,9 @@
           "quantity": "3",
           "price": "237.99",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=24",
-          "category": ""
-        },
-        {
-          "id": "14a86d90932c4006bc7bfc4d6e4d7d8b",
-          "in_stock": true,
-          "date_time": "2026-05-23 12:00",
-          "vendor": "Amazon",
-          "item": "Thick Curd",
-          "quantity": "1",
-          "price": "50.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=24",
-          "category": "Dairy"
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "867d8db1a9c7443ea1f496cedbc9d526",
@@ -13399,7 +14217,9 @@
           "quantity": "1",
           "price": "117.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=23",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "5d2fbb9609b44f078d85caebfe9eda73",
@@ -13410,18 +14230,9 @@
           "quantity": "1",
           "price": "89.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=22",
-          "category": "Fruits"
-        },
-        {
-          "id": "ce13ca2addac40e2b703d4ebfa33d669",
-          "in_stock": true,
-          "date_time": "2026-05-23 12:00",
-          "vendor": "Amazon",
-          "item": "Soy Milk 1L",
-          "quantity": "1",
-          "price": "126.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=21",
-          "category": "Dairy"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "5d02ea62b7ae4f29b8bd91bce6cca6c6",
@@ -13432,7 +14243,9 @@
           "quantity": "1",
           "price": "51.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=20",
-          "category": "Snacks / Makhana"
+          "category": "Snacks / Makhana",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "7991daac57f946b09f5b635015b9bce9",
@@ -13443,7 +14256,9 @@
           "quantity": "1",
           "price": "64.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=100",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "7a17f1bf1dde42e69d4cc1bc6c8cc562",
@@ -13454,7 +14269,9 @@
           "quantity": "1",
           "price": "178.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=99",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "f1fddb2b6a6b408d912214d287008dbc",
@@ -13465,7 +14282,9 @@
           "quantity": "1",
           "price": "156.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=98",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "c2c86f7e716d4c24be139e6433f8baf4",
@@ -13476,7 +14295,9 @@
           "quantity": "1",
           "price": "356.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=97",
-          "category": "Snacks / Makhana"
+          "category": "Snacks / Makhana",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "be938f9aa10d47ebaf0dfc16088c45e0",
@@ -13487,7 +14308,9 @@
           "quantity": "1",
           "price": "48.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=96",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "4d75e064faee4254afd39cd65dbd8cdd",
@@ -13498,7 +14321,9 @@
           "quantity": "1",
           "price": "21.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=95",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "6647286854ae4117959a46cf7e7d2d5c",
@@ -13509,7 +14334,9 @@
           "quantity": "1",
           "price": "34.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=94",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "2db94480853a4999ac698cfb204288f3",
@@ -13520,7 +14347,9 @@
           "quantity": "1",
           "price": "41.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=32",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "212cc3b291294417acb6bbb3b6812017",
@@ -13531,7 +14360,9 @@
           "quantity": "1",
           "price": "46.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=31",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "8dad35cd745040a0bfa8dfcc7b79716c",
@@ -13542,7 +14373,9 @@
           "quantity": "1",
           "price": "108.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=30",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "27db955082e84b999becc6f9c8823db6",
@@ -13553,7 +14386,9 @@
           "quantity": "1",
           "price": "70.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=29",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "9cd202a08cf94c14bb3ee3c362dc9736",
@@ -13564,18 +14399,9 @@
           "quantity": "1",
           "price": "34.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=93",
-          "category": "Fruits"
-        },
-        {
-          "id": "77abc4d18f9b48679c45d86fbca8e50f",
-          "in_stock": true,
-          "date_time": "2026-05-14 12:00",
-          "vendor": "Amazon",
-          "item": "Soy Milk 1L",
-          "quantity": "2",
-          "price": "256.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=92",
-          "category": "Dairy"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "19278300684a4ce6b2359d15de9adfdd",
@@ -13586,7 +14412,9 @@
           "quantity": "2",
           "price": "78.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=91",
-          "category": "Other Kitchen"
+          "category": "Other Kitchen",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "81275f21169241b6b3a483eaa4578b31",
@@ -13597,7 +14425,9 @@
           "quantity": "1",
           "price": "61.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=90",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "ae0c5f82995b43e1a0c287a56f5a057c",
@@ -13608,7 +14438,9 @@
           "quantity": "2",
           "price": "92.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=28",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "c1685ad759834c5ca3095326270b35a1",
@@ -13619,7 +14451,9 @@
           "quantity": "1",
           "price": "269.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=27",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "233e01f2ddd047779f4d31c83c5e202f",
@@ -13630,7 +14464,9 @@
           "quantity": "1",
           "price": "45.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=26",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "eea075b5fb884fcaaee1b148eda57732",
@@ -13641,7 +14477,9 @@
           "quantity": "2",
           "price": "243.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=25",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "49050ea60ce34646abd7440500c3a62c",
@@ -13652,7 +14490,9 @@
           "quantity": "1",
           "price": "0.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=24",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "dfcc8b14507a426d83ac9636db189a61",
@@ -13663,7 +14503,9 @@
           "quantity": "1",
           "price": "32.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=23",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "9d8b2fab03354cab88600edc0dfa833f",
@@ -13674,7 +14516,9 @@
           "quantity": "1",
           "price": "180.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=22",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "f863575c25e3464d813150c32bdea7ec",
@@ -13685,7 +14529,9 @@
           "quantity": "1",
           "price": "190.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=21",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "a55b06f92be140bc911f6f20cb29c537",
@@ -13696,7 +14542,9 @@
           "quantity": "1",
           "price": "50.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=20",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "da91245b106547ada1279daa9cf65548",
@@ -13707,7 +14555,9 @@
           "quantity": "1",
           "price": "109.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=19",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "861d311c1fd344a4917ab95d254dbc80",
@@ -13718,7 +14568,9 @@
           "quantity": "1",
           "price": "0.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=18",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "a9ac74fb365a43d892658992dde81e38",
@@ -13729,7 +14581,9 @@
           "quantity": "1",
           "price": "130.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=23",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "244804ea870f4e48be56b7ae00ea0ea9",
@@ -13740,7 +14594,9 @@
           "quantity": "1",
           "price": "106.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=22",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "8ff1522c14cd4a51aa4dee1b4245aa33",
@@ -13751,7 +14607,9 @@
           "quantity": "1",
           "price": "71.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=21",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "0796aa20ede44b1bae519cb508f99f3c",
@@ -13762,7 +14620,9 @@
           "quantity": "1",
           "price": "57.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=17",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "8ab951e8d7634fa0999e555de39f3ab2",
@@ -13773,7 +14633,9 @@
           "quantity": "1",
           "price": "130.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=16",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "371124942ccd49bc97f3dee5f838f60b",
@@ -13784,7 +14646,9 @@
           "quantity": "1",
           "price": "155.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=15",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "eca1d836e27c443fa0b6390109c39741",
@@ -13795,7 +14659,9 @@
           "quantity": "2",
           "price": "128.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=89",
-          "category": "Protein / Health"
+          "category": "Protein / Health",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "e5885be5d88942fbbe5cb834d93e397e",
@@ -13806,7 +14672,9 @@
           "quantity": "1",
           "price": "119.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=88",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "11a14cb0a04b45acad29715f464bae69",
@@ -13817,7 +14685,9 @@
           "quantity": "1",
           "price": "46.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=14",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "7f3d4e057b2447babec0686022ca266f",
@@ -13828,7 +14698,9 @@
           "quantity": "1",
           "price": "188.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=13",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "c75baa15ca28480bb83bb44f70ddab26",
@@ -13839,7 +14711,9 @@
           "quantity": "2",
           "price": "130.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=12",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "093105df4a6b49ad894f0499fc9442ff",
@@ -13850,7 +14724,9 @@
           "quantity": "2",
           "price": "258.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=11",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "ba87ba34b2104a548e94c1c4ad828b97",
@@ -13861,18 +14737,9 @@
           "quantity": "1",
           "price": "15.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=87",
-          "category": "Pickles / Papad / Chutney"
-        },
-        {
-          "id": "2518d7cba43644c9b08e035a56c8cb20",
-          "in_stock": true,
-          "date_time": "2026-04-12 12:00",
-          "vendor": "Amazon",
-          "item": "Butter 100g",
-          "quantity": "1",
-          "price": "69.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=86",
-          "category": "Dairy"
+          "category": "Pickles / Papad / Chutney",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "e9ba33a696f2412a8e4dd4c2839d403f",
@@ -13883,18 +14750,9 @@
           "quantity": "1",
           "price": "45.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=85",
-          "category": "Protein / Health"
-        },
-        {
-          "id": "047fbaf76020467da1c01440f050f723",
-          "in_stock": true,
-          "date_time": "2026-04-12 12:00",
-          "vendor": "Amazon",
-          "item": "Cheese Slices",
-          "quantity": "1",
-          "price": "122.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=84",
-          "category": "Dairy"
+          "category": "Protein / Health",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "3ba407fbd78140c9ba7dd973edef27e8",
@@ -13905,7 +14763,9 @@
           "quantity": "1",
           "price": "31.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=83",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "abe62bc964f146059353849d29e50efe",
@@ -13916,7 +14776,9 @@
           "quantity": "1",
           "price": "45.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=82",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "b0d33538dc324917b8a297afce3ce430",
@@ -13927,7 +14789,9 @@
           "quantity": "2",
           "price": "160.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=81",
-          "category": "Protein / Health"
+          "category": "Protein / Health",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "cbe49bbe7b7c4b228413062ad80216fd",
@@ -13938,7 +14802,9 @@
           "quantity": "1",
           "price": "145.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=80",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "0aa0a1b1f97a45128718329f13391147",
@@ -13949,7 +14815,9 @@
           "quantity": "1",
           "price": "12.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=79",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "341fd92b887f4232be9aae3fc1f2b228",
@@ -13960,7 +14828,9 @@
           "quantity": "1",
           "price": "39.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=78",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "05213043de744063890b6fbb62486f81",
@@ -13971,18 +14841,9 @@
           "quantity": "1",
           "price": "85.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=77",
-          "category": "Fruits"
-        },
-        {
-          "id": "594ec5b022ad4d4f8c2e25ca89dc7304",
-          "in_stock": true,
-          "date_time": "2026-04-06 12:00",
-          "vendor": "Amazon",
-          "item": "Soy Milk 200ml",
-          "quantity": "1",
-          "price": "37.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=76",
-          "category": "Dairy"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "8a7125b8da9445e3a28c5f09ba51d007",
@@ -13993,7 +14854,9 @@
           "quantity": "1",
           "price": "29.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=75",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "94fcb1ca5db14b02b5fb1984e52993cf",
@@ -14004,7 +14867,9 @@
           "quantity": "1",
           "price": "19.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=74",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "fb2ef938bd594306bfc558768c2f7cdd",
@@ -14015,7 +14880,9 @@
           "quantity": "1",
           "price": "149.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=20",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "c5fe00bc8754442ba5480b9d65fe0f96",
@@ -14026,7 +14893,9 @@
           "quantity": "1",
           "price": "0.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=19",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "6f853683e3524dcf8f423f27bc87d75f",
@@ -14037,7 +14906,9 @@
           "quantity": "1",
           "price": "299.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=18",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "771bb4222df54131a11d43d9e7dad4a3",
@@ -14048,7 +14919,9 @@
           "quantity": "1",
           "price": "0.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=17",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "36809c96f80f4950a221b90bb76e304a",
@@ -14059,7 +14932,9 @@
           "quantity": "1",
           "price": "91.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=73",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "d9ebdadc23134d7da4e7833b53ddb251",
@@ -14070,7 +14945,9 @@
           "quantity": "1",
           "price": "85.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=72",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "5e83be16082f487aa84e9925ac2e37fe",
@@ -14081,18 +14958,9 @@
           "quantity": "1",
           "price": "165.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=71",
-          "category": "Other Kitchen"
-        },
-        {
-          "id": "bd5b1ded4c184aa39da6391b91f48644",
-          "in_stock": true,
-          "date_time": "2026-03-28 12:00",
-          "vendor": "Amazon",
-          "item": "Amul Dahi 200g",
-          "quantity": "1",
-          "price": "23.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=70",
-          "category": "Dairy"
+          "category": "Other Kitchen",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "f3adef748b4649da86d717a8e2116184",
@@ -14103,7 +14971,9 @@
           "quantity": "1",
           "price": "61.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=69",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "acb5fdf378ed486cbc758abe01798822",
@@ -14114,7 +14984,9 @@
           "quantity": "1",
           "price": "137.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=68",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "357d2bd7a5544ce693e5e9b1c6fde88f",
@@ -14125,7 +14997,9 @@
           "quantity": "2",
           "price": "148.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=67",
-          "category": "Protein / Health"
+          "category": "Protein / Health",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "033aabf289d545dd9318489d25dfa683",
@@ -14136,18 +15010,9 @@
           "quantity": "1",
           "price": "249.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=66",
-          "category": "Protein / Health"
-        },
-        {
-          "id": "ac3ff53792124ef1b9b925f81954febe",
-          "in_stock": true,
-          "date_time": "2026-03-26 12:00",
-          "vendor": "Amazon",
-          "item": "Soy Milk 1L",
-          "quantity": "1",
-          "price": "124.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=65",
-          "category": "Dairy"
+          "category": "Protein / Health",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "68fb0d6a7fa24668b678876a95199aaa",
@@ -14158,7 +15023,9 @@
           "quantity": "1",
           "price": "36.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=64",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "a8d2cd1313ce45f29963b3044c868980",
@@ -14169,7 +15036,9 @@
           "quantity": "1",
           "price": "32.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=63",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "de820b403a0940b48f9856f35073fe93",
@@ -14180,7 +15049,9 @@
           "quantity": "1",
           "price": "129.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=62",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "18b7a8ec274a46778e962de03fa6eebe",
@@ -14191,7 +15062,9 @@
           "quantity": "1",
           "price": "64.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=61",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "4209711a0b1b4b2ab77cb066402c4bb6",
@@ -14202,7 +15075,9 @@
           "quantity": "1",
           "price": "74.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=60",
-          "category": "Protein / Health"
+          "category": "Protein / Health",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "b4796987902d4dd1b760094e4137a4a8",
@@ -14213,18 +15088,9 @@
           "quantity": "1",
           "price": "36.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=59",
-          "category": "Grains / Rice / Atta"
-        },
-        {
-          "id": "f2c7ce37563c4ce4a5f670d1d38007cb",
-          "in_stock": true,
-          "date_time": "2026-03-25 12:00",
-          "vendor": "Amazon",
-          "item": "Soy Milk 1L",
-          "quantity": "1",
-          "price": "124.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=58",
-          "category": "Dairy"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "098cbbd82ba44175b6ce85061ad118fe",
@@ -14235,7 +15101,9 @@
           "quantity": "1",
           "price": "85.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=57",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "1027c47644b34b2ea20f44927af41409",
@@ -14246,7 +15114,9 @@
           "quantity": "1",
           "price": "135.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=56",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "9906f8055e5c4eca849d4e992ed76127",
@@ -14257,7 +15127,9 @@
           "quantity": "1",
           "price": "83.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=55",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "1884f41317a94ddea1484e940011e46e",
@@ -14268,7 +15140,9 @@
           "quantity": "1",
           "price": "16.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=54",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "14df0f4954db41c0b2cb16a160dabd01",
@@ -14279,7 +15153,9 @@
           "quantity": "1",
           "price": "68.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=53",
-          "category": "Other Kitchen"
+          "category": "Other Kitchen",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "ea294592c6764f2396c1b95e4d538de4",
@@ -14290,7 +15166,9 @@
           "quantity": "1",
           "price": "74.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=52",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "dde30ba7aaf3411b96639e248dfe1e9b",
@@ -14301,7 +15179,9 @@
           "quantity": "1",
           "price": "142.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=51",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "af5fb6e849c6445abb448789ce98ed44",
@@ -14312,7 +15192,9 @@
           "quantity": "2",
           "price": "18.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=50",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "3b3b5355dc864dd096bd311ae95dd9ef",
@@ -14323,18 +15205,9 @@
           "quantity": "1",
           "price": "122.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=49",
-          "category": "Fruits"
-        },
-        {
-          "id": "dae2cf3d2ad14e808427940864c39f49",
-          "in_stock": true,
-          "date_time": "2026-03-17 12:00",
-          "vendor": "Amazon",
-          "item": "Almond Milk 1L",
-          "quantity": "1",
-          "price": "210.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=48",
-          "category": "Dairy"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "f37f47968d464e47aa00c0e00e500298",
@@ -14345,7 +15218,9 @@
           "quantity": "1",
           "price": "37.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=47",
-          "category": "Masale / Spices"
+          "category": "Masale / Spices",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "6a40cc46a8b14d20a2ba87e93c044449",
@@ -14356,7 +15231,9 @@
           "quantity": "2",
           "price": "70.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=46",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "f6e998ef56de42f99c85c79af8f41f95",
@@ -14367,7 +15244,9 @@
           "quantity": "1",
           "price": "30.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=45",
-          "category": "Snacks / Makhana"
+          "category": "Snacks / Makhana",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "b4a4f306dd77459ead62fe1d06b6e30b",
@@ -14378,7 +15257,9 @@
           "quantity": "1",
           "price": "249.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=44",
-          "category": "Protein / Health"
+          "category": "Protein / Health",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "ad34046153a24fad9243a979731b4fe6",
@@ -14389,7 +15270,9 @@
           "quantity": "1",
           "price": "85.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=43",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "7b470140e2dc41b8a0d40b70a89d4967",
@@ -14400,7 +15283,9 @@
           "quantity": "1",
           "price": "33.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=42",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "95738d7196484dd28e8420b5dce53de5",
@@ -14411,18 +15296,9 @@
           "quantity": "1",
           "price": "110.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=41",
-          "category": "Fruits"
-        },
-        {
-          "id": "a304a4d49eb34a7ba860483182332d2d",
-          "in_stock": true,
-          "date_time": "2026-03-09 12:00",
-          "vendor": "Amazon",
-          "item": "Soy Milk 1L",
-          "quantity": "1",
-          "price": "120.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=40",
-          "category": "Dairy"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "87cfc1a1d4e64182a889ef0b96c01dd9",
@@ -14433,7 +15309,9 @@
           "quantity": "1",
           "price": "68.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=39",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "7cd14079fbe542d88fbfe4b1ee59bbfe",
@@ -14444,7 +15322,9 @@
           "quantity": "1",
           "price": "107.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=38",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "f4e6b9a2edea4fcaa4044d27d7d3eb75",
@@ -14455,7 +15335,9 @@
           "quantity": "1",
           "price": "126.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=10",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "061328ea910e4e1f9fff0e4472eba4c4",
@@ -14466,7 +15348,9 @@
           "quantity": "1",
           "price": "74.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=9",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "d127e6e26d6d45379d1af10aa17bf02a",
@@ -14477,7 +15361,9 @@
           "quantity": "1",
           "price": "94.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=8",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "dc184d37064044f181ab8f368d5fbde8",
@@ -14488,7 +15374,9 @@
           "quantity": "1",
           "price": "156.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=16",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "38b6a9f2facf48ef91aeebe33157eb97",
@@ -14499,7 +15387,9 @@
           "quantity": "1",
           "price": "399.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=15",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "991fac5de18a4de086ad9de22a78c280",
@@ -14510,7 +15400,9 @@
           "quantity": "1",
           "price": "220.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=14",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "1f803ac5555b499ab788ed2e1af2d69e",
@@ -14521,18 +15413,9 @@
           "quantity": "1",
           "price": "125.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=37",
-          "category": "Grains / Rice / Atta"
-        },
-        {
-          "id": "eb68ce498cf541a8a1ab2e63cd02e264",
-          "in_stock": true,
-          "date_time": "2026-02-18 12:00",
-          "vendor": "Amazon",
-          "item": "Paneer 200g",
-          "quantity": "1",
-          "price": "81.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=36",
-          "category": "Dairy"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "884d91917faf4d6a8506911b0e909ebf",
@@ -14543,7 +15426,9 @@
           "quantity": "1",
           "price": "74.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=35",
-          "category": "Protein / Health"
+          "category": "Protein / Health",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "6c5bdc375ad94a87a41b862aed0e2db0",
@@ -14554,18 +15439,9 @@
           "quantity": "1",
           "price": "238.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=34",
-          "category": "Fruits"
-        },
-        {
-          "id": "48ec73dab4ea430ca142eb054379fc2b",
-          "in_stock": true,
-          "date_time": "2026-02-18 12:00",
-          "vendor": "Amazon",
-          "item": "Soy Milk 1L",
-          "quantity": "1",
-          "price": "126.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=33",
-          "category": "Dairy"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "116bd665d1d14eefaae44677e9822c31",
@@ -14576,7 +15452,9 @@
           "quantity": "1",
           "price": "70.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=13",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "e130e8660d214aaea8253a503b10e10d",
@@ -14587,7 +15465,9 @@
           "quantity": "1",
           "price": "87.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=12",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "4006c32336e34feba6309a3ce15f6969",
@@ -14598,7 +15478,9 @@
           "quantity": "1",
           "price": "260.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=11",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "0c9cda3350a5456b9b708d3915d602c1",
@@ -14609,7 +15491,9 @@
           "quantity": "1",
           "price": "39.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=7",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "f61dd530220a44498ca58d96ca63bb7a",
@@ -14620,7 +15504,9 @@
           "quantity": "1",
           "price": "103.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=6",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "c0b5d2d1366443fd90b8043f0cb449b7",
@@ -14631,7 +15517,9 @@
           "quantity": "1",
           "price": "79.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=5",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "9c0691b8ab3d4c038255680273ab6f73",
@@ -14642,7 +15530,9 @@
           "quantity": "1",
           "price": "0.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=4",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "d7448662e51748259e6bfeacf0cda639",
@@ -14653,7 +15543,9 @@
           "quantity": "1",
           "price": "449.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=3",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "cdc5a56ff5ea4f51885b614b028cb0a7",
@@ -14664,7 +15556,9 @@
           "quantity": "1",
           "price": "178.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_purchase_log_set_2.csv; source_row=2",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "8767c6fc73544ba5a4ed65bc8a2f9b57",
@@ -14675,18 +15569,9 @@
           "quantity": "1",
           "price": "70.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=32",
-          "category": "Pickles / Papad / Chutney"
-        },
-        {
-          "id": "8ab5111bb14d4e2589d8bcc8994ddc6b",
-          "in_stock": true,
-          "date_time": "2026-02-02 12:00",
-          "vendor": "Amazon",
-          "item": "Almond Milk 1L",
-          "quantity": "1",
-          "price": "241.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=31",
-          "category": "Dairy"
+          "category": "Pickles / Papad / Chutney",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "ac1637efdeaf4260af02f08348fc2747",
@@ -14697,7 +15582,9 @@
           "quantity": "1",
           "price": "232.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=30",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "f7fd2fdc95c0440ea3426d881dd2f489",
@@ -14708,7 +15595,9 @@
           "quantity": "1",
           "price": "117.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=29",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "d818596481f249959003605d228c03e4",
@@ -14719,7 +15608,9 @@
           "quantity": "1",
           "price": "98.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=28",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "3bf08710605d43f6b72a6dfafa4d0286",
@@ -14730,7 +15621,9 @@
           "quantity": "1",
           "price": "59.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=27",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "e249b09e885e42c7be80795035e039b3",
@@ -14741,7 +15634,9 @@
           "quantity": "1",
           "price": "21.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=26",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "5c4f1d95789f477abf95b40e813d6895",
@@ -14752,7 +15647,9 @@
           "quantity": "1",
           "price": "89.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=25",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "00b9fab17d2f47a9b15c51107dad9bb7",
@@ -14763,7 +15660,9 @@
           "quantity": "1",
           "price": "15.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=24",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "e50e627c334c41de9954f7e3be1bc1e0",
@@ -14774,7 +15673,9 @@
           "quantity": "1",
           "price": "242.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=23",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "6b99e1e0b021465789cbcf727f29e1c2",
@@ -14785,7 +15686,9 @@
           "quantity": "1",
           "price": "80.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=22",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "59c08e292d32464ea8800163a920dc47",
@@ -14796,7 +15699,9 @@
           "quantity": "1",
           "price": "139.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=21",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "f5d59d3ac01141b893482342c6e8c875",
@@ -14807,7 +15712,9 @@
           "quantity": "1",
           "price": "72.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=20",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "249edef2bb9646769b656fb9a0ef962e",
@@ -14818,7 +15725,9 @@
           "quantity": "1",
           "price": "42.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=19",
-          "category": "Vegetables"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "14d626746c8c44b780ad7115e4986291",
@@ -14829,18 +15738,9 @@
           "quantity": "1",
           "price": "35.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=18",
-          "category": "Vegetables"
-        },
-        {
-          "id": "0019c5eccdce4d44a050f1c957e69a41",
-          "in_stock": true,
-          "date_time": "2026-01-29 12:00",
-          "vendor": "Amazon",
-          "item": "Amul Dahi 200g",
-          "quantity": "1",
-          "price": "23.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=17",
-          "category": "Dairy"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "900fddd8b9c54849b1b0921e94726f4d",
@@ -14851,18 +15751,9 @@
           "quantity": "1",
           "price": "244.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=16",
-          "category": "Fruits"
-        },
-        {
-          "id": "53cffbb03a4d4f2e977af8ebffb734b2",
-          "in_stock": true,
-          "date_time": "2026-01-29 12:00",
-          "vendor": "Amazon",
-          "item": "Soy Milk 1L",
-          "quantity": "1",
-          "price": "127.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=15",
-          "category": "Dairy"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "71593a7eb98c49e4a6e16529a305974f",
@@ -14873,18 +15764,9 @@
           "quantity": "1",
           "price": "30.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=14",
-          "category": "Vegetables"
-        },
-        {
-          "id": "222dbbd8babc4bf1a899ee18dddc6174",
-          "in_stock": true,
-          "date_time": "2026-01-27 12:00",
-          "vendor": "Amazon",
-          "item": "Almond Milk 1L",
-          "quantity": "1",
-          "price": "239.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=13",
-          "category": "Dairy"
+          "category": "Vegetables",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "5694a8bdb7554d1883b05f3b27b77949",
@@ -14895,7 +15777,9 @@
           "quantity": "1",
           "price": "139.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=12",
-          "category": "Grains / Rice / Atta"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "7cba7e51548a441680c7b5c396c5d521",
@@ -14906,7 +15790,9 @@
           "quantity": "1",
           "price": "84.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=11",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "034f8c3a725e408182a930bb31b9b6c5",
@@ -14917,29 +15803,9 @@
           "quantity": "1",
           "price": "86.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=10",
-          "category": "Grains / Rice / Atta"
-        },
-        {
-          "id": "96e7cff8f4294533acc8788650b3ab13",
-          "in_stock": true,
-          "date_time": "2026-01-21 12:00",
-          "vendor": "Amazon",
-          "item": "Soy Milk 1L",
-          "quantity": "1",
-          "price": "128.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=9",
-          "category": "Dairy"
-        },
-        {
-          "id": "de80e4bc08854dc4941379ed3181f658",
-          "in_stock": true,
-          "date_time": "2026-01-21 12:00",
-          "vendor": "Amazon",
-          "item": "Amul Dahi 200g",
-          "quantity": "1",
-          "price": "23.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=8",
-          "category": "Dairy"
+          "category": "Grains / Rice / Atta",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "4ed5c3481bc64c5d9ee2be3ed59fe30f",
@@ -14950,7 +15816,9 @@
           "quantity": "1",
           "price": "201.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=7",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "0bb18fa357df499383066ff004f42367",
@@ -14961,7 +15829,9 @@
           "quantity": "1",
           "price": "243.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=6",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "2f76458b94974c11bae2c62ef12d503f",
@@ -14972,7 +15842,9 @@
           "quantity": "1",
           "price": "80.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=5",
-          "category": "Snacks / Makhana"
+          "category": "Snacks / Makhana",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "f90e9c2bc6424e40a5df3caefe5f47c3",
@@ -14983,7 +15855,9 @@
           "quantity": "2",
           "price": "252.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=4",
-          "category": "Fruits"
+          "category": "Fruits",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "079dd975f99a411dba8573c84cebd9ff",
@@ -14994,18 +15868,9 @@
           "quantity": "2",
           "price": "148.00",
           "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=3",
-          "category": "Protein / Health"
-        },
-        {
-          "id": "893bedcc66e14b9582f35ed02df4aae0",
-          "in_stock": true,
-          "date_time": "2026-01-19 12:00",
-          "vendor": "Amazon",
-          "item": "Soy Milk 200ml",
-          "quantity": "1",
-          "price": "34.00",
-          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=2",
-          "category": "Dairy"
+          "category": "Protein / Health",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "35a1cf0b54ce45f28809f5e1fdfbc297",
@@ -15016,7 +15881,9 @@
           "quantity": "1",
           "price": "125.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=10",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "ad983fd8a72c48929fcab07c84a4b55b",
@@ -15027,7 +15894,9 @@
           "quantity": "1",
           "price": "65.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=9",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "45ca2953cc9644e4b7856d050b39da9f",
@@ -15038,7 +15907,9 @@
           "quantity": "1",
           "price": "276.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=8",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "19eea4dbc984421c8f3e2fb52caf7527",
@@ -15049,7 +15920,9 @@
           "quantity": "1",
           "price": "20.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=7",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "b6585fa5271c48e2a130091b95b3dcdd",
@@ -15060,7 +15933,9 @@
           "quantity": "1",
           "price": "85.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=6",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "9bf240a3a8874f108f4c04b7c5a6562c",
@@ -15071,7 +15946,9 @@
           "quantity": "1",
           "price": "50.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=5",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "d634e3d03e8a43598720581a93b8e016",
@@ -15082,7 +15959,9 @@
           "quantity": "1",
           "price": "125.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=4",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "c68a701772ce44038c2e17b61ff93202",
@@ -15093,7 +15972,9 @@
           "quantity": "1",
           "price": "26.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=3",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         },
         {
           "id": "22cc710b03964704ada572305c992df5",
@@ -15104,10 +15985,519 @@
           "quantity": "1",
           "price": "65.00",
           "note": "Imported Blinkit CSV batch=blinkit-20260713-shreya-import-001; source_file=blinkit_consolidated_purchase_log.csv; source_row=2",
-          "category": ""
+          "category": "",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "61678f0653134e21923216268995d11d",
+          "in_stock": true,
+          "date_time": "2026-07-13 14:48",
+          "vendor": "SATJEEVAN ORGANIC",
+          "item": "Organic Vedic Gir Cow Bilona Ghee  | 1 |",
+          "quantity": "1000ml",
+          "price": "2400.00",
+          "note": "",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "purchase_log_live"
+        },
+        {
+          "id": "aa6697aaaf664a2581ce9bc097b31c9b",
+          "in_stock": true,
+          "date_time": "2026-07-12 12:00",
+          "vendor": "Amazon",
+          "item": "Soy Milk 1L",
+          "quantity": "2",
+          "price": "254.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=6",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "6a85253a7db24f1a9220d9253a776ff3",
+          "in_stock": true,
+          "date_time": "2026-07-01 12:00",
+          "vendor": "Amazon",
+          "item": "Soy Milk 1L",
+          "quantity": "2",
+          "price": "254.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=12",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "b161e8348627406dab270b4a4a802054",
+          "in_stock": true,
+          "date_time": "2026-06-20",
+          "vendor": "Sodhi's Super Market Sector 46 Gurgaon",
+          "item": "Amma Idli Dosa Batter 500g",
+          "quantity": "0 pc",
+          "price": "10",
+          "note": "Bill 048638 | Rate Rs 10 | Amount Rs 10 | Marked finished because bought before 2026-07-07.",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "50c747be70e8476ab47954f644472776",
+          "in_stock": true,
+          "date_time": "2026-06-20",
+          "vendor": "Sodhi's Super Market Sector 46 Gurgaon",
+          "item": "Britannia Processed Cream Cheese 180g",
+          "quantity": "0 pc",
+          "price": "190",
+          "note": "Bill 048638 | Rate Rs 190 | Amount Rs 190 | Marked finished because bought before 2026-07-07.",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "1ed8edd0e6934956a6c2602074f3dfd8",
+          "in_stock": true,
+          "date_time": "2026-06-18 12:00",
+          "vendor": "Amazon",
+          "item": "Soy Milk 1L",
+          "quantity": "2",
+          "price": "257.75",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=14",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "a72e37ef2c864fcab48bc19a5d08a8bf",
+          "in_stock": true,
+          "date_time": "2026-06-05 12:00",
+          "vendor": "Amazon",
+          "item": "Soy Milk 1L",
+          "quantity": "2",
+          "price": "248.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=110",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "5efe7b8e941e485aadbd34ddc3a9633b",
+          "in_stock": true,
+          "date_time": "2026-06-02 12:00",
+          "vendor": "Amazon",
+          "item": "Idli Dosa Batter",
+          "quantity": "1",
+          "price": "41.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=19",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "7c40bafab9df497788585443054473a1",
+          "in_stock": true,
+          "date_time": "2026-05-30 12:00",
+          "vendor": "Amazon",
+          "item": "Soy Milk 1L",
+          "quantity": "1",
+          "price": "128.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=107",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "f9d263c246724c76b5af748b7eaf1e8a",
+          "in_stock": true,
+          "date_time": "2026-05-29 12:00",
+          "vendor": "Amazon",
+          "item": "Amul Dahi 380g",
+          "quantity": "1",
+          "price": "35.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=102",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "14a86d90932c4006bc7bfc4d6e4d7d8b",
+          "in_stock": true,
+          "date_time": "2026-05-23 12:00",
+          "vendor": "Amazon",
+          "item": "Thick Curd",
+          "quantity": "1",
+          "price": "50.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=24",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "ce13ca2addac40e2b703d4ebfa33d669",
+          "in_stock": true,
+          "date_time": "2026-05-23 12:00",
+          "vendor": "Amazon",
+          "item": "Soy Milk 1L",
+          "quantity": "1",
+          "price": "126.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-001; source_file=amazon_purchase_history_2026_set_1.csv; source_row=21",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "77abc4d18f9b48679c45d86fbca8e50f",
+          "in_stock": true,
+          "date_time": "2026-05-14 12:00",
+          "vendor": "Amazon",
+          "item": "Soy Milk 1L",
+          "quantity": "2",
+          "price": "256.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=92",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "2518d7cba43644c9b08e035a56c8cb20",
+          "in_stock": true,
+          "date_time": "2026-04-12 12:00",
+          "vendor": "Amazon",
+          "item": "Butter 100g",
+          "quantity": "1",
+          "price": "69.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=86",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "047fbaf76020467da1c01440f050f723",
+          "in_stock": true,
+          "date_time": "2026-04-12 12:00",
+          "vendor": "Amazon",
+          "item": "Cheese Slices",
+          "quantity": "1",
+          "price": "122.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=84",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "594ec5b022ad4d4f8c2e25ca89dc7304",
+          "in_stock": true,
+          "date_time": "2026-04-06 12:00",
+          "vendor": "Amazon",
+          "item": "Soy Milk 200ml",
+          "quantity": "1",
+          "price": "37.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=76",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "bd5b1ded4c184aa39da6391b91f48644",
+          "in_stock": true,
+          "date_time": "2026-03-28 12:00",
+          "vendor": "Amazon",
+          "item": "Amul Dahi 200g",
+          "quantity": "1",
+          "price": "23.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=70",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "ac3ff53792124ef1b9b925f81954febe",
+          "in_stock": true,
+          "date_time": "2026-03-26 12:00",
+          "vendor": "Amazon",
+          "item": "Soy Milk 1L",
+          "quantity": "1",
+          "price": "124.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=65",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "f2c7ce37563c4ce4a5f670d1d38007cb",
+          "in_stock": true,
+          "date_time": "2026-03-25 12:00",
+          "vendor": "Amazon",
+          "item": "Soy Milk 1L",
+          "quantity": "1",
+          "price": "124.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=58",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "dae2cf3d2ad14e808427940864c39f49",
+          "in_stock": true,
+          "date_time": "2026-03-17 12:00",
+          "vendor": "Amazon",
+          "item": "Almond Milk 1L",
+          "quantity": "1",
+          "price": "210.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=48",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "a304a4d49eb34a7ba860483182332d2d",
+          "in_stock": true,
+          "date_time": "2026-03-09 12:00",
+          "vendor": "Amazon",
+          "item": "Soy Milk 1L",
+          "quantity": "1",
+          "price": "120.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=40",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "eb68ce498cf541a8a1ab2e63cd02e264",
+          "in_stock": true,
+          "date_time": "2026-02-18 12:00",
+          "vendor": "Amazon",
+          "item": "Paneer 200g",
+          "quantity": "1",
+          "price": "81.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=36",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "48ec73dab4ea430ca142eb054379fc2b",
+          "in_stock": true,
+          "date_time": "2026-02-18 12:00",
+          "vendor": "Amazon",
+          "item": "Soy Milk 1L",
+          "quantity": "1",
+          "price": "126.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=33",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "8ab5111bb14d4e2589d8bcc8994ddc6b",
+          "in_stock": true,
+          "date_time": "2026-02-02 12:00",
+          "vendor": "Amazon",
+          "item": "Almond Milk 1L",
+          "quantity": "1",
+          "price": "241.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=31",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "0019c5eccdce4d44a050f1c957e69a41",
+          "in_stock": true,
+          "date_time": "2026-01-29 12:00",
+          "vendor": "Amazon",
+          "item": "Amul Dahi 200g",
+          "quantity": "1",
+          "price": "23.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=17",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "53cffbb03a4d4f2e977af8ebffb734b2",
+          "in_stock": true,
+          "date_time": "2026-01-29 12:00",
+          "vendor": "Amazon",
+          "item": "Soy Milk 1L",
+          "quantity": "1",
+          "price": "127.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=15",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "222dbbd8babc4bf1a899ee18dddc6174",
+          "in_stock": true,
+          "date_time": "2026-01-27 12:00",
+          "vendor": "Amazon",
+          "item": "Almond Milk 1L",
+          "quantity": "1",
+          "price": "239.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=13",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "96e7cff8f4294533acc8788650b3ab13",
+          "in_stock": true,
+          "date_time": "2026-01-21 12:00",
+          "vendor": "Amazon",
+          "item": "Soy Milk 1L",
+          "quantity": "1",
+          "price": "128.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=9",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "de80e4bc08854dc4941379ed3181f658",
+          "in_stock": true,
+          "date_time": "2026-01-21 12:00",
+          "vendor": "Amazon",
+          "item": "Amul Dahi 200g",
+          "quantity": "1",
+          "price": "23.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=8",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
+        },
+        {
+          "id": "893bedcc66e14b9582f35ed02df4aae0",
+          "in_stock": true,
+          "date_time": "2026-01-19 12:00",
+          "vendor": "Amazon",
+          "item": "Soy Milk 200ml",
+          "quantity": "1",
+          "price": "34.00",
+          "note": "Imported purchase CSV batch=amazon-20260713-shreya-import-002; source_file=amazon_purchase_history_2026_set_2.csv; source_row=2",
+          "category": "Dairy",
+          "inventory_synced": true,
+          "inventory_sync_source": "existing_inventory"
         }
       ],
       "kitchen_inventory_rows": [
+        {
+          "id": "f03574ca1ef448249bff9742b6ae1499",
+          "in_stock": true,
+          "item": "Courier | |",
+          "quantity": "1 unit",
+          "vendor": "SATJEEVAN ORGANIC",
+          "note": "",
+          "category": "Other Kitchen"
+        },
+        {
+          "id": "7540f26c233b4f7e81ef222e2ed76df8",
+          "in_stock": true,
+          "item": "Organic Matar White Peas  | 1 |",
+          "quantity": "500 g",
+          "vendor": "SATJEEVAN ORGANIC",
+          "note": "",
+          "category": "Grains / Rice / Atta"
+        },
+        {
+          "id": "69126ca48642421bb0ce668da8806bd9",
+          "in_stock": true,
+          "item": "Organic Moong Sesame Crunchies  | 1 |",
+          "quantity": "100 g",
+          "vendor": "SATJEEVAN ORGANIC",
+          "note": "",
+          "category": "Other Kitchen"
+        },
+        {
+          "id": "72ca024971d443b593951b5249ff866f",
+          "in_stock": true,
+          "item": "Organic Basil Pesto Sauce  | 1 |",
+          "quantity": "200 g",
+          "vendor": "SATJEEVAN ORGANIC",
+          "note": "",
+          "category": "Other Kitchen"
+        },
+        {
+          "id": "d4257875f39d490ba64192e3fe47c227",
+          "in_stock": true,
+          "item": "Organic Pasta Fusilli Yellow Moong (GF)  | 1 |",
+          "quantity": "500 g",
+          "vendor": "SATJEEVAN ORGANIC",
+          "note": "",
+          "category": "Other Kitchen"
+        },
+        {
+          "id": "73669804eef8439096597829350d86db",
+          "in_stock": true,
+          "item": "Organic Vedic Gir Cow Bilona Ghee  | 1 |",
+          "quantity": "1000 ml",
+          "vendor": "SATJEEVAN ORGANIC",
+          "note": "",
+          "category": "Other Kitchen"
+        },
+        {
+          "id": "8a19ee4854b54c0999c43db7255812ff",
+          "in_stock": true,
+          "item": "Litchi |  | \u20b9",
+          "quantity": "0.52 kg",
+          "vendor": "Sodhi's Sector 46",
+          "note": "",
+          "category": "Fruits"
+        },
+        {
+          "id": "7971c8ec4c7c480580ced1eb6799713a",
+          "in_stock": true,
+          "item": "Jamun  Box | 2 boxes * 1kg | \u20b9",
+          "quantity": "2 kg",
+          "vendor": "Sodhi's Sector 46",
+          "note": "",
+          "category": "Fruits"
+        },
+        {
+          "id": "b8b4f56e145e48a5966e889514b0fda2",
+          "in_stock": true,
+          "item": "Afghan Cherry |  | \u20b9",
+          "quantity": "1 pack",
+          "vendor": "Sodhi's Sector 46",
+          "note": "",
+          "category": "Fruits"
+        },
+        {
+          "id": "5909e59553a149109de6aed5db804f64",
+          "in_stock": true,
+          "item": "Sodhi's Pumpkin Seeds  | 1 pack | \u20b9",
+          "quantity": "100 g",
+          "vendor": "Sodhi's Sector 46",
+          "note": "",
+          "category": "Dry Fruits / Seeds"
+        },
+        {
+          "id": "ad2300b30101480387d787ecb9ed7581",
+          "in_stock": true,
+          "item": "Safeda Mango (Premium) |  | \u20b9",
+          "quantity": "1.63 kg",
+          "vendor": "Sodhi's Sector 46",
+          "note": "",
+          "category": "Fruits"
+        },
+        {
+          "id": "bf62b46e6ca84acea8c6e4d989dc460c",
+          "in_stock": true,
+          "item": "Sweet Potato |  | \u20b9",
+          "quantity": "0.61 kg",
+          "vendor": "Sodhi's Sector 46",
+          "note": "",
+          "category": "Vegetables"
+        },
+        {
+          "id": "eb18497cc40e4b96962dd73fb5195033",
+          "in_stock": true,
+          "item": "Hybrid Cucumber |  | \u20b9",
+          "quantity": "1.34 kg",
+          "vendor": "Sodhi's Sector 46",
+          "note": "",
+          "category": "Vegetables"
+        },
         {
           "id": "0c69fecadca44287a7a634c2f95a3717",
           "in_stock": true,
@@ -15500,7 +16890,11 @@
       "shopping_manual_rows": [],
       "simple_item_memory": {
         "categories": {
-          "soy milk 1l": "Dairy",
+          "organic pasta fusilli yellow moong gf 1": "Other Kitchen",
+          "organic basil pesto sauce 1": "Other Kitchen",
+          "organic moong sesame crunchies 1": "Other Kitchen",
+          "organic matar white peas 1": "Grains / Rice / Atta",
+          "courier": "Other Kitchen",
           "green capsicum 500g": "Vegetables",
           "carrot 500g": "Vegetables",
           "tomato 500g": "Vegetables",
@@ -15508,10 +16902,10 @@
           "hybrid cucumber": "Vegetables",
           "sweet potato": "Vegetables",
           "safeda mango premium": "Fruits",
-          "sodhi s pumpkin seeds 1 pack": "dry fruits",
-          "afghan cherry": "fruits",
-          "jamun box 2 boxes 1kg": "fruits",
-          "litchi": "fruits",
+          "sodhi s pumpkin seeds 1 pack": "Dry Fruits / Seeds",
+          "afghan cherry": "Fruits",
+          "jamun box 2 boxes 1kg": "Fruits",
+          "litchi": "Fruits",
           "coriander leaves": "Vegetables",
           "bottle gourd lauki": "Vegetables",
           "red onion": "Vegetables",
@@ -15559,23 +16953,18 @@
           "manjeet black salt 200g": "Masale / Spices",
           "sodhilicious brown sandwich bread": "Snacks / Makhana",
           "sodhi s haldi powder 500g": "Masale / Spices",
-          "amma idli dosa batter 500g": "Dairy",
-          "britannia processed cream cheese 180g": "Dairy",
           "kashmir cherry 1kg pack": "Fruits",
           "jamun packet box": "Fruits",
           "jowar macaroni": "Grains / Rice / Atta",
           "frozen sweet corn 200g": "Vegetables",
           "kiwi green 3 pcs": "Fruits",
           "frozen sweet corn 500g": "Vegetables",
-          "idli dosa batter": "Dairy",
           "tofu 200g": "Protein / Health",
           "cashews 200g": "Dry Fruits",
           "white sesame seeds": "Other Kitchen",
           "rajma 500g": "Grains / Rice / Atta",
           "capsicum 500g": "Vegetables",
-          "amul dahi 380g": "Dairy",
           "cabbage": "Vegetables",
-          "thick curd": "Dairy",
           "mtr dosa mix": "Grains / Rice / Atta",
           "bhujia": "Snacks / Makhana",
           "watermelon": "Fruits",
@@ -15584,16 +16973,12 @@
           "idli dosa batter 500g": "Other Kitchen",
           "coconut chunks 100g": "Fruits",
           "tomato ketchup": "Pickles / Papad / Chutney",
-          "butter 100g": "Dairy",
           "protein pav": "Protein / Health",
-          "cheese slices": "Dairy",
           "iceberg lettuce": "Vegetables",
           "burger buns": "Grains / Rice / Atta",
           "coriander": "Vegetables",
-          "soy milk 200ml": "Dairy",
           "onion 1kg": "Vegetables",
           "toor dal 500g": "Grains / Rice / Atta",
-          "amul dahi 200g": "Dairy",
           "chana dal 500g": "Grains / Rice / Atta",
           "chana sattu 1kg": "Protein / Health",
           "drumstick": "Vegetables",
@@ -15602,12 +16987,10 @@
           "thai guava": "Fruits",
           "mint leaves": "Vegetables",
           "olive rosemary sourdough": "Grains / Rice / Atta",
-          "almond milk 1l": "Dairy",
           "whole red chilli": "Masale / Spices",
           "ragi chips": "Snacks / Makhana",
           "white peas 1kg": "Grains / Rice / Atta",
           "21 grain bread": "Grains / Rice / Atta",
-          "paneer 200g": "Dairy",
           "pomegranate 4 pcs": "Fruits",
           "masala papad 200g": "Pickles / Papad / Chutney",
           "frozen sweet corn 1kg": "Vegetables",
@@ -15621,10 +17004,27 @@
           "cucumber 500g": "Vegetables",
           "ragi atta 1kg": "Grains / Rice / Atta",
           "kiwi gold 500g": "Fruits",
-          "banana chips": "Snacks / Makhana"
+          "banana chips": "Snacks / Makhana",
+          "organic vedic gir cow bilona ghee 1": "Other Kitchen",
+          "soy milk 1l": "Dairy",
+          "amma idli dosa batter 500g": "Dairy",
+          "britannia processed cream cheese 180g": "Dairy",
+          "idli dosa batter": "Dairy",
+          "amul dahi 380g": "Dairy",
+          "thick curd": "Dairy",
+          "butter 100g": "Dairy",
+          "cheese slices": "Dairy",
+          "soy milk 200ml": "Dairy",
+          "amul dahi 200g": "Dairy",
+          "almond milk 1l": "Dairy",
+          "paneer 200g": "Dairy"
         },
         "vendors": {
-          "soy milk 1l": "Amazon",
+          "organic pasta fusilli yellow moong gf 1": "SATJEEVAN ORGANIC",
+          "organic basil pesto sauce 1": "SATJEEVAN ORGANIC",
+          "organic moong sesame crunchies 1": "SATJEEVAN ORGANIC",
+          "organic matar white peas 1": "SATJEEVAN ORGANIC",
+          "courier": "SATJEEVAN ORGANIC",
           "green capsicum 500g": "Amazon",
           "carrot 500g": "Amazon",
           "tomato 500g": "Amazon",
@@ -15692,8 +17092,6 @@
           "manjeet black salt 200g": "Sodhi's Super Market Sector 46 Gurgaon",
           "sodhilicious brown sandwich bread": "Sodhi's Super Market Sector 46 Gurgaon",
           "sodhi s haldi powder 500g": "Sodhi's Super Market Sector 46 Gurgaon",
-          "amma idli dosa batter 500g": "Sodhi's Super Market Sector 46 Gurgaon",
-          "britannia processed cream cheese 180g": "Sodhi's Super Market Sector 46 Gurgaon",
           "kashmir cherry 1kg pack": "Sodhi's Super Market Sector 46 Gurgaon",
           "jamun packet box": "Sodhi's Super Market Sector 46 Gurgaon",
           "jowar macaroni": "Amazon",
@@ -15709,13 +17107,11 @@
           "frozen sweet corn 200g": "Amazon",
           "kiwi green 3 pcs": "Amazon",
           "frozen sweet corn 500g": "Amazon",
-          "idli dosa batter": "Amazon",
           "tofu 200g": "Amazon",
           "cashews 200g": "Amazon",
           "white sesame seeds": "Amazon",
           "rajma 500g": "Amazon",
           "capsicum 500g": "Amazon",
-          "amul dahi 380g": "Amazon",
           "cabbage": "Amazon",
           "jamun pack": "Blinkit",
           "lifelong vegetable peeler plastic stainless steel box": "Blinkit",
@@ -15724,7 +17120,6 @@
           "harvest gold butter pav packet": "Blinkit",
           "godrej aer power pocket air freshener assorted pack of 5": "Blinkit",
           "harpic hygienic toilet cleaner block lavender pack": "Blinkit",
-          "thick curd": "Amazon",
           "mtr dosa mix": "Amazon",
           "bhujia": "Amazon",
           "watermelon": "Amazon",
@@ -15750,20 +17145,16 @@
           "gainda phenyl white pack": "Blinkit",
           "rajdhani chana sattu pack": "Blinkit",
           "tomato ketchup": "Amazon",
-          "butter 100g": "Amazon",
           "protein pav": "Amazon",
-          "cheese slices": "Amazon",
           "iceberg lettuce": "Amazon",
           "burger buns": "Amazon",
           "coriander": "Amazon",
-          "soy milk 200ml": "Amazon",
           "onion 1kg": "Amazon",
           "foodie puppies mini pellet fish food for aquarium fish packet": "Blinkit",
           "nootie stylish cat collar with bow tie green pouch": "Blinkit",
           "retirement party decoration kit by party propz packet": "Blinkit",
           "joy hydra refresh ultra light moisturizing cream container": "Blinkit",
           "toor dal 500g": "Amazon",
-          "amul dahi 200g": "Amazon",
           "chana dal 500g": "Amazon",
           "chana sattu 1kg": "Amazon",
           "drumstick": "Amazon",
@@ -15772,7 +17163,6 @@
           "thai guava": "Amazon",
           "mint leaves": "Amazon",
           "olive rosemary sourdough": "Amazon",
-          "almond milk 1l": "Amazon",
           "whole red chilli": "Amazon",
           "ragi chips": "Amazon",
           "white peas 1kg": "Amazon",
@@ -15782,7 +17172,6 @@
           "morinaga firm tofu pack": "Blinkit",
           "swaadesi dryfruit coconut gujia by unibic": "Blinkit",
           "21 grain bread": "Amazon",
-          "paneer 200g": "Amazon",
           "pomegranate 4 pcs": "Amazon",
           "green kiwi pack": "Blinkit",
           "24 mantra organic cold pressed mustard oil pack": "Blinkit",
@@ -15810,7 +17199,20 @@
           "lemon 200 g pack": "Blinkit",
           "safal sweet corn frozen pack": "Blinkit",
           "organically grown sweet potato pack": "Blinkit",
-          "curry leaves pack": "Blinkit"
+          "curry leaves pack": "Blinkit",
+          "organic vedic gir cow bilona ghee 1": "SATJEEVAN ORGANIC",
+          "soy milk 1l": "Amazon",
+          "amma idli dosa batter 500g": "Sodhi's Super Market Sector 46 Gurgaon",
+          "britannia processed cream cheese 180g": "Sodhi's Super Market Sector 46 Gurgaon",
+          "idli dosa batter": "Amazon",
+          "amul dahi 380g": "Amazon",
+          "thick curd": "Amazon",
+          "butter 100g": "Amazon",
+          "cheese slices": "Amazon",
+          "soy milk 200ml": "Amazon",
+          "amul dahi 200g": "Amazon",
+          "almond milk 1l": "Amazon",
+          "paneer 200g": "Amazon"
         }
       },
       "simple_shopping_overrides": {
