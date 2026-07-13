@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One-off backend importer for Blinkit purchase CSVs into a user profile store."""
+"""One-off backend importer for purchase CSVs into a user profile store."""
 
 from __future__ import annotations
 
@@ -18,8 +18,28 @@ from uuid import uuid4
 
 
 DEFAULT_TIME = "12:00"
-EXPECTED_COLUMNS = ["Vendor", "Item", "Quantity", "Price (INR)", "Date & Time"]
-IMPORT_NOTE_PREFIX = "Imported Blinkit CSV batch="
+IMPORT_NOTE_PREFIX = "Imported purchase CSV batch="
+LEGACY_IMPORT_NOTE_PREFIXES = (
+    "Imported Blinkit CSV batch=",
+    "Imported purchase CSV batch=",
+)
+HEADER_ALIASES = {
+    "vendor": "vendor",
+    "item": "item",
+    "product name": "item",
+    "product": "item",
+    "quantity": "quantity",
+    "qty": "quantity",
+    "price (inr)": "price",
+    "price": "price",
+    "total price": "price",
+    "date & time": "date_time",
+    "date": "date_time",
+    "purchase date": "date_time",
+    "purchase date/time": "date_time",
+    "category": "category",
+}
+REQUIRED_COLUMNS = {"vendor", "item", "quantity", "price", "date_time"}
 
 
 @dataclass
@@ -31,6 +51,7 @@ class ParsedRow:
     quantity: str
     price: str
     date_time: str
+    category: str
     key: tuple[str, str, str, str, str]
 
 
@@ -67,6 +88,10 @@ def normalize_price(value: str) -> str:
 def normalize_vendor(value: str) -> str:
     vendor = clean_text(value) or "Blinkit"
     return "Blinkit" if vendor.casefold() == "blinkit" else vendor
+
+
+def normalize_category(value: str) -> str:
+    return clean_text(value)
 
 
 def normalize_date_time(value: str) -> str:
@@ -153,27 +178,46 @@ def row_note(batch_id: str, source_file: str, source_row_number: int) -> str:
     return f"{IMPORT_NOTE_PREFIX}{batch_id}; source_file={source_file}; source_row={source_row_number}"
 
 
+def batch_note_matches(note: str, batch_id: str) -> bool:
+    text = str(note or "")
+    return any(text.startswith(f"{prefix}{batch_id}") for prefix in LEGACY_IMPORT_NOTE_PREFIXES)
+
+
+def canonical_fieldnames(fieldnames: list[str] | None) -> dict[str, str]:
+    if not fieldnames:
+        return {}
+    mapped = {}
+    for name in fieldnames:
+        canonical = HEADER_ALIASES.get(clean_text(name).casefold())
+        if canonical:
+            mapped[canonical] = name
+    return mapped
+
+
 def parse_csv_rows(csv_path: Path) -> tuple[list[ParsedRow], list[str]]:
     valid_rows: list[ParsedRow] = []
     errors: list[str] = []
     with csv_path.open("r", encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
-        if reader.fieldnames != EXPECTED_COLUMNS:
+        fields = canonical_fieldnames(reader.fieldnames)
+        missing = sorted(REQUIRED_COLUMNS - set(fields))
+        if missing:
             errors.append(
-                f"{csv_path.name}: invalid header {reader.fieldnames!r}; expected {EXPECTED_COLUMNS!r}"
+                f"{csv_path.name}: invalid header {reader.fieldnames!r}; missing canonical columns {missing!r}"
             )
             return valid_rows, errors
         for source_row_number, raw in enumerate(reader, start=2):
             try:
-                item = clean_text(raw.get("Item", ""))
+                item = clean_text(raw.get(fields["item"], ""))
                 if not item:
                     raise ValueError("missing item")
-                vendor = normalize_vendor(raw.get("Vendor", ""))
-                quantity = normalize_quantity(raw.get("Quantity", ""))
+                vendor = normalize_vendor(raw.get(fields["vendor"], ""))
+                quantity = normalize_quantity(raw.get(fields["quantity"], ""))
                 if not quantity:
                     raise ValueError("missing quantity")
-                price = normalize_price(raw.get("Price (INR)", ""))
-                date_time = normalize_date_time(raw.get("Date & Time", ""))
+                price = normalize_price(raw.get(fields["price"], ""))
+                date_time = normalize_date_time(raw.get(fields["date_time"], ""))
+                category = normalize_category(raw.get(fields.get("category", ""), "")) if fields.get("category") else ""
                 valid_rows.append(
                     ParsedRow(
                         source_file=csv_path.name,
@@ -183,6 +227,7 @@ def parse_csv_rows(csv_path: Path) -> tuple[list[ParsedRow], list[str]]:
                         quantity=quantity,
                         price=price,
                         date_time=date_time,
+                        category=category,
                         key=dedupe_key(vendor, item, quantity, price, date_time),
                     )
                 )
@@ -265,7 +310,7 @@ def import_rows(
                 "quantity": row.quantity,
                 "price": row.price,
                 "note": row_note(batch_id, row.source_file, row.source_row_number),
-                "category": "",
+                "category": row.category,
             },
         )
 
@@ -276,7 +321,7 @@ def import_rows(
     imported = [
         row
         for row in reloaded_profile.get("purchase_log_rows", [])
-        if str(row.get("note", "")).startswith(f"{IMPORT_NOTE_PREFIX}{batch_id}")
+        if batch_note_matches(row.get("note", ""), batch_id)
     ]
     print("Import verification:")
     print(f"  inserted records found for batch: {len(imported)}")
@@ -291,7 +336,7 @@ def rollback_batch(store_path: Path, batch_id: str) -> int:
     kept = [
         row
         for row in rows
-        if not str(row.get("note", "")).startswith(f"{IMPORT_NOTE_PREFIX}{batch_id}")
+        if not batch_note_matches(row.get("note", ""), batch_id)
     ]
     removed = len(rows) - len(kept)
     profile["purchase_log_rows"] = kept
