@@ -6,6 +6,7 @@ from datetime import date, datetime, timedelta
 from difflib import SequenceMatcher
 from io import StringIO
 import json
+import logging
 from pathlib import Path
 import re
 import random
@@ -15,6 +16,16 @@ import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
 import yaml
+
+from recipe_submission import (
+    RECIPE_FORM_DEFAULTS,
+    clear_recipe_form_state,
+    recipe_form_field_key,
+    recipe_form_values_from_state,
+    save_recipe_submission,
+    sanitize_recipe_submission,
+    validate_recipe_submission,
+)
 
 DATA = yaml.safe_load(Path("meal_data.yaml").read_text())
 MEAL_LOG_PATH = Path("meal_log.json")
@@ -305,6 +316,7 @@ DEFAULT_VENDOR_RECORDS = [
     {"name": "Other", "vendor_type": "Other", "preferred_categories": []},
 ]
 WASTE_REASONS = {"mark expired", "mark perished/spoiled", "mark spilled/lost", "mark given away", "expired", "perished/spoiled", "spilled/lost", "given away"}
+LOGGER = logging.getLogger("meal_planner.recipes")
 
 
 def try_float(value):
@@ -1389,6 +1401,72 @@ def persist_active_profile(profile):
     store = load_profile_store(store_path)
     store = replace_profile(store, normalize_profile(profile))
     save_profile_store(store, store_path)
+
+
+def log_recipe_diagnostic(event, **fields):
+    payload = {"event": event, "active_user_id": st.session_state.get("planner_user_id", "")}
+    payload.update(fields)
+    LOGGER.info("recipe_diagnostic=%s", json.dumps(payload, sort_keys=True, default=str))
+
+
+def save_recipe_from_form(profile):
+    user_id = st.session_state.get("planner_user_id", "")
+    store_path = user_profile_store_path(user_id) if user_id else None
+    form_values = recipe_form_values_from_state(st.session_state, profile["id"])
+    sanitized_values = sanitize_recipe_submission(form_values)
+    log_recipe_diagnostic(
+        "submit_detected",
+        storage_path=str(store_path) if store_path else "",
+        submitted_fields=sanitized_values,
+    )
+    validation_errors = validate_recipe_submission(form_values)
+    log_recipe_diagnostic(
+        "validation_result",
+        validation_ok=not validation_errors,
+        validation_errors=validation_errors,
+    )
+    if validation_errors:
+        st.session_state.recipe_error = validation_errors[0]
+        st.session_state.recipe_show_add = True
+        return False
+    try:
+        result = save_recipe_submission(
+            profile,
+            form_values,
+            normalize_recipe=normalize_recipe,
+            parse_ingredient_lines=parse_ingredient_lines,
+            persist_profile=persist_active_profile,
+            reload_profile=lambda: get_active_profile(load_profile_store(store_path)),
+        )
+        log_recipe_diagnostic(
+            "storage_write_complete",
+            storage_path=str(store_path) if store_path else "",
+            insert_result=result["action"],
+            commit_result=True,
+            recipe_name=result["recipe"]["name"],
+        )
+        log_recipe_diagnostic(
+            "recipe_reload_result",
+            reloaded_recipe_count=len(result["profile"].get("recipes", [])),
+            saved_recipe_name=result["recipe"]["name"],
+        )
+    except Exception as exc:
+        LOGGER.exception("Recipe save failed for user %s", user_id)
+        log_recipe_diagnostic(
+            "storage_write_failed",
+            storage_path=str(store_path) if store_path else "",
+            exception_type=type(exc).__name__,
+            exception_message=str(exc),
+        )
+        st.session_state.recipe_error = "Could not save recipe. Please try again."
+        st.session_state.recipe_show_add = True
+        return False
+    st.session_state.recipe_flash = f"Saved recipe {result['recipe']['name']}."
+    st.session_state.recipe_error = ""
+    st.session_state.recipe_show_add = False
+    st.session_state.selected_recipe_slug = recipe_slug(result["recipe"]["name"])
+    st.session_state.recipe_form_clear_profile_id = profile["id"]
+    return True
 
 
 def sync_profile_state(profile):
@@ -5709,10 +5787,13 @@ def render_planner_workspace(active_profile):
 
 
 def render_recipes_workspace(active_profile):
+    if st.session_state.get("recipe_form_clear_profile_id") == active_profile["id"]:
+        clear_recipe_form_state(st.session_state, active_profile["id"])
+        st.session_state.pop("recipe_form_clear_profile_id", None)
     recipe_dishes = build_recipe_dishes(active_profile)
     recipe_slugs = {recipe_slug(dish["name"]) for dish in recipe_dishes}
     selected_recipe_slug = st.session_state.get("selected_recipe_slug", "")
-    show_add_recipe = st.session_state.pop("recipe_show_add", False)
+    show_add_recipe = st.session_state.get("recipe_show_add", False)
     if selected_recipe_slug not in recipe_slugs:
         st.session_state.selected_recipe_slug = ""
         selected_recipe_slug = ""
@@ -5721,35 +5802,49 @@ def render_recipes_workspace(active_profile):
         render_recipe_manager(active_profile, favorites_only=False)
     add_recipe_cols = st.columns([1, 4])
     if add_recipe_cols[0].button("Add Recipe", use_container_width=True, key=f"recipes_add_button_{active_profile['id']}"):
+        st.session_state.recipe_show_add = True
+        st.session_state.recipe_error = ""
         show_add_recipe = True
     st.markdown("<div id='recipes-section'></div>", unsafe_allow_html=True)
     with st.container(border=True):
         if st.session_state.get("recipe_flash"):
             st.success(st.session_state.recipe_flash)
             st.session_state.recipe_flash = ""
+        if st.session_state.get("recipe_error"):
+            st.error(st.session_state.recipe_error)
         if show_add_recipe:
+            for field, default in RECIPE_FORM_DEFAULTS.items():
+                state_key = recipe_form_field_key(active_profile["id"], field)
+                if state_key not in st.session_state:
+                    st.session_state[state_key] = default
             with st.expander("Add Recipe", expanded=True):
                 with st.form(f"quick_recipe_form_{active_profile['id']}"):
-                    quick_recipe_name = st.text_input("Recipe name")
-                    quick_recipe_description = st.text_area("Description", height=56)
-                    quick_base_servings = st.number_input("Base serving count", min_value=1.0, max_value=12.0, step=0.5, value=2.0)
-                    quick_recipe_ingredients = st.text_area("Ingredients (one per line: name | quantity | unit | notes)", height=150)
-                    quick_cooking_style = st.text_input("Cooking style or method")
-                    quick_recipe_instructions = st.text_area("Instructions (one step per line)", height=150)
-                    quick_recipe_youtube = st.text_input("Optional YouTube link")
+                    st.text_input("Recipe name", key=recipe_form_field_key(active_profile["id"], "name"))
+                    st.text_area("Description", height=56, key=recipe_form_field_key(active_profile["id"], "description"))
+                    st.number_input(
+                        "Base serving count",
+                        min_value=1.0,
+                        max_value=12.0,
+                        step=0.5,
+                        key=recipe_form_field_key(active_profile["id"], "base_servings"),
+                    )
+                    st.text_area(
+                        "Ingredients (one per line: name | quantity | unit | notes)",
+                        height=150,
+                        key=recipe_form_field_key(active_profile["id"], "ingredients"),
+                    )
+                    st.text_input("Cooking style or method", key=recipe_form_field_key(active_profile["id"], "cooking_style"))
+                    st.text_area(
+                        "Instructions (one step per line)",
+                        height=150,
+                        key=recipe_form_field_key(active_profile["id"], "instructions"),
+                    )
+                    st.text_input("Optional YouTube link", key=recipe_form_field_key(active_profile["id"], "youtube"))
                     quick_save_recipe = st.form_submit_button("Save recipe")
                 if quick_save_recipe:
-                    if not quick_recipe_name.strip():
-                        st.error("Recipe name is required.")
-                    else:
-                        instructions = [line.strip() for line in quick_recipe_instructions.splitlines() if line.strip()]
-                        if quick_cooking_style.strip():
-                            instructions = [f"Cooking style: {quick_cooking_style.strip()}"] + instructions
-                        quick_recipe = normalize_recipe({"id": uuid4().hex, "name": quick_recipe_name.strip(), "description": quick_recipe_description.strip(), "base_servings": quick_base_servings, "ingredients": parse_ingredient_lines(quick_recipe_ingredients), "instructions": instructions, "youtube": quick_recipe_youtube.strip(), "favorite": False})
-                        active_profile["recipes"] = [item for item in active_profile.get("recipes", []) if item["name"].strip().lower() != quick_recipe["name"].strip().lower()] + [quick_recipe]
-                        persist_active_profile(active_profile)
-                        st.session_state.recipe_flash = f"Saved recipe {quick_recipe['name']}."
+                    if save_recipe_from_form(active_profile):
                         st.rerun()
+                    st.error(st.session_state.recipe_error)
         for dish in recipe_dishes:
             st.markdown(f"<div id='{recipe_anchor_id(dish['name'])}' class='recipe-anchor'></div>", unsafe_allow_html=True)
             with st.expander(dish["name"], expanded=recipe_slug(dish["name"]) == selected_recipe_slug):
